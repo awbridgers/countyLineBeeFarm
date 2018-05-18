@@ -1,11 +1,12 @@
 {
-  "main.css": "static/css/main.80f9b848.css",
-  "main.css.map": "static/css/main.80f9b848.css.map",
-  "main.js": "static/js/main.3005228b.js",
-  "main.js.map": "static/js/main.3005228b.js.map",
+  "main.css": "static/css/main.a65f544e.css",
+  "main.css.map": "static/css/main.a65f544e.css.map",
+  "main.js": "static/js/main.9437401a.js",
+  "main.js.map": "static/js/main.9437401a.js.map",
   "static\\media\\bee1.jpg": "static/media/bee1.91e67c61.jpg",
   "static\\media\\bee2.jpg": "static/media/bee2.872235db.jpg",
   "static\\media\\beeLogo.png": "static/media/beeLogo.d09a28f3.png",
+  "static\\media\\beeLogoSmall.png": "static/media/beeLogoSmall.894d1f82.png",
   "static\\media\\verticalLogo.png": "static/media/verticalLogo.e9f6a825.png",
   "static\\media\\words.png": "static/media/words.a0d719e3.png"
 }
