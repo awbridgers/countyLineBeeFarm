@@ -4,6 +4,25 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import Navbar from './navBar.jsx'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const About = () => <div><Navbar /><h1>About Us</h1></div>
+const BuyHoney = () => <div><Navbar /><h1>Buy Honey</h1></div>
+const Contact = () => <div><Navbar /><h1>Contact Us</h1></div>
+
+const Routing = () =>{
+  return(
+    <Router>
+      <div>
+        <Route exact path = "/" component = {App} />
+        <Route path = "/about" component = {About} />
+        <Route path = "/buy-honey" component = {BuyHoney} />
+        <Route path = "/contact" component = {Contact} />
+      </div>
+    </Router>
+  )
+}
+
+ReactDOM.render(<Routing />, document.getElementById('root'));
 registerServiceWorker();

@@ -20,14 +20,15 @@ class App extends Component {
           </div>
           <div className = "bannerRight">
             <div className = "bannerText">
-          <h4>Bringing you local honey from local Bees in Wendell, North Carolina</h4>
+          <h4>100% local honey made by our hardworking bees in Wendell, North Carolina</h4>
           </div>
         </div>
       </div>
     </MediaQuery>
     <MediaQuery query="(max-device-width: 1224px)">
-      <div>
+      <div style = {{color: "white"}}>
       <img src = {beeLogoSmall} />
+      <h6>100% local honey made by our hardworking bees in Wendell, North Carolina</h6>
       </div>
     </MediaQuery>
         <p className="App-intro">
