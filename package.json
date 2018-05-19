@@ -2,21 +2,26 @@
   "name": "bee_website",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://awbridgers.github.io/countyLineBeeFarm",
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.1.1",
     "react": "^16.3.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-dom": "^16.3.2",
+    "react-responsive": "^4.1.0",
     "reactstrap": "^6.0.1"
   },
   "devDependencies": {
+    "gh-pages": "^1.1.0",
     "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

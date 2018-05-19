@@ -1,10 +1,18 @@
+body{
+  background-color: yellow;
+}
+
 .App {
   text-align: center;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  position: fixed;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 100px;
 }
 
 .App-header {
@@ -25,4 +33,77 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.beeLogo {
+  width: 100px;
+  height: auto;
+}
+
+.verticalLogo{
+  width: 200px;
+  height: auto;
+}
+.test a {
+  color: red;
+}
+.nav{
+  font-size: 18px;
+  font-weight: 600;
+}
+.navItem{
+  margin: 0px 20px 0px 20px;
+}
+
+.header{
+  width: 50%;
+  height: 25%;
+  margin: auto;
+  color: white;
+  text-align: center;
+  background-image: url("./images/beeLogo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.header h2{
+  padding-top: 150px;
+}
+
+
+.jumboLogo{
+  height: 200px;
+  width: auto;
+}
+
+.banner{
+  height: 30%;
+  width: 80%;
+  margin: auto;
+  background-color: #141414;
+  margin-top: 10px;
+  color: white;
+}
+.bannerLeft{
+  float: left;
+  height: 100%;
+  width: 30%;
+  background-image: url('./images/beeLogo.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bannerRight{
+  float: right;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+
+  /* background-color: red; */
+}
+.bannerText{
+  width:100%;
+
+
 }
