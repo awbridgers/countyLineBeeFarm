@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-import logo from './images/beeLogo.png';
+import bee from './images/beeBack.jpg';
 import logoSmall from "./images/beeLogoSmall.png";
 import bee1 from './images/bee1.jpg';
 import bee2 from './images/bee2.jpg';
@@ -14,20 +14,20 @@ import MediaQuery from 'react-responsive'
 
 const items = [
   {
-    src: logo,
+    src: bee,
     srcSmall:logoSmall,
     altText: 'Slide 1',
-    header: 'Welcome to County Line Bee Farm!'
+    header: ''
   },
   {
     src: bee1,
     altText: 'Slide 2',
-    caption: 'Our 100% Honey is made with care by our hardworking bees in Wendell, North Carolina'
+    caption: ''
   },
   {
     src: bee2,
     altText: 'Slide 3',
-    caption: 'Something interesting goes here'
+    caption: ''
   }
 ];
 

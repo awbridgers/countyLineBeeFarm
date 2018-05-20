@@ -35,7 +35,7 @@ export default class Example extends React.Component {
       <div>
         <Navbar color="warning" light expand="md">
           <MediaQuery query="(min-device-width: 1224px)">
-            <LinkContainer to = "/">
+            <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
                 <img className = "beeLogo" src = {beeLogo} />
               </NavbarBrand>
@@ -52,11 +52,10 @@ export default class Example extends React.Component {
                   </NavItem>
                 </LinkContainer>
               </MediaQuery>
-              <LinkContainer to = "/about">
-                <NavItem className = "navItem">
-                  <NavLink href=""><font color = "black">About Us</font></NavLink>
-                </NavItem>
-              </LinkContainer>
+              <LinkContainer to= "/about"><NavItem className = "navItem">
+                <NavLink href=""><font color = "black">About Us</font></NavLink>
+              </NavItem>
+            </LinkContainer>
               <LinkContainer to = "buy-honey">
                 <NavItem className = "navItem">
                   <NavLink href=""><font color = "black">Buy Honey</font></NavLink>
