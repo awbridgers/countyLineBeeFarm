@@ -15,7 +15,7 @@ const Group = (props) => {
           <CardTitle>Local Bees</CardTitle>
           <CardSubtitle>Located on the Johnston/Wake County line in Wendell, North Carolina</CardSubtitle>
           <CardText></CardText>
-          <Button>Button</Button>
+          <Button>About Us</Button>
         </CardBody>
       </Card>
       <Card>
@@ -24,7 +24,7 @@ const Group = (props) => {
           <CardTitle>Local Honey</CardTitle>
           <CardSubtitle>100% all natural honey straight from the hive</CardSubtitle>
           <CardText></CardText>
-          <Button>Button</Button>
+          <Button>Buy Now</Button>
         </CardBody>
       </Card>
       <Card>
@@ -33,7 +33,7 @@ const Group = (props) => {
           <CardTitle>Something else</CardTitle>
           <CardSubtitle>Something interesting? going for a Local Bees, Local Honey, Local _______</CardSubtitle>
           <CardText></CardText>
-          <Button>Button</Button>
+          <Button>Something</Button>
         </CardBody>
       </Card>
     </CardDeck>

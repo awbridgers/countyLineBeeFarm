@@ -89,7 +89,7 @@ body{
 .bannerLeft{
   float: left;
   height: 100%;
-  width: 35%;
+  width: 37%;
   background-image: url('./images/beeLogo.png');
   background-size: contain;
   background-position: center;
@@ -98,7 +98,7 @@ body{
 .bannerRight{
   float: right;
   height: 100%;
-  width:65%;
+  width:63%;
   display: flex;
   align-items: center;
 
