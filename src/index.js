@@ -6,10 +6,14 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Navbar from './navBar.jsx'
+import About from './aboutUs.jsx'
+import Email from './email.jsx'
 
-const About = () => <div><Navbar /><h1>About Us</h1></div>
+
+
+// const About = () => <div><Navbar /><h1>About Us</h1></div>
 const BuyHoney = () => <div><Navbar /><h1>Buy Honey</h1></div>
-const Contact = () => <div><Navbar /><h1>Contact Us</h1></div>
+const Contact = () => <div><Email /></div>
 
 const Routing = () =>{
   return(

@@ -6,29 +6,76 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import MediaQuery from 'react-responsive';
 import bee from './images/beeBack.jpg';
 import logoSmall from "./images/beeLogoSmall.png";
 import bee1 from './images/bee1.jpg';
 import bee2 from './images/bee2.jpg';
-import MediaQuery from 'react-responsive'
+import swarm from './images/beeSwarm2.jpg'
+import originalHives from './images/originalHives.jpg'
+import cuttingComb from './images/cuttingComb.jpg';
+import honeyHarvest from './images/honeyHarvest.jpg';
+import firstYear from './images/firstYear.JPG'
+import machine from './images/machine.jpg';
+import supers from './images/honeySupers.jpg';
+import gettingSwarm from './images/gettingSwarm.JPG';
+
+
 
 const items = [
   {
-    src: bee,
-    srcSmall:logoSmall,
+    src: originalHives,
     altText: 'Slide 1',
-    header: ''
+    header: '',
+    caption: 'Setting up our first hives in the spring of 2017'
   },
   {
     src: bee1,
     altText: 'Slide 2',
-    caption: ''
+    caption: 'Some of our original hardworking bees!'
+  },
+  {
+    src: swarm,
+    altText: 'Slide 3',
+    caption: 'Our bees tried to swarm a few times while we were still figuring out what we were doing. Oops!'
+  },
+  {
+    src: gettingSwarm,
+    altText: 'Slide 2',
+    caption: 'Thankfully, we were able to retrieve the swarm and get our bees back!'
   },
   {
     src: bee2,
-    altText: 'Slide 3',
-    caption: ''
-  }
+    altText: 'Slide 2',
+    caption: 'Our hives continue to grow and multiply.'
+  },
+  {
+    src: bee,
+    altText: 'Slide 2',
+    caption: 'Searching for the queen!'
+  },
+  {
+    src: supers,
+    altText: 'Slide 2',
+    caption: 'Frames full of honey from our honey supers'
+  },
+  {
+    src: cuttingComb,
+    altText: 'Slide 2',
+    caption: 'Cutting the honeycomb to free that delicious, all natural honey. Yum!'
+  },
+  {
+    src: machine,
+    altText: 'Slide 2',
+    caption: 'Frames in the honey extractor ready to be spun'
+  },
+  {
+    src: honeyHarvest,
+    altText: 'Slide 2',
+    caption: 'Here comes the honey!'
+  },
+
+
 ];
 
 class Slides extends Component {
@@ -78,13 +125,14 @@ class Slides extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <MediaQuery query="(max-device-width: 1224px)">
-            <img src={item.srcSmall}  alt={item.altText} />
-            <CarouselCaption  captionHeader={item.header} captionText = {item.caption} />
+          <MediaQuery query="(max-device-width: 767px)">
+            <img src={item.src} className = "carouselImageSmall"  alt={item.altText} />
+            <div  className = "test">{item.caption} </div>
             </MediaQuery>
-            <MediaQuery query="(min-device-width: 1224px)">
-              <img src={item.src}  alt={item.altText} />
-              <CarouselCaption  captionHeader={item.header} captionText = {item.caption} />
+            <MediaQuery query="(min-device-width: 767px)">
+              <img className = "carouselImage" src={item.src}  alt={item.altText} />
+              <div className = "carouselCaption"></div>
+              <CarouselCaption className = "carouselFont" captionHeader={item.header} captionText = {item.caption} />
               </MediaQuery>
         </CarouselItem>
       );
@@ -92,10 +140,11 @@ class Slides extends Component {
 
     return (
       <Carousel
+        pause = 'hover'
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}
-        interval = "8000"
+        interval = {false}
         className = "carousel"
       >
         <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
