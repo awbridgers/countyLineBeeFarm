@@ -22,7 +22,7 @@ export default class About extends Component {
           becoming endangered. Our 3 hives quickly became 6 by the end of the first year, and continued to grow from there.
           We were surprised by the amount of honey we were able to collect that year, and found that we were unable to use
           it all before it was time for another harvest. With that in mind, County Line Bee Farm was created so that we
-          could share our honey with the rest of the world.</p>
+          could share our honey with the rest of the world. Check out some of our pictures below!</p>
         </div>
         <Slides/>
       </div>

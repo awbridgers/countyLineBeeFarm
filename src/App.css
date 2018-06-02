@@ -182,13 +182,16 @@ margin-bottom: 30px;
 @media all and (max-width: 767px){
   .carousel{
     height: 350px;
+    text-align: center;
   }
   .test{
     font-size: 16px;
     color:white;
-    width: 500px;
-    margin: auto;
+    max-width:350px;
+    text-align: center;
     padding-bottom: 50px;
+    margin: auto;
+
 
   }
 
