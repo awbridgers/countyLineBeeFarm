@@ -12,7 +12,7 @@ import Email from './email.jsx'
 
 
 // const About = () => <div><Navbar /><h1>About Us</h1></div>
-const BuyHoney = () => <div><Navbar /><h1>Buy Honey</h1></div>
+const BuyHoney = () => <div style = {{ backgroundColor: "black", color: "white", width: "100%", height: "100%", position: "fixed"}}><Navbar /><h1>Coming Soon!</h1></div>
 const Contact = () => <div><Email /></div>
 
 const Routing = () =>{

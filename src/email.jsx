@@ -40,7 +40,7 @@ export default class Email extends Component{
     return(
       <div className = "App">
         <Navbar></Navbar>
-        <MediaQuery query="(min-device-width: 1224px)">
+        <MediaQuery query="(min-width: 1224px)">
           <div className = "emailForm">
           <form method="POST" action="https://formspree.io/countylinebeefarm@outlook.com">
           <input className = "email" name = "email" type = "email" placeholder = "Email Address" value = {this.state.emailAddress} onChange = {this.changeEmail}></input>
@@ -57,8 +57,8 @@ export default class Email extends Component{
           <p><h4>Leave us your email and message using the form </h4></p><p><h4>and we'll get back to you as soon as possible.</h4></p>
         </div>
       </MediaQuery>
-      <MediaQuery query="(max-device-width: 1224px)">
-        <div style = {{width: "95%", color: "white"}}>
+      <MediaQuery query="(max-width: 1224px)">
+        <div style = {{width: "95%", color: "white", marginLeft: "10px", marginRight: "10px"}}>
           <h4>Have Questions or Comments?</h4>
           <p className = "emailP"><h5>You can reach us via email at</h5></p> <p><h5><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></h5></p>
           <p><center><h6>-OR-</h6></center></p>
@@ -66,7 +66,7 @@ export default class Email extends Component{
         </div>
         <div style = {{width: "95%", paddingBottom: "50px"}}>
           <form method="POST" action="https://formspree.io/countylinebeefarm@outlook.com">
-          <input style = {{width: "85%", paddingBottom: "10px"}}name = "email" type = "email" placeholder = "Email Address" value = {this.state.emailAddress} onChange = {this.changeEmail}></input>
+          <input style = {{width: "85%", marginBottom: "10px"}}name = "email" type = "email" placeholder = "Email Address" value = {this.state.emailAddress} onChange = {this.changeEmail}></input>
           <p><textarea style = {{width: "85%"}} name = 'message'  rows = "4" placeholder = "Message" value = {this.state.message} onChange = {this.changeMessage}></textarea></p>
           <input style = {{width: "85%"}} type="hidden" name="_subject" value="New Message From CountyLineBeeFarm.com" />
           <input style = {{width: "85%"}} type="hidden" name="_next" value={window.location.href} />

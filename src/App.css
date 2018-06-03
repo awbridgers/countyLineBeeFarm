@@ -142,7 +142,7 @@ margin-bottom: 30px;
   padding-bottom: 20px;
 }
 .mobileImage{
-  max-width: 95%;
+  max-width: 50%;
 }
 
 .emailForm{
@@ -179,20 +179,24 @@ margin-bottom: 30px;
   margin-top: 20px;
   text-align: center
 }
-@media all and (max-width: 767px){
+@media all and (max-width: 1224px){
   .carousel{
     height: 350px;
     text-align: center;
   }
-  .test{
-    font-size: 16px;
-    color:white;
-    max-width:350px;
-    text-align: center;
-    padding-bottom: 50px;
-    margin: auto;
-
-
+}
+@media all and (max-width:767px){
+  .mobileImage{
+    max-width: 60%;
   }
+}
+.test{
+  font-size: 16px;
+  color:white;
+  max-width:350px;
+  text-align: center;
+  padding-bottom: 50px;
+  margin: auto;
+
 
 }
