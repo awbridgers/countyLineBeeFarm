@@ -6,14 +6,9 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink} from 'reactstrap';
   import beeLogo from "./images/words.png";
   import MediaQuery from 'react-responsive';
-  import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
   import { LinkContainer } from 'react-router-bootstrap'
 
 export default class Example extends React.Component {
@@ -37,7 +32,7 @@ export default class Example extends React.Component {
           <MediaQuery query="(min-device-width: 1224px)">
             <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
-                <img className = "beeLogo" src = {beeLogo} />
+                <img className = "beeLogo" src = {beeLogo} alt= 'Bee Logo'/>
               </NavbarBrand>
             </LinkContainer>
             </MediaQuery>

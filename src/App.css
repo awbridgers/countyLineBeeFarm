@@ -155,6 +155,7 @@ margin-bottom: 30px;
   left: 50px;
   min-width: 100px;
 
+
 }
 .email{
   width:400px;
@@ -171,15 +172,20 @@ margin-bottom: 30px;
   color: white;
   margin-top: 25px;
   float: right;
-  width: 65%;
+  width: 50%;
   min-width: 200px;
+  text-align: center;
+  position: relative;
+  right: 100px;
+
+
 }
 
 .emailP{
   margin-top: 20px;
   text-align: center
 }
-@media all and (max-width: 1224px){
+@media all and (max-width: 1024px){
   .carousel{
     height: 350px;
     text-align: center;

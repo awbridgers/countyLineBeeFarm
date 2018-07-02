@@ -8,14 +8,12 @@ import {
 } from 'reactstrap';
 import MediaQuery from 'react-responsive';
 import bee from './images/beeBack.jpg';
-import logoSmall from "./images/beeLogoSmall.png";
 import bee1 from './images/bee1.jpg';
 import bee2 from './images/bee2.jpg';
 import swarm from './images/beeSwarm2.jpg'
 import originalHives from './images/originalHives.jpg'
 import cuttingComb from './images/cuttingComb.jpg';
 import honeyHarvest from './images/honeyHarvest.jpg';
-import firstYear from './images/firstYear.JPG'
 import machine from './images/machine.jpg';
 import supers from './images/honeySupers.jpg';
 import gettingSwarm from './images/gettingSwarm.JPG';
@@ -125,11 +123,11 @@ class Slides extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <MediaQuery query="(max-width: 1224px)">
+          <MediaQuery query="(max-width: 1024px)">
             <img src={item.src} className = "carouselImageSmall"  alt={item.altText} />
             <div  className = "test">{item.caption} </div>
             </MediaQuery>
-            <MediaQuery query="(min-width: 1224px)">
+            <MediaQuery query="(min-width: 1024px)">
               <img className = "carouselImage" src={item.src}  alt={item.altText} />
               <div className = "carouselCaption"></div>
               <CarouselCaption className = "carouselFont" captionHeader={item.header} captionText = {item.caption} />

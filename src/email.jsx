@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {HashRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import Navbar from './navBar.jsx';
-import About from './aboutUs.jsx';
 import { Button } from 'reactstrap';
 import MediaQuery from 'react-responsive'
 
@@ -52,7 +47,7 @@ export default class Email extends Component{
         </div>
         <div className = 'contactInfo'>
           <h2>Have Questions or Comments?</h2>
-          <p className = "emailP"><h4>You can reach us via email at</h4></p> <p><h4><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></h4></p>
+          <p className = "emailP"><h4>You can reach us via email at</h4></p> <p><h4><b><font color = "yellow">info@CountyLineBeeFarm.com</font></b></h4></p>
           <p><center><h5>-OR-</h5></center></p>
           <p><h4>Leave us your email and message using the form </h4></p><p><h4>and we'll get back to you as soon as possible.</h4></p>
         </div>

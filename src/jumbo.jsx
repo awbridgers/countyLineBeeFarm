@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
 import logo from './images/verticalLogo.png'
 
 const Jumbo = (props) => {
@@ -7,7 +7,7 @@ const Jumbo = (props) => {
     <div className = "jumbo">
       <Jumbotron className = "bg-dark">
         <p>
-        <img className = "jumboLogo" src = {logo} />
+        <img className = "jumboLogo" src = {logo} alt = "Logo" />
         <h2>Welcome to County Line Bee Farm!</h2>
         </p>
       </Jumbotron>

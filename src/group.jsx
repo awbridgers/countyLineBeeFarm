@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
  CardSubtitle, CardBody } from 'reactstrap';
+ import { LinkContainer } from 'react-router-bootstrap'
  import bee2 from "./images/bee2.jpg";
  import bee1 from "./images/bee1.jpg";
  import honey from './images/honey.jpg'
- import beePic3 from './images/beePic3.png'
 
 const Group = (props) => {
   return (
@@ -15,7 +15,7 @@ const Group = (props) => {
           <CardTitle>Local Bees</CardTitle>
           <CardSubtitle>Located on the Johnston/Wake County line in Wendell, North Carolina</CardSubtitle>
           <CardText></CardText>
-          <Button>About Us</Button>
+          <LinkContainer to = '/about'><Button>About Us</Button></LinkContainer>
         </CardBody>
       </Card>
       <Card>
@@ -24,7 +24,7 @@ const Group = (props) => {
           <CardTitle>Local Honey</CardTitle>
           <CardSubtitle>100% all natural honey straight from the hive</CardSubtitle>
           <CardText></CardText>
-          <Button>Buy Now</Button>
+          <LinkContainer to = '/buy-honey'><Button>Buy Now</Button></LinkContainer>
         </CardBody>
       </Card>
       <Card>
