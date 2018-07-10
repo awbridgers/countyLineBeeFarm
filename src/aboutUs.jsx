@@ -10,7 +10,7 @@ export default class About extends Component {
     return(
       <div className = "App">
         <NavMenu />
-        <div style = {{backgroundColor:"#141414", color: "white", width: "70%", margin: "auto", paddingTop: "20px"}}>
+        <div className = 'wordContainer'>
           <h1>About Us</h1>
           <p>We started beekeeping in the spring of 2017 in an effort to help save the honeybee population from
           becoming endangered. Our 3 hives quickly became 6 by the end of the first year, and continued to grow from there.

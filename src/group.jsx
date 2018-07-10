@@ -30,10 +30,10 @@ const Group = (props) => {
       <Card>
         <CardImg top width="100%" src= {bee1} alt="Card image cap" />
         <CardBody>
-          <CardTitle>Something else</CardTitle>
-          <CardSubtitle>Something interesting? going for a Local Bees, Local Honey, Local _______</CardSubtitle>
+          <CardTitle>For a Good Cause</CardTitle>
+          <CardSubtitle>Learn about Colony Collapse Disorder and what you can do to help!</CardSubtitle>
           <CardText></CardText>
-          <Button>Something</Button>
+            <LinkContainer to = '/help-the-bees'><Button>Learn Here</Button></LinkContainer>
         </CardBody>
       </Card>
     </CardDeck>

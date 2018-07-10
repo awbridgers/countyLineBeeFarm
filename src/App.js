@@ -17,7 +17,7 @@ class App extends Component {
           </div>
           <div className = "bannerRight">
             <div className = "bannerText">
-          <h3>Something interesting to go with the logo, like a tagline or catchphrase or something.</h3>
+          <h3>Delicious, pure honey made by our hardworking bees on the Johnston-Wake County Line.</h3>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@ class App extends Component {
     <MediaQuery query="(max-width: 1024px)">
       <div style = {{color: "white"}}>
       <img className = "mobileImage" src = {beeLogo} alt = "Bee Logo"/>
-      <h6>100% local honey made by our hardworking bees in Wendell, North Carolina</h6>
+      <h6 style = {{width: "80%", margin: "auto"}}>Delicious, pure honey made by our hardworking bees on the Johnston-Wake County Line.</h6>
       </div>
     </MediaQuery>
         <div className = "deck">

@@ -8,6 +8,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './navBar.jsx'
 import About from './aboutUs.jsx'
 import Email from './email.jsx'
+import CCD from './ccd.jsx'
+import NotFound from './notFound.jsx'
+import Submitted from './submitted.jsx'
 
 
 
@@ -15,15 +18,20 @@ import Email from './email.jsx'
 const BuyHoney = () => <div style = {{ backgroundColor: "black", color: "white", width: "100%", height: "100%", position: "fixed"}}><Navbar /><h1>Coming Soon!</h1></div>
 const Contact = () => <div><Email /></div>
 
+
+
 const Routing = () =>{
   return(
     <Router>
-      <div>
+      <Switch>
         <Route exact path = "/" component = {App} />
         <Route path = "/about" component = {About} />
+        <Route path = "/help-the-bees" component = {CCD} />
         <Route path = "/buy-honey" component = {BuyHoney} />
         <Route path = "/contact" component = {Contact} />
-      </div>
+        <Route path = '/submitted' component = {Submitted} />
+        <Route component = {NotFound} />
+      </Switch>
     </Router>
   )
 }

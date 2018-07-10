@@ -84,7 +84,7 @@ body{
   width: 80%;
   margin: auto;
   background-color: #141414;
-  margin-top: 10px;
+  margin-top: 5px;
   color: white;
 
 }
@@ -101,7 +101,7 @@ body{
 .bannerRight{
   float: right;
   height: 100%;
-  width:63%;
+  width:61%;
   display: flex;
   align-items: center;
 
@@ -185,6 +185,18 @@ margin-bottom: 30px;
   margin-top: 20px;
   text-align: center
 }
+.graph{
+  height:500px;
+  width: auto;
+}
+.wordContainer{
+  background-color:#141414;
+  color: white;
+  width: 75%;
+  margin: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
@@ -193,7 +205,19 @@ margin-bottom: 30px;
 }
 @media all and (max-width:767px){
   .mobileImage{
-    max-width: 60%;
+    max-width: 80%;
+  }
+  .graph{
+    height:auto;
+    width: 90vw;
+  }
+  .wordContainer{
+    background-color:#141414;
+    color: white;
+    width: 98%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 .test{
@@ -203,6 +227,4 @@ margin-bottom: 30px;
   text-align: center;
   padding-bottom: 50px;
   margin: auto;
-
-
 }
