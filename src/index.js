@@ -4,18 +4,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './navBar.jsx'
-import About from './aboutUs.jsx'
-import Email from './email.jsx'
-import CCD from './ccd.jsx'
-import NotFound from './notFound.jsx'
-import Submitted from './submitted.jsx'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+import Navbar from './navBar.jsx';
+import About from './aboutUs.jsx';
+import Email from './email.jsx';
+import CCD from './ccd.jsx';
+import NotFound from './notFound.jsx';
+import Submitted from './submitted.jsx';
+import BuyHoney from './buyHoney.jsx';
 
 
 
 // const About = () => <div><Navbar /><h1>About Us</h1></div>
-const BuyHoney = () => <div style = {{ backgroundColor: "black", color: "white", width: "100%", height: "100%", position: "fixed"}}><Navbar /><h1>Coming Soon!</h1></div>
+// const BuyHoney = () => <div style = {{ backgroundColor: "black", color: "white", width: "100%", height: "100%", position: "fixed"}}><Navbar /><h1>Coming Soon!</h1></div>
 const Contact = () => <div><Email /></div>
 
 

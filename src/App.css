@@ -197,6 +197,29 @@ margin-bottom: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.test{
+  font-size: 16px;
+  color:white;
+  max-width:350px;
+  text-align: center;
+  padding-bottom: 50px;
+  margin: auto;
+}
+
+.buyDeck{
+  width: 70%;
+  margin: auto;
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+}
+.cardDiv{
+  margin: 20px 10px 20px 10px;
+  width: 40%;
+}
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
@@ -219,12 +242,4 @@ margin-bottom: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
   }
-}
-.test{
-  font-size: 16px;
-  color:white;
-  max-width:350px;
-  text-align: center;
-  padding-bottom: 50px;
-  margin: auto;
 }
