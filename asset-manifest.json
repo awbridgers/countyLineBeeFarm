@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.6e574c57.css",
-  "main.css.map": "static/css/main.6e574c57.css.map",
-  "main.js": "static/js/main.d90c53d9.js",
-  "main.js.map": "static/js/main.d90c53d9.js.map",
+  "main.css": "static/css/main.1a9355ee.css",
+  "main.css.map": "static/css/main.1a9355ee.css.map",
+  "main.js": "static/js/main.744411e5.js",
+  "main.js.map": "static/js/main.744411e5.js.map",
   "static\\media\\bee1.jpg": "static/media/bee1.6fee51c0.jpg",
   "static\\media\\bee2.jpg": "static/media/bee2.84224d18.jpg",
   "static\\media\\beeBack.jpg": "static/media/beeBack.56d92cce.jpg",
@@ -13,6 +13,7 @@
   "static\\media\\honey.jpg": "static/media/honey.3ced6a03.jpg",
   "static\\media\\honeyHarvest.jpg": "static/media/honeyHarvest.4d1b7e7c.jpg",
   "static\\media\\honeySupers.jpg": "static/media/honeySupers.892b55ea.jpg",
+  "static\\media\\loss.png": "static/media/loss.545ebb11.png",
   "static\\media\\machine.jpg": "static/media/machine.fad2f7ce.jpg",
   "static\\media\\originalHives.jpg": "static/media/originalHives.495f3114.jpg",
   "static\\media\\words.png": "static/media/words.36237257.png"
