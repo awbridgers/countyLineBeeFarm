@@ -1,10 +1,12 @@
 {
   "name": "bee_website",
   "version": "0.1.0",
+  "homepage": "https://awbridgers.github.io/countyLineBeeFarm",
   "private": true,
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "bootstrap": "^4.1.1",
+    "firebase": "^5.5.1",
     "react": "^16.3.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",

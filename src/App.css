@@ -207,7 +207,7 @@ margin-bottom: 30px;
 }
 
 .buyDeck{
-  width: 70%;
+  width: 90%;
   margin: auto;
   display: flex;
   padding-top: 20px;
@@ -215,10 +215,19 @@ margin-bottom: 30px;
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
+
 }
 .cardDiv{
   margin: 20px 10px 20px 10px;
-  width: 40%;
+  width: 31%;
+}
+.card{
+  width:80%;
+  margin: auto;
+
+}
+.alert{
+  
 }
 @media all and (max-width: 1024px){
   .carousel{
@@ -241,5 +250,9 @@ margin-bottom: 30px;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+  .cardDiv{
+    margin: 20px 10px 20px 10px;
+    width: 100%;
   }
 }

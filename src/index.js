@@ -12,7 +12,17 @@ import CCD from './ccd.jsx';
 import NotFound from './notFound.jsx';
 import Submitted from './submitted.jsx';
 import BuyHoney from './buyHoney.jsx';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
+firebase.initializeApp({
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
+})
 
 
 // const About = () => <div><Navbar /><h1>About Us</h1></div>
