@@ -210,7 +210,7 @@ margin-bottom: 30px;
   width: 90%;
   margin: auto;
   display: flex;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 50px;
   flex-wrap: wrap;
   text-align: center;
@@ -220,14 +220,22 @@ margin-bottom: 30px;
 .cardDiv{
   margin: 20px 10px 20px 10px;
   width: 31%;
+  min-width: 350px;
 }
 .card{
   width:80%;
   margin: auto;
 
 }
-.alert{
-  
+
+.honeyPrice{
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  top: 5px;
+}
+.honeyPicture{
+
 }
 @media all and (max-width: 1024px){
   .carousel{
