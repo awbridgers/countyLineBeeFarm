@@ -11,7 +11,7 @@ export default class CCD extends Component {
     return(
       <div className = "App">
         <NavMenu />
-        <div className = 'wordContainer'>
+        <div className = 'wordContainer' style = {{backgroundColor: '#141414'}}>
           <h1>What's Happening to the Bees?</h1>
 
           <p>In 2006, some beekeepers began to see an enormous increase in the number of lost hives over the year. In some places, beekeepers
@@ -26,7 +26,7 @@ export default class CCD extends Component {
           that causes a large concern for beekeepers nationwide.</p> <p><img className = 'graph' src = {loss} alt = 'beeGraph'></img></p>
         <p>What the exact cause of CCD is still largely unknown. According to the EPA, researches beleive it is mainly caused by a combination of the vorroa mite, diseases, pesticide poisoning,
           change in habitat due to urbanization, and inadequate forage or nutrition.</p>
-        <p><h1>Why it Matters</h1></p>
+        <h1><p>Why it Matters</p></h1>
         <p>The honey bee is the single best pollinator of crops in the world. According to the <a href = "https://obamawhitehouse.archives.gov/the-press-office/2014/06/20/fact-sheet-economic-challenge-posed-declining-pollinator-populations" target = '_blank' rel="noopener noreferrer">
         US Government</a>, the honey bee
         is responsible for the pollination of at least 90 commercially grown crops in North America and 35% of global food production worldwide.
@@ -35,7 +35,7 @@ export default class CCD extends Component {
         find a way to not only slow the rate of bee hives being lost, but increase the number of bees in the population. It is this goal that caused us
         to start County Line Bee Farm.
       </p>
-      <p><h1>What you can do to help</h1></p>
+      <h1><p>What you can do to help</p></h1>
         <p>There are many ways you can help the bees. One way is to become a backyard beekeeper yourself. This adds healthy bees to the local population
         and will leave you with plenty of honey for your effort. If beekeeping isn't for you, simply keeping a garden and staying away from pesticides
         that are harmful to honey bees can also have an important role in bringing back nature's pollinator. You may also choose to donate to groups dedicated to protecting the honey bee

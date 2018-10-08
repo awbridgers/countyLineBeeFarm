@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavMenu></NavMenu>
-        <MediaQuery query="(min-width: 1024px)">
+        <MediaQuery query="(min-width: 1224px)">
         <div className = "banner">
           <div className = "bannerLeft">
           </div>
@@ -22,7 +22,7 @@ class App extends Component {
         </div>
       </div>
     </MediaQuery>
-    <MediaQuery query="(max-width: 1024px)">
+    <MediaQuery query="(max-width: 1224px)">
       <div style = {{color: "white"}}>
       <img className = "mobileImage" src = {beeLogo} alt = "Bee Logo"/>
       <h6 style = {{width: "80%", margin: "auto"}}>Delicious, pure honey made by our hardworking bees on the Johnston-Wake County Line.</h6>

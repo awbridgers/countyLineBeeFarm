@@ -39,7 +39,7 @@ export default class BuyHoney extends Component{
     }
     this.fallBall = {
       title: "Fall Wildflower Honey",
-      subtitle: "12 oz. pound glass Ball jar",
+      subtitle: "12 oz. glass Mason jar",
       price: "$8",
       image: ballJarFallHoney,
       inStock: true
@@ -61,7 +61,7 @@ export default class BuyHoney extends Component{
     }
     this.springBall = {
       title: "Spring Wildflower Honey",
-      subtitle: "12 oz. glass Ball jar",
+      subtitle: "12 oz. glass Mason jar",
       price: "$8",
       image: ballJarSpringHoney,
       inStock: true
@@ -83,7 +83,7 @@ export default class BuyHoney extends Component{
     }
     this.cloverBall = {
       title: "Clover Honey",
-      subtitle: "12 oz. glass Ball jar",
+      subtitle: "12 oz. glass Mason jar",
       price: "$8",
       image: ballJarCloverHoney,
       inStock: true
@@ -118,7 +118,7 @@ export default class BuyHoney extends Component{
             {this.state.honeyArray.map((honeyType,i) =>{
               return(
                 <div className = 'cardDiv' key = {i}>
-                  <Card>
+                  <Card className = 'honeyCard'>
                     <CardImg className = 'honeyPicture' src= {honeyType.image} alt="Card image cap" />
                     <CardBody>
                       <CardTitle>{honeyType.title}</CardTitle>

@@ -123,11 +123,11 @@ class Slides extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <MediaQuery query="(max-width: 1024px)">
+          <MediaQuery query="(max-width: 1224px)">
             <img src={item.src} className = "carouselImageSmall"  alt={item.altText} />
             <div  className = "test">{item.caption} </div>
             </MediaQuery>
-            <MediaQuery query="(min-width: 1024px)">
+            <MediaQuery query="(min-width: 1224px)">
               <img className = "carouselImage" src={item.src}  alt={item.altText} />
               <div className = "carouselCaption"></div>
               <CarouselCaption className = "carouselFont" captionHeader={item.header} captionText = {item.caption} />

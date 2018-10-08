@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import About from './aboutUs.jsx';
 import Email from './email.jsx';
 import CCD from './ccd.jsx';

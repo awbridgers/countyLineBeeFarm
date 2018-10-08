@@ -47,17 +47,17 @@ export default class Email extends Component{
         </div>
         <div className = 'contactInfo'>
           <h2>Have Questions or Comments?</h2>
-          <p className = "emailP"><h4>You can reach us via email at</h4></p> <p><h4><b><font color = "yellow">info@CountyLineBeeFarm.com</font></b></h4></p>
-          <p><center><h5>-OR-</h5></center></p>
-          <p><h4>Leave us your email and message using the form </h4></p><p><h4>and we'll get back to you as soon as possible.</h4></p>
+          <h4><p className = "emailP">You can reach us via email at</p><p><b><font color = "yellow">info@CountyLineBeeFarm.com</font></b></p></h4>
+          <h5><center><p>-OR-</p></center></h5>
+          <h4><p>Leave us your email and message using the form </p><p>and we'll get back to you as soon as possible.</p></h4>
         </div>
       </MediaQuery>
       <MediaQuery query="(max-width: 1224px)">
         <div style = {{width: "85%", color: "white", margin: 'auto'}}>
           <h4>Have Questions or Comments?</h4>
-          <p className = "emailP"><h5>You can reach us via email at</h5></p> <p><h5><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></h5></p>
-          <p><center><h6>-OR-</h6></center></p>
-          <p><h5>Leave us your email and message using the form below and we'll get back to you as soon as possible.</h5></p>
+          <h5><p className = "emailP">You can reach us via email at</p> <p><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></p></h5>
+          <h6><center><p>-OR-</p></center></h6>
+          <h5><p>Leave us your email and message using the form below and we'll get back to you as soon as possible.</p></h5>
         </div>
         <div style = {{width: "95%", paddingBottom: "50px", margin: 'auto'}}>
           <form method="POST" action="https://formspree.io/countylinebeefarm@outlook.com">

@@ -190,7 +190,6 @@ margin-bottom: 30px;
   width: auto;
 }
 .wordContainer{
-  background-color:#141414;
   color: white;
   width: 75%;
   margin: auto;
@@ -222,10 +221,9 @@ margin-bottom: 30px;
   width: 31%;
   min-width: 350px;
 }
-.card{
-  width:80%;
+.honeyCard{
+  width: 80%;
   margin: auto;
-
 }
 
 .honeyPrice{
@@ -234,8 +232,7 @@ margin-bottom: 30px;
   position: relative;
   top: 5px;
 }
-.honeyPicture{
-
+.homepageCard{
 }
 @media all and (max-width: 1024px){
   .carousel{
@@ -252,9 +249,8 @@ margin-bottom: 30px;
     width: 90vw;
   }
   .wordContainer{
-    background-color:#141414;
     color: white;
-    width: 98%;
+    width: 90%;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
