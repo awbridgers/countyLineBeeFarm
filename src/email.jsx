@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './navBar.jsx';
 import { Button } from 'reactstrap';
 import MediaQuery from 'react-responsive'
 
@@ -34,8 +33,7 @@ export default class Email extends Component{
   render(){
     return(
       <div className = "App">
-        <Navbar></Navbar>
-        <MediaQuery query="(min-width: 1224px)">
+        <MediaQuery minWidth = {1224}>
           <div className = "emailForm">
           <form method="POST" action="https://formspree.io/info@countylinebeefarm.com">
           <input className = "email" name = "email" type = "email" placeholder = "Email Address" value = {this.state.emailAddress} onChange = {this.changeEmail}></input>
@@ -52,7 +50,7 @@ export default class Email extends Component{
           <h4><p>Leave us your email and message using the form </p><p>and we'll get back to you as soon as possible.</p></h4>
         </div>
       </MediaQuery>
-      <MediaQuery query="(max-width: 1224px)">
+      <MediaQuery maxWidth = {1224}>
         <div style = {{width: "85%", color: "white", margin: 'auto'}}>
           <h4>Have Questions or Comments?</h4>
           <h5><p className = "emailP">You can reach us via email at</p> <p><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></p></h5>
@@ -60,11 +58,11 @@ export default class Email extends Component{
           <h5><p>Leave us your email and message using the form below and we'll get back to you as soon as possible.</p></h5>
         </div>
         <div style = {{width: "95%", paddingBottom: "50px", margin: 'auto'}}>
-          <form method="POST" action="https://formspree.io/countylinebeefarm@outlook.com">
+          <form method="POST" action="https://formspree.io/info@countylinebeefarm.com">
           <input style = {{width: "85%", marginBottom: "10px"}}name = "email" type = "email" placeholder = "Email Address" value = {this.state.emailAddress} onChange = {this.changeEmail}></input>
           <p><textarea style = {{width: "85%"}} name = 'message'  rows = "4" placeholder = "Message" value = {this.state.message} onChange = {this.changeMessage}></textarea></p>
           <input style = {{width: "85%"}} type="hidden" name="_subject" value="New Message From CountyLineBeeFarm.com" />
-          <input style = {{width: "85%"}} type="hidden" name="_next" value={window.location.href} />
+          <input style = {{width: "85%"}} type="hidden" name="_next" value= '/submitted' />
           <p><Button outline color="warning" size = "lg">Send Email</Button></p>
           </form>
         </div>

@@ -8,9 +8,9 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
 
 const Group = (props) => {
   return (
-    <CardDeck>
+    <CardDeck className = 'homepageDeck'>
       <Card className = "homepageCard">
-        <CardImg top width="100%" src= {bee2} alt="Card image cap" />
+        <CardImg className ="cardImg" top width="100%" src= {bee2} alt="Card image cap" />
         <CardBody>
           <CardTitle>Local Bees</CardTitle>
           <CardSubtitle>Located on the Johnston/Wake County line in Wendell, North Carolina</CardSubtitle>
@@ -22,9 +22,9 @@ const Group = (props) => {
         <CardImg top width="100%" src={honey} alt="Card image cap"/>
         <CardBody>
           <CardTitle>Local Honey</CardTitle>
-          <CardSubtitle>100% all natural honey straight from the hive</CardSubtitle>
+          <CardSubtitle>Find out where we'll be selling honey locally or buy online.</CardSubtitle>
           <CardText></CardText>
-          <LinkContainer to = '/buy-honey'><Button>Buy Now</Button></LinkContainer>
+          <LinkContainer to = '/buy-honey'><Button className = 'cardButton'>Buy Now</Button></LinkContainer>
         </CardBody>
       </Card>
       <Card className = 'homepageCard'>

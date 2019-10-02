@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import NavMenu from "./navBar.jsx"
 import loss from './images/loss.png'
 
 
@@ -10,7 +9,6 @@ export default class CCD extends Component {
   render(){
     return(
       <div className = "App">
-        <NavMenu />
         <div className = 'wordContainer' style = {{backgroundColor: '#141414'}}>
           <h1>What's Happening to the Bees?</h1>
 

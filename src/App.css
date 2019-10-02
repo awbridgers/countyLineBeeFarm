@@ -80,7 +80,7 @@ body{
 }
 
 .banner{
-  height: 30%;
+  height: 100px;
   width: 80%;
   margin: auto;
   background-color: #141414;
@@ -109,7 +109,12 @@ body{
 }
 .bannerText{
   width:100%;
-
+}
+.bannerText h3{
+  font-size: 2.1vw;
+}
+.computerSize{
+  width:100%;
 }
 .carousel{
   margin-bottom: 40px;
@@ -207,23 +212,24 @@ margin-bottom: 30px;
 
 .buyDeck{
   width: 90%;
-  margin: auto;
+  margin:auto;
   display: flex;
   padding-top: 10px;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   flex-wrap: wrap;
   text-align: center;
-  justify-content: center;
+  justify-content: space-between;
+}
 
-}
-.cardDiv{
-  margin: 20px 10px 20px 10px;
-  width: 31%;
-  min-width: 350px;
-}
 .honeyCard{
-  width: 80%;
-  margin: auto;
+  width: 25%;
+  margin:10px 25px 10px 25px;
+}
+.honeyCard .btn{
+  margin-top: auto;
+}
+.honeyCard .card-title{
+  flex-grow: 2;
 }
 
 .honeyPrice{
@@ -232,17 +238,48 @@ margin-bottom: 30px;
   position: relative;
   top: 5px;
 }
-.homepageCard{
+.markets{
+  margin: 10px 0px 10px 0px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
+.marketTable{
+  text-align: center;
+  margin: auto;
+  border-collapse: collapse;
+  width:100%;
+  table-layout: fixed;
+
+}
+.marketTable td{
+
+}
+.homepageCard .card-body, .honeyCard .card-body{
+  padding:0px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+.homepageCard .btn{
+  margin-top: auto;
+}
+.iframe{
+  width: 80%;
+  margin: auto;
+  height: 80%;
+}
+
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
     text-align: center;
   }
 }
-@media all and (max-width:767px){
+@media all and (max-width:768px){
   .mobileImage{
-    max-width: 80%;
+    max-width: 70%;
   }
   .graph{
     height:auto;
@@ -258,5 +295,14 @@ margin-bottom: 30px;
   .cardDiv{
     margin: 20px 10px 20px 10px;
     width: 100%;
+  }
+  .buyDeck{
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .honeyCard{
+    width:80%;
+    margin: 20px;
   }
 }

@@ -29,7 +29,7 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="warning" light expand="md">
-          <MediaQuery query="(min-device-width: 1224px)">
+          <MediaQuery minDeviceWidth = {1224}>
             <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
                 <img className = "beeLogo" src = {beeLogo} alt= 'Bee Logo'/>
@@ -40,7 +40,7 @@ export default class Example extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
 
             <Nav className="nav" navbar tabs style = {{border:"0px"}}>
-              <MediaQuery query="(max-device-width: 1224px)">
+              <MediaQuery maxDeviceWidth = {1224}>
                 <LinkContainer to = "/">
                   <NavItem className = "navItem">
                     <NavLink href=""><font color = "black">Home</font></NavLink>
