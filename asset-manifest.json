@@ -1,11 +1,8 @@
 {
-  "main.css": "static/css/main.ed2eb113.css",
-  "main.css.map": "static/css/main.ed2eb113.css.map",
-  "main.js": "static/js/main.8d78ed04.js",
-  "main.js.map": "static/js/main.8d78ed04.js.map",
-  "static\\media\\ballJarCloverHoney.jpg": "static/media/ballJarCloverHoney.bfe50898.jpg",
-  "static\\media\\ballJarFallHoney.jpg": "static/media/ballJarFallHoney.8bdd9cbd.jpg",
-  "static\\media\\ballJarSpringHoney.jpg": "static/media/ballJarSpringHoney.5547d023.jpg",
+  "main.css": "static/css/main.edf42ecc.css",
+  "main.css.map": "static/css/main.edf42ecc.css.map",
+  "main.js": "static/js/main.0e77c19c.js",
+  "main.js.map": "static/js/main.0e77c19c.js.map",
   "static\\media\\bee1.jpg": "static/media/bee1.79402d62.jpg",
   "static\\media\\bee2.jpg": "static/media/bee2.4f391609.jpg",
   "static\\media\\beeBack.jpg": "static/media/beeBack.aaba8959.jpg",
@@ -19,12 +16,8 @@
   "static\\media\\honeySupers.jpg": "static/media/honeySupers.ab03833b.jpg",
   "static\\media\\loss.png": "static/media/loss.545ebb11.png",
   "static\\media\\machine.jpg": "static/media/machine.d3e62b8e.jpg",
-  "static\\media\\muthJarCloverHoney.jpg": "static/media/muthJarCloverHoney.54363d81.jpg",
-  "static\\media\\muthJarFallHoney.jpg": "static/media/muthJarFallHoney.2738863a.jpg",
   "static\\media\\muthJarSpringHoney.jpg": "static/media/muthJarSpringHoney.9fb42004.jpg",
   "static\\media\\originalHives.jpg": "static/media/originalHives.caf54e45.jpg",
-  "static\\media\\squeezeJarCloverHoney.jpg": "static/media/squeezeJarCloverHoney.347cb521.jpg",
-  "static\\media\\squeezeJarFallHoney.jpg": "static/media/squeezeJarFallHoney.bc017378.jpg",
   "static\\media\\squeezeJarSpringHoney.jpg": "static/media/squeezeJarSpringHoney.a7caec21.jpg",
   "static\\media\\words.png": "static/media/words.36237257.png"
 }
