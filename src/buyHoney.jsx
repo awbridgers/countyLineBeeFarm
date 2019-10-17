@@ -11,78 +11,32 @@ import { Card, Button, CardImg, CardTitle, CardText,
 
 export default class BuyHoney extends Component{
   render(){
-    //create all honey type objects here
-    //FALL Honey
     const honeyList = [
-      // {
-      //   title: "Seasonal Wildflower Honey",
-      //   subtitle: "16 oz. glass Muth jar",
-      //   price: "$15",
-      //   image: muthJarFallHoney,
-      //   inStock: this.props.honeyStock.fall.muth
-      // },
-      // {
-      //   title: "Seasonal Wildflower Honey",
-      //   subtitle: "8 oz. plastic bottle",
-      //   price: "$5",
-      //   image: squeezeJarFallHoney,
-      //   inStock: this.props.honeyStock.fall.squeeze
-      // },
-      // {
-      //   title: "Seasonal Wildflower Honey",
-      //   subtitle: "12 oz. glass Mason jar",
-      //   price: "$8",
-      //   image: ballJarFallHoney,
-      //   inStock: this.props.honeyStock.fall.ball
-      // },
-      //SPRING Honey
       {
         title: "Seasonal Wildflower Honey",
         subtitle: "16 oz. glass Muth jar",
         price: "$15",
         image: muthJarSpringHoney,
-        inStock: this.props.honeyStock.spring.muth
+        inStock: this.props.honeyStock.muth
       },
       {
         title: "Seasonal Wildflower Honey",
         subtitle: "8 oz. plastic bottle",
         price: "$5",
         image: squeezeJarSpringHoney,
-        inStock: this.props.honeyStock.spring.squeeze
+        inStock: this.props.honeyStock.squeeze
       },
       {
         title: "Seasonal Wildflower Honey + Comb",
         subtitle: "12 oz. glass hex jar",
         price: "$15",
         image: hexJar,
-        inStock: this.props.honeyStock.spring.ball
-      },
-      //CLOVER Honey
-      // {
-      //   title: "Clover Honey",
-      //   subtitle: "16 oz. glass Muth jar",
-      //   price: "$15",
-      //   image: muthJarCloverHoney,
-      //   inStock: this.props.honeyStock.clover.muth
-      // },
-      // {
-      //   title: "Clover Honey",
-      //   subtitle: "8 oz. plastic bottle",
-      //   price: "$5",
-      //   image: squeezeJarCloverHoney,
-      //   inStock: this.props.honeyStock.clover.squeeze
-      // },
-      // {
-      //   title: "Clover Honey",
-      //   subtitle: "12 oz. glass Mason jar",
-      //   price: "$8",
-      //   image: ballJarCloverHoney,
-      //   inStock: this.props.honeyStock.clover.ball
-      // }
+        inStock: this.props.honeyStock.hex
+      }
     ]
     return (
-        <div className = 'App'>
-          <div className = 'deck'>
+        <div>
+          <div className = 'marketDeck'>
             <MarketList marketList = {this.props.marketList} />
           </div>
           <div className = 'buyDeck'>

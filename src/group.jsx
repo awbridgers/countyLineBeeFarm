@@ -9,7 +9,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
 const Group = (props) => {
   return (
     <CardDeck className = 'homepageDeck'>
-      <Card className = "homepageCard">
+      <Card className = "homepageCard" id = 'one'>
         <CardImg className ="cardImg" top width="100%" src= {bee2} alt="Card image cap" />
         <CardBody>
           <CardTitle>Local Bees</CardTitle>
@@ -18,7 +18,7 @@ const Group = (props) => {
           <LinkContainer to = '/about'><Button>About Us</Button></LinkContainer>
         </CardBody>
       </Card>
-      <Card className = 'homepageCard'>
+      <Card className = 'homepageCard' id ='two'>
         <CardImg top width="100%" src={honey} alt="Card image cap"/>
         <CardBody>
           <CardTitle>Local Honey</CardTitle>
@@ -27,7 +27,7 @@ const Group = (props) => {
           <LinkContainer to = '/buy-honey'><Button className = 'cardButton'>Buy Now</Button></LinkContainer>
         </CardBody>
       </Card>
-      <Card className = 'homepageCard'>
+      <Card className = 'homepageCard' id='three'>
         <CardImg top width="100%" src= {bee1} alt="Card image cap" />
         <CardBody>
           <CardTitle>For a Good Cause</CardTitle>

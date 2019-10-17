@@ -1,6 +1,5 @@
 {
   "name": "bee_website",
-  "homepage": "https://awbridgers.github.io/countyLineBeeFarm",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,8 +14,8 @@
     "react-google-calendar-api": "^1.0.10",
     "react-iframe": "^1.8.0",
     "react-responsive": "^8.0.1",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.3.1",
+    "react-router-bootstrap": "^0.25.0",
+    "react-router-dom": "^5.1.2",
     "react_google_calendar": "^2.2.4444",
     "reactstrap": "^6.5.0"
   },

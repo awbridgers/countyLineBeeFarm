@@ -7,7 +7,7 @@ import Group from './group.jsx'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <MediaQuery minWidth = {769}>
           <div className = "banner">
             <div className = "bannerLeft"></div>
@@ -26,7 +26,6 @@ class App extends Component {
     </MediaQuery>
         <div className = "deck">
           <Group></Group>
-
         </div>
       </div>
     );

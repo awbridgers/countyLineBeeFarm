@@ -32,7 +32,7 @@ export default class Email extends Component{
 
   render(){
     return(
-      <div className = "App">
+      <div>
         <MediaQuery minWidth = {1224}>
           <div className = "emailForm">
           <form method="POST" action="https://formspree.io/info@countylinebeefarm.com">
@@ -40,20 +40,20 @@ export default class Email extends Component{
           <p><textarea name = 'message' className = "message" rows = "10" placeholder = "Message" value = {this.state.message} onChange = {this.changeMessage}></textarea></p>
           <input type="hidden" name="_subject" value="New Message From CountyLineBeeFarm.com" />
           <input type="hidden" name="_next" value = '/submitted' />
-          <p><Button outline color="warning" size = "lg">Send Email</Button></p>
+          <p className = 'formButton'><Button outline color="warning" size = "lg">Send Email</Button></p>
           </form>
         </div>
         <div className = 'contactInfo'>
           <h2>Have Questions or Comments?</h2>
-          <h4><p className = "emailP">You can reach us via email at</p><p><b><font color = "yellow">info@CountyLineBeeFarm.com</font></b></p></h4>
+          <h4><p className = "emailP">You can reach us via email at</p><p><b><font color = "#cfb53b">info@CountyLineBeeFarm.com</font></b></p></h4>
           <h5><center><p>-OR-</p></center></h5>
           <h4><p>Leave us your email and message using the form </p><p>and we'll get back to you as soon as possible.</p></h4>
         </div>
       </MediaQuery>
       <MediaQuery maxWidth = {1224}>
-        <div style = {{width: "85%", color: "white", margin: 'auto'}}>
+        <div style = {{width: "85%", color: "white", margin: 'auto', paddingTop: '20px'}}>
           <h4>Have Questions or Comments?</h4>
-          <h5><p className = "emailP">You can reach us via email at</p> <p><b><font color = "yellow">CountyLineBeeFarm@Outlook.com</font></b></p></h5>
+          <h5><p className = "emailP">You can reach us via email at</p> <p><b><font color = "#cfb53b">info@CountyLineBeeFarm.com</font></b></p></h5>
           <h6><center><p>-OR-</p></center></h6>
           <h5><p>Leave us your email and message using the form below and we'll get back to you as soon as possible.</p></h5>
         </div>
@@ -63,7 +63,7 @@ export default class Email extends Component{
           <p><textarea style = {{width: "85%"}} name = 'message'  rows = "4" placeholder = "Message" value = {this.state.message} onChange = {this.changeMessage}></textarea></p>
           <input style = {{width: "85%"}} type="hidden" name="_subject" value="New Message From CountyLineBeeFarm.com" />
           <input style = {{width: "85%"}} type="hidden" name="_next" value= '/submitted' />
-          <p><Button outline color="warning" size = "lg">Send Email</Button></p>
+          <p className = 'formButton'><Button outline color="warning" size = "lg">Send Email</Button></p>
           </form>
         </div>
       </MediaQuery>
