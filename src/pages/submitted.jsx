@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import beeLogo from './images/beeLogo.png'
+import beeLogo from '../images/beeLogo.png'
 
 
 

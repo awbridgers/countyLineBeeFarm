@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'reactstrap';
 import MediaQuery from 'react-responsive'

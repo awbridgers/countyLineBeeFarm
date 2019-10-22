@@ -1,21 +1,23 @@
 import React, {Component, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import './App.css'
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
-import About from './aboutUs.jsx';
-import Email from './email.jsx';
-import CCD from './ccd.jsx';
-import NotFound from './notFound.jsx';
-import Submitted from './submitted.jsx';
-import BuyHoney from './buyHoney.jsx';
-import firebase from 'firebase/app';
+import './index.css';
+import './pages/App.css'
 import 'firebase/database';
 import moment from 'moment-timezone';
-import NavBar from './navBar.jsx'
+import firebase from 'firebase/app';
+import {HashRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import store from './store.js';
+import App from './pages/App.js';
+import About from './pages/aboutUs.jsx';
+import Email from './pages/email.jsx';
+import CCD from './pages/ccd.jsx';
+import NotFound from './pages/notFound.jsx';
+import Submitted from './pages/submitted.jsx';
+import BuyHoney from './pages/buyHoney.jsx';
+import NavBar from './components/navBar.jsx'
 
 
 const ScrollToTop = () => {
@@ -81,7 +83,6 @@ export default class Routing extends Component {
         <Router>
           <ScrollToTop />
           <div>
-
             <Route path = '/'>
               <NavBar />
             </Route>
@@ -118,5 +119,9 @@ export default class Routing extends Component {
   }
 }
 
-ReactDOM.render(<Routing />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store = {store}>
+    <Routing />
+  </Provider>,
+  document.getElementById('root'));
 registerServiceWorker();

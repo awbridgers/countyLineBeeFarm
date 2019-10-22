@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import beeLogo from './images/beeLogo.png'
+import beeLogo from '../images/beeLogo.png'
 import MediaQuery from 'react-responsive'
-import Group from './group.jsx'
+import Group from '../components/group.jsx'
 
 class App extends Component {
   render() {

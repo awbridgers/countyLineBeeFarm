@@ -7,16 +7,16 @@ import {
   CarouselCaption
 } from 'reactstrap';
 import MediaQuery from 'react-responsive';
-import bee from './images/beeBack.jpg';
-import bee1 from './images/bee1.jpg';
-import bee2 from './images/bee2.jpg';
-import swarm from './images/beeSwarm2.jpg'
-import originalHives from './images/originalHives.jpg'
-import cuttingComb from './images/cuttingComb.jpg';
-import honeyHarvest from './images/honeyHarvest.jpg';
-import machine from './images/machine.jpg';
-import supers from './images/honeySupers.jpg';
-import gettingSwarm from './images/gettingSwarm.JPG';
+import bee from '../images/beeBack.jpg';
+import bee1 from '../images/bee1.jpg';
+import bee2 from '../images/bee2.jpg';
+import swarm from '../images/beeSwarm2.jpg'
+import originalHives from '../images/originalHives.jpg'
+import cuttingComb from '../images/cuttingComb.jpg';
+import honeyHarvest from '../images/honeyHarvest.jpg';
+import machine from '../images/machine.jpg';
+import supers from '../images/honeySupers.jpg';
+import gettingSwarm from '../images/gettingSwarm.JPG';
 
 
 

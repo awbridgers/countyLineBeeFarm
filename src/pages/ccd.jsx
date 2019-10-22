@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import loss from './images/loss.png'
+import loss from '../images/loss.png'
 
 
 

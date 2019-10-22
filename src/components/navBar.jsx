@@ -7,7 +7,7 @@ import {
   Nav,
   NavItem,
   NavLink} from 'reactstrap';
-  import beeLogo from "./images/words.png";
+  import beeLogo from "../images/words.png";
   import MediaQuery, {useMediaQuery} from 'react-responsive';
   import { LinkContainer, Link } from 'react-router-bootstrap'
 

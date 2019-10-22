@@ -57,7 +57,7 @@
   margin: auto;
   color: white;
   text-align: center;
-  background-image: url("./images/beeLogo.png");
+  background-image: url("../images/beeLogo.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -85,7 +85,7 @@
   float: left;
   height: 100%;
   width: 37%;
-  background-image: url('./images/beeLogo.png');
+  background-image: url('../images/beeLogo.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -285,6 +285,65 @@ margin-bottom: 30px;
 }
 .formButton .btn-outline-warning:hover{
   background: #cfb53b;
+}
+.addToCart{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #cfb53b;
+  border: 5px solid red;
+  text-align: center;
+  width: 75%;
+  min-width: 576px;
+}
+#addExitButton{
+  border-radius: 0px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: black;
+}
+#addExitButton:hover{
+  color:white;
+}
+.addBody{
+  display: flex;
+
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background: black;
+  color: #cfb53b
+}
+.addImage{
+}
+.addImage img{
+  width:85%;
+}
+.addDetails{
+  align-self: flex-start;
+  margin: 20px;
+}
+.quanity{
+  margin-bottom: 20px;
+}
+.quanity button{
+  text-align: center;
+  font-weight: normal;
+  color: black;
+  line-height: .5;
+}
+.quanity button:focus{
+  outline: none;
+  box-shadow: none;
+}
+.quanity div{
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 10px 0px 10px;
+  width: 20px;
 }
 
 @media all and (max-width: 1024px){
