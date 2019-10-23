@@ -7,9 +7,22 @@ import {
   Nav,
   NavItem,
   NavLink} from 'reactstrap';
-  import beeLogo from "./images/words.png";
-  import MediaQuery from 'react-responsive';
+  import beeLogo from "../images/words.png";
+  import MediaQuery, {useMediaQuery} from 'react-responsive';
   import { LinkContainer } from 'react-router-bootstrap'
+
+  const CustomNavItem = (props) =>{
+      const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+      return(
+        <LinkContainer
+          to = {props.linkLocation}
+          onClick = {isTabletOrMobile ? props.onClick : null}>
+          <NavItem className = "navItem">
+            <NavLink href=""><font color = "black">{props.linkTitle}</font></NavLink>
+          </NavItem>
+        </LinkContainer>
+      )
+  }
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -27,8 +40,7 @@ export default class Example extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Navbar color="warning" light expand="md">
+        <Navbar light expand="md">
           <MediaQuery minDeviceWidth = {1224}>
             <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
@@ -38,33 +50,32 @@ export default class Example extends React.Component {
             </MediaQuery>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-
             <Nav className="nav" navbar tabs style = {{border:"0px"}}>
-              <MediaQuery maxDeviceWidth = {1224}>
-                <LinkContainer to = "/">
+              <MediaQuery maxDeviceWidth = {768}>
+                <LinkContainer to = "/" onClick = {this.toggle}>
                   <NavItem className = "navItem">
                     <NavLink href=""><font color = "black">Home</font></NavLink>
                   </NavItem>
                 </LinkContainer>
               </MediaQuery>
-              <LinkContainer to= "/about"><NavItem className = "navItem">
-                <NavLink href=""><font color = "black">About Us</font></NavLink>
-              </NavItem>
-            </LinkContainer>
-              <LinkContainer to = "buy-honey">
-                <NavItem className = "navItem">
-                  <NavLink href=""><font color = "black">Buy Honey</font></NavLink>
-                </NavItem>
-              </LinkContainer>
-                <LinkContainer to= "/contact"><NavItem className = "navItem">
-                  <NavLink href=""><font color = "black">Contact</font></NavLink>
-                </NavItem>
-              </LinkContainer>
-
+              <CustomNavItem
+                linkLocation = '/about'
+                linkTitle = 'About Us'
+                onClick = {this.toggle}
+              />
+                <CustomNavItem
+                  linkLocation = '/buy-honey'
+                  linkTitle = 'Buy Honey'
+                  onClick = {this.toggle}
+                />
+                <CustomNavItem
+                  linkLocation = '/contact'
+                  linkTitle = 'Contact'
+                  onClick = {this.toggle}
+                  />
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
     );
   }
 }

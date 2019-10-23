@@ -1,23 +1,16 @@
-body{
-
+#root{
+  height: 100%;
 }
-
 .App {
   text-align: center;
-  height: 100%;
-  width: 100%;
   max-width: 1440px;
-  background-color: black;
-  position: fixed;
-  overflow-y:  scroll;
-  -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 100px;
-}
 
+.navbar {
+  background: #cfb53b;
+}
 .App-header {
   background-color: #222;
   height: 150px;
@@ -64,7 +57,7 @@ body{
   margin: auto;
   color: white;
   text-align: center;
-  background-image: url("./images/beeLogo.png");
+  background-image: url("../images/beeLogo.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -92,7 +85,7 @@ body{
   float: left;
   height: 100%;
   width: 37%;
-  background-image: url('./images/beeLogo.png');
+  background-image: url('../images/beeLogo.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -191,8 +184,7 @@ margin-bottom: 30px;
   text-align: center
 }
 .graph{
-  height:500px;
-  width: auto;
+  width:80%;
 }
 .wordContainer{
   color: white;
@@ -211,24 +203,24 @@ margin-bottom: 30px;
 }
 
 .buyDeck{
-  width: 90%;
+  width: 80%;
   margin:auto;
   display: flex;
-  padding-top: 10px;
+  padding-top: 5px;
   padding-bottom: 100px;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   text-align: center;
   justify-content: space-between;
 }
 
 .honeyCard{
-  width: 25%;
-  margin:10px 25px 10px 25px;
+  width:24%;
 }
 .honeyCard .btn{
   margin-top: auto;
 }
 .honeyCard .card-title{
+  font-size: 1.15rem;
   flex-grow: 2;
 }
 
@@ -239,10 +231,19 @@ margin-bottom: 30px;
   top: 5px;
 }
 .markets{
-  margin: 10px 0px 10px 0px;
-  width: 100%;
+  margin: 5px 0px 5px 0px;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
+}
+.marketDeck .card{
+  background: #282828;
+  color: #cfb53b;
+}
+.marketDeck .card-title{
+  font-size: 26px;
+  margin-bottom: 5px;
+
 }
 .marketTable{
   text-align: center;
@@ -250,25 +251,99 @@ margin-bottom: 30px;
   border-collapse: collapse;
   width:100%;
   table-layout: fixed;
+}
+.marketTable th{
+  font-size: 20px;
 
 }
 .marketTable td{
-
+  font-size: 18px;
+  font-weight: 500;
 }
+
 .homepageCard .card-body, .honeyCard .card-body{
   padding:0px;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
+  color: black;
 }
-.homepageCard .btn{
+.homepageCard .btn, .honeyCard .btn{
   margin-top: auto;
+  color: black;
+  font-size: 18px;
 }
-.iframe{
-  width: 80%;
-  margin: auto;
-  height: 80%;
+
+.card-body{
+  background: #cfb53b;
+}
+
+.formButton .btn-outline-warning{
+  color: #cfb53b;
+  border-color: #cfb53b;
+}
+.formButton .btn-outline-warning:hover{
+  background: #cfb53b;
+}
+.addToCart{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #cfb53b;
+  border: 5px solid red;
+  text-align: center;
+  width: 75%;
+  min-width: 576px;
+}
+#addExitButton{
+  border-radius: 0px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  color: black;
+}
+#addExitButton:hover{
+  color:white;
+}
+.addBody{
+  display: flex;
+
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  background: black;
+  color: #cfb53b
+}
+.addImage{
+}
+.addImage img{
+  width:85%;
+}
+.addDetails{
+  align-self: flex-start;
+  margin: 20px;
+}
+.quanity{
+  margin-bottom: 20px;
+}
+.quanity button{
+  text-align: center;
+  font-weight: normal;
+  color: black;
+  line-height: .5;
+}
+.quanity button:focus{
+  outline: none;
+  box-shadow: none;
+}
+.quanity div{
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 10px 0px 10px;
+  width: 20px;
 }
 
 @media all and (max-width: 1024px){
@@ -282,8 +357,7 @@ margin-bottom: 30px;
     max-width: 70%;
   }
   .graph{
-    height:auto;
-    width: 90vw;
+    width: 100%
   }
   .wordContainer{
     color: white;
@@ -302,7 +376,33 @@ margin-bottom: 30px;
     justify-content: center;
   }
   .honeyCard{
-    width:80%;
-    margin: 20px;
+    width:90%;
+    margin-bottom: 10px;
   }
+  .markets{
+    width:100%;
+  }
+  .marketDeck .card-title{
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .marketTable th{
+    font-size: 18px;
+  }
+  .marketTable td{
+    font-size: 16px;
+  }
+  /* .scroll{
+    text-align: center;
+    background-color: black;
+    overflow-y:  scroll;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+  }
+  .App{
+    text-align: center;
+    height: auto;
+    width: auto;
+    position: relative;
+  } */
 }

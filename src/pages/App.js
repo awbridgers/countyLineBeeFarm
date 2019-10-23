@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import beeLogo from './images/beeLogo.png'
+import beeLogo from '../images/beeLogo.png'
 import MediaQuery from 'react-responsive'
-import Group from './group.jsx'
+import Group from '../components/group.jsx'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <MediaQuery minWidth = {769}>
           <div className = "banner">
             <div className = "bannerLeft"></div>
@@ -26,7 +26,6 @@ class App extends Component {
     </MediaQuery>
         <div className = "deck">
           <Group></Group>
-
         </div>
       </div>
     );

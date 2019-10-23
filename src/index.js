@@ -1,20 +1,35 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
-import About from './aboutUs.jsx';
-import Email from './email.jsx';
-import CCD from './ccd.jsx';
-import NotFound from './notFound.jsx';
-import Submitted from './submitted.jsx';
-import BuyHoney from './buyHoney.jsx';
-import firebase from 'firebase/app';
+import './index.css';
+import './pages/App.css'
 import 'firebase/database';
 import moment from 'moment-timezone';
-import navBar from './navBar.jsx'
+import firebase from 'firebase/app';
+import {HashRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
+import { Provider } from 'react-redux'
+import store from './store.js';
+import App from './pages/App.js';
+import About from './pages/aboutUs.jsx';
+import Email from './pages/email.jsx';
+import CCD from './pages/ccd.jsx';
+import NotFound from './pages/notFound.jsx';
+import Submitted from './pages/submitted.jsx';
+import BuyHoney from './pages/buyHoney.jsx';
+import NavBar from './components/navBar.jsx'
+
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 
 //setup the firebase database
 firebase.initializeApp({
@@ -26,35 +41,11 @@ firebase.initializeApp({
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 })
 
-const currentStock = {
-  fall:{
-    ball: true,
-    muth: true,
-    squeeze: true
-  },
-  spring:{
-    ball: true,
-    muth: true,
-    squeeze: true
-  },
-  clover:{
-    ball: true,
-    muth: true,
-    squeeze: true
-  }
-}
-
-
-
-
-// const About = () => <div><Navbar /><h1>About Us</h1></div>
-// const BuyHoney = () => <div style = {{ backgroundColor: "black", color: "white", width: "100%", height: "100%", position: "fixed"}}><Navbar /><h1>Coming Soon!</h1></div>
-const Contact = () => <div><Email /></div>
 
 export default class Routing extends Component {
   constructor(){
     super();
-    this.state = {honeyStock: currentStock, marketList:[]}
+    this.state = {honeyStock:{muth: false, hex: false, squeeze: false}, marketList:[]}
     this.ref = firebase.database().ref();
     moment.tz.setDefault('America/New_York');
   }
@@ -78,17 +69,9 @@ export default class Routing extends Component {
       }
     })).then(this.setState({marketList: eventArray}))
     //load in all the honey in stock values
-    let newStock = {...currentStock};
+    let newStock;
     this.ref.once('value').then((snapshot) =>{
-      newStock.fall.ball = snapshot.child('fall/ball').val();
-      newStock.fall.muth = snapshot.child('fall/muth').val();
-      newStock.fall.squeeze = snapshot.child('fall/squeeze').val();
-      newStock.spring.ball = snapshot.child('spring/ball').val();
-      newStock.spring.muth = snapshot.child('spring/muth').val();
-      newStock.spring.squeeze = snapshot.child('spring/squeeze').val();
-      newStock.clover.ball = snapshot.child('clover/ball').val();
-      newStock.clover.muth = snapshot.child('clover/muth').val();
-      newStock.clover.squeeze = snapshot.child('clover/squeeze').val();
+      newStock = snapshot.child('honeyStock').val()
     }).then(()=>{
       this.setState({honeyStock: newStock})
     })
@@ -96,28 +79,49 @@ export default class Routing extends Component {
   render(){
     const {honeyStock, marketList} = this.state;
     return(
-      <Router>
-        <div>
-          <Route path = '/' component = {navBar} />
-          <Switch>
-            <Route exact path = "/" component = {App}/>
-            <Route path = "/about" component = {About} />
-            <Route path = "/help-the-bees" component = {CCD} />
-            <Route path = "/buy-honey"
-              render = {(props)=><BuyHoney {...props}
-                honeyStock = {honeyStock}
-                marketList = {marketList}
-              />}
-            />
-            <Route path = "/contact" component = {Contact} />
-            <Route path = '/submitted' component = {Submitted} />
-            <Route component = {NotFound} />
-          </Switch>
-        </div>
-      </Router>
+      <div className = 'App'>
+        <Router>
+          <ScrollToTop />
+          <div>
+            <Route path = '/'>
+              <NavBar />
+            </Route>
+              <Switch>
+                <Route exact path = "/">
+                  <App />
+                </Route>
+                <Route path = "/about">
+                  <About />
+                </Route>
+                <Route path = "/help-the-bees">
+                  <CCD />
+                </Route>
+                <Route path = "/buy-honey">
+                  <BuyHoney
+                    honeyStock = {honeyStock}
+                    marketList = {marketList}
+                    />
+                </Route>
+                <Route path = "/contact">
+                  <Email />
+                </Route>
+                <Route path = '/submitted'>
+                  <Submitted />
+                </Route>
+                <Route>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </div>
+        </Router>
+      </div>
     )
   }
 }
 
-ReactDOM.render(<Routing />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store = {store}>
+    <Routing />
+  </Provider>,
+  document.getElementById('root'));
 registerServiceWorker();
