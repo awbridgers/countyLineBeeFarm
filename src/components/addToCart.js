@@ -10,7 +10,7 @@ const AddToCart = (props) =>(
     <Button id = 'addExitButton' onClick = {props.exit}>X</Button>
     <div className = 'addBody'>
       <div className = 'addImage'>
-        <img src = {props.honeyType.image} />
+        <img src = {props.honeyType.image} alt = {props.honeyType.type} />
       </div>
       <div className = 'addDetails'>
         <h4>Seasonal WildFlower Honey</h4>

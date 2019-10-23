@@ -9,7 +9,7 @@ import {
   NavLink} from 'reactstrap';
   import beeLogo from "../images/words.png";
   import MediaQuery, {useMediaQuery} from 'react-responsive';
-  import { LinkContainer, Link } from 'react-router-bootstrap'
+  import { LinkContainer } from 'react-router-bootstrap'
 
   const CustomNavItem = (props) =>{
       const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })

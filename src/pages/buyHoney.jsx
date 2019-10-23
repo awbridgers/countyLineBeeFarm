@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Card, Button, CardImg, CardTitle, CardText,
  CardSubtitle, CardBody } from 'reactstrap';
 import './App.css';
-import {FaPlus, FaMinus} from 'react-icons/fa'
 import { connect } from 'react-redux';
-import squeezeJarSpringHoney from '../images/squeezeJarSpringHoney.jpg';
-import muthJarSpringHoney from '../images/muthJarSpringHoney.jpg';
-import hexJar from '../images/hexWithComb.jpg';
 import MarketList from '../components/marketList.js'
 import AddToCart from '../components/addToCart.js'
 
