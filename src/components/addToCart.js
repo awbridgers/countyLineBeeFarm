@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, CardText } from 'reactstrap';
 import { FaPlus, FaMinus} from 'react-icons/fa'
-import {connect} from 'react-redux';
+
 
 
 const AddToCart = (props) =>(
@@ -16,15 +16,14 @@ const AddToCart = (props) =>(
         <h4>Seasonal WildFlower Honey</h4>
         <h5>{props.honeyType.subtitle}</h5>
         <CardText className = 'honeyPrice'>{props.honeyType.price}</CardText>
-        <h5>Quanity:</h5>
-        <div className = 'quanity'>
+        <h5>Quantity:</h5>
+        <div className = 'quantity'>
           <Button onClick = {()=>props.changeQuantity('sub')}><FaMinus /></Button>
           <div>{props.amount}</div>
           <Button onClick = {()=>props.changeQuantity('add')}><FaPlus /></Button>
         </div>
         <div className = 'addButtons'>
-          <p><Button>Add and Checkout</Button></p>
-          <p><Button>Add and Continue Shopping</Button></p>
+          <p><Button onClick = {props.accept}>Add To Cart</Button></p>
         </div>
       </div>
     </div>

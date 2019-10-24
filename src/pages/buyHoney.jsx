@@ -5,6 +5,8 @@ import './App.css';
 import { connect } from 'react-redux';
 import MarketList from '../components/marketList.js'
 import AddToCart from '../components/addToCart.js'
+import { addToCart } from '../actions/index.js';
+import { LinkContainer } from 'react-router-dom'
 
 
 export class BuyHoney extends Component{
@@ -12,8 +14,12 @@ export class BuyHoney extends Component{
     super(props);
     this.state = {showCartScreen: true, honeyType: 0, amount: 0}
   }
-  addToCart = (type) => {
-    this.setState({showCartScreen: true, honeyType: type})
+  openAddScreen = (type) => {
+    this.setState({
+      showCartScreen: true,
+      honeyType: type,
+      amount:this.props.shoppingCart[type].quantity
+    })
   }
   exit = () =>{
     this.setState({showCartScreen: false, honeyType: '', amount: 0})
@@ -26,6 +32,11 @@ export class BuyHoney extends Component{
     else if(type === 'add'){
       this.setState({amount: current + 1})
     }
+  }
+  accept = () =>{
+    const {honeyType, amount} = this.state;
+    this.props.addToCart(honeyType, amount);
+
   }
   render(){
     const {honeyType, amount} = this.state;
@@ -45,7 +56,7 @@ export class BuyHoney extends Component{
                     <CardText className = 'honeyPrice'>{honeyType.price}</CardText>
                     {!honeyType.inStock && <Button color = 'danger' disabled >Sold Out</Button>}
                     {honeyType.inStock &&
-                      <Button onClick = {()=>this.addToCart(i)}>Add to Cart</Button>}
+                      <Button onClick = {()=>this.openAddScreen(i)}>Add to Cart</Button>}
                   </CardBody>
                 </Card>
               )})
@@ -55,8 +66,9 @@ export class BuyHoney extends Component{
             <AddToCart
               exit = {this.exit}
               honeyType = {this.props.shoppingCart[honeyType]}
-              amount = {amount}
               changeQuantity = {this.changeQuantity}
+              amount = {this.state.amount}
+              accept = {this.accept}
             />
           }
       </div>
@@ -67,7 +79,7 @@ const mapStateToProps = (state) =>({
   shoppingCart: state.shoppingCart
 })
 const mapDispatchToProps = dispatch =>({
-
+  addToCart: (index, quantity) => dispatch(addToCart(index, quantity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuyHoney)

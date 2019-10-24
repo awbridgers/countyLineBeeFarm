@@ -325,20 +325,20 @@ margin-bottom: 30px;
   align-self: flex-start;
   margin: 20px;
 }
-.quanity{
+.quantity{
   margin-bottom: 20px;
 }
-.quanity button{
+.quantity button{
   text-align: center;
   font-weight: normal;
   color: black;
   line-height: .5;
 }
-.quanity button:focus{
+.quantity button:focus{
   outline: none;
   box-shadow: none;
 }
-.quanity div{
+.quantity div{
   display: inline-block;
   font-size: 16px;
   font-weight: bold;

@@ -10,7 +10,7 @@ export const shoppingCart = (state = [
     price: "$15",
     image: muthJarSpringHoney,
     inStock: true,
-    quanity: 0
+    quantity: 0
   },
 
   {
@@ -20,7 +20,7 @@ export const shoppingCart = (state = [
     price: "$10",
     image: hexJar,
     inStock: true,
-    quanity: 0
+    quantity: 0
   },
   {
     type: 'Squeeze',
@@ -29,10 +29,20 @@ export const shoppingCart = (state = [
     price: "$5",
     image: squeezeJarSpringHoney,
     inStock: true,
-    quanity:0
+    quantity:0
   }
 ], action) => {
   switch(action.type){
+    case 'ADD_TO_CART':
+      return state.map((honey, index) => {
+        if(index !== action.index){
+          return honey;
+        }
+        return {
+          ...honey,
+          quantity: action.quantity
+        }
+      })
     default:
       return state;
   }
