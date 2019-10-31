@@ -3,3 +3,9 @@ export const addToCart = (index, quantity) =>({
   index,
   quantity
 })
+
+export const changeQuantity = (index, mod) =>({
+  type: 'CHANGE_QUANTITY',
+  index,
+  mod
+})

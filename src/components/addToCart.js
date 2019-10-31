@@ -15,7 +15,7 @@ const AddToCart = (props) =>(
       <div className = 'addDetails'>
         <h4>Seasonal WildFlower Honey</h4>
         <h5>{props.honeyType.subtitle}</h5>
-        <CardText className = 'honeyPrice'>{props.honeyType.price}</CardText>
+        <CardText className = 'honeyPrice'>{`$${props.honeyType.price}`}</CardText>
         <h5>Quantity:</h5>
         <div className = 'quantity'>
           <Button onClick = {()=>props.changeQuantity('sub')}><FaMinus /></Button>
@@ -23,7 +23,7 @@ const AddToCart = (props) =>(
           <Button onClick = {()=>props.changeQuantity('add')}><FaPlus /></Button>
         </div>
         <div className = 'addButtons'>
-          <p><Button onClick = {props.accept}>Add To Cart</Button></p>
+          <Button onClick = {props.accept}>Add To Cart</Button>
         </div>
       </div>
     </div>
