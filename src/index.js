@@ -18,6 +18,7 @@ import NotFound from './pages/notFound.jsx';
 import Submitted from './pages/submitted.jsx';
 import BuyHoney from './pages/buyHoney.jsx';
 import NavBar from './components/navBar.jsx'
+import ShoppingCart from './pages/cart.js';
 
 
 const ScrollToTop = () => {
@@ -107,6 +108,9 @@ export default class Routing extends Component {
                 </Route>
                 <Route path = '/submitted'>
                   <Submitted />
+                </Route>
+                <Route path = '/shopping-cart'>
+                  <ShoppingCart />
                 </Route>
                 <Route>
                   <NotFound />
