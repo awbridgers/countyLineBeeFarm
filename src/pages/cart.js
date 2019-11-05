@@ -47,14 +47,14 @@ const ShoppingCart = (props) => {
           <div className = 'cell'>Subtotal</div>
           <div className = 'cell halfCell'>{`$${totalCost.toFixed(2)}`}</div>
         </div>
-        <div className = 'row totalRow'>
+        {/*<div className = 'row totalRow'>
           <div className = 'cell'>Shipping</div>
           <div className = 'cell halfCell'>{`$${shippingCost.toFixed(2)}`}</div>
         </div>
         <div className = 'row totalRow'>
           <div className = 'cell'>Total</div>
           <div className = 'cell halfCell'>{`$${(shippingCost + totalCost).toFixed(2)}`}</div>
-        </div>
+        </div>*/}
       </div>
     </div>
   )

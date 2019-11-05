@@ -386,6 +386,10 @@ margin-bottom: 30px;
 .cell img{
   width: 75px;
 }
+.sq-payment-form{
+  background-color: white;
+  margin: auto;
+}
 
 @media all and (max-width: 1024px){
   .carousel{
