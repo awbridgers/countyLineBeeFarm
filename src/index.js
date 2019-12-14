@@ -111,7 +111,7 @@ export default class Routing extends Component {
                   <Submitted />
                 </Route>
                 <Route path = '/shopping-cart'>
-                  <PaymentForm />
+                  <ShoppingCart />
                 </Route>
                 <Route>
                   <NotFound />

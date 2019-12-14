@@ -46,6 +46,7 @@ export default class PaymentForm extends React.Component{
     return(
       <div>
        <h1>Payment Page</h1>
+       <div className = 'paymentForm'>
          <SquarePaymentForm
            sandbox={true}
            applicationId={process.env.REACT_APP_SQUARE_ID}
@@ -53,20 +54,31 @@ export default class PaymentForm extends React.Component{
            cardNonceResponseReceived={this.cardNonceResponseReceived}
            createVerificationDetails={this.createVerificationDetails}
          >
-         <fieldset className="sq-fieldset">
-             <CreditCardNumberInput />
+          <fieldset className="sq-fieldset">
+            <div className = 'labelLeft'>
+              <span className = 'sq-label'>Full Name</span>
+              <input className = 'sq-input cartInput' placeholder = "John Doe"></input>
+            </div>
+            <div>
+              <span className = 'sq-label'>Email</span>
+              <input className = 'sq-input cartInput' placeholder = 'john.doe@example.com'></input>
+            </div>
+            <div className = 'sq-divider'></div>
+            <div>
+              <CreditCardNumberInput />
+            </div>
 
-             <div className="sq-form-third">
-               <CreditCardExpirationDateInput />
-             </div>
+            <div className="sq-form-third">
+              <CreditCardExpirationDateInput/>
+            </div>
 
-             <div className="sq-form-third">
-               <CreditCardPostalCodeInput />
-             </div>
+            <div className="sq-form-third">
+              <CreditCardPostalCodeInput />
+            </div>
 
-             <div className="sq-form-third">
-               <CreditCardCVVInput />
-             </div>
+            <div className="sq-form-third">
+              <CreditCardCVVInput />
+            </div>
           </fieldset>
 
            <CreditCardSubmitButton>
@@ -74,6 +86,7 @@ export default class PaymentForm extends React.Component{
            </CreditCardSubmitButton>
 
          </SquarePaymentForm>
+       </div>
 
        <div className="sq-error-message">
          {this.state.errorMessages.map(errorMessage =>

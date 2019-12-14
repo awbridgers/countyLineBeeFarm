@@ -151,7 +151,7 @@ margin-bottom: 30px;
   width:35%;
   position: relative;
   left: 50px;
-  min-width: 100px;
+  min-width: 258px;
 
 
 }
@@ -269,12 +269,12 @@ margin-bottom: 30px;
   justify-content: center;
   color: black;
 }
-.homepageCard .btn, .honeyCard .btn{
+ .homepageCard .btn, .honeyCard .btn{
   margin-top: auto;
   color: black;
   font-size: 18px;
 }
-.homepageCard .btn:hover, .honeyCard .btn:hover{
+.homepageCard .btn:hover, .honeyCard .btn:hover, .shippingDetails .btn:hover{
   color: white;
 }
 
@@ -355,12 +355,13 @@ margin-bottom: 30px;
 }
 .cartList{
   width: 90%;
-  margin:auto;
-
+  min-width: 360px;
+  margin: auto;
 }
 .row{
   display: flex;
   flex-flow: row wrap;
+  margin:auto;
 }
 .totalRow{
   justify-content: flex-end;
@@ -370,11 +371,13 @@ margin-bottom: 30px;
   align-items: center;
   justify-content: center;
   width: calc(100%/3);
-  background: blue;
+  background: #585858;
+  color: black;
   overflow: hidden;
   border: 2px solid black;
   box-sizing: border-box;
   word-wrap: break-word;
+  font-weight: 600;
 }
 .halfCell{
   width: calc(100%/6)
@@ -386,11 +389,100 @@ margin-bottom: 30px;
 .cell img{
   width: 75px;
 }
-.sq-payment-form{
-  background-color: white;
+.tableHeader{
+  font-size: 18px;
+  font-weight: bold;
+}
+.paymentForm{
+  width: 90%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
   margin: auto;
 }
+.sq-form-half {
+  float: left;
+  width: calc((100% - 32px) / 2);
+  padding: 0;
+  margin: 0 16px 16px 0;
+}
+.labelLeft{
+  text-align: left;
+}
+.cartInput{
+  width:100%;
+  height: 40px;
+  color: #373F4A;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.sq-label label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.5;
+  text-transform: uppercase;
+}
+.sq-input {
+  box-sizing: border-box;
+  border: 1px solid #E0E2E3;
+  border-radius: 4px;
+  outline-offset: -2px;
+  display: inline-block;
+  -webkit-transition: border-color .2s ease-in-out, background .2s ease-in-out;
+  -moz-transition: border-color .2s ease-in-out, background .2s ease-in-out;
+  -ms-transition: border-color .2s ease-in-out, background .2s ease-in-out;
+  transition: border-color .2s ease-in-out, background .2s ease-in-out;
+}
+.shippingDetails{
+  min-width:350px;
+  width:40%;
+  background: #cfb53b;
+  margin: auto;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 2;
+}
+.label{
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.5;
+  text-transform: uppercase;
+}
+.form{
+  width: 100%;
+  padding: 0px 5px 0px 5px;
+  text-align: left;
 
+}
+#address1{
+  margin-bottom: 3px;
+}
+label{
+  margin: 0px;
+}
+.cartCheckoutButton{
+  color: black;
+  margin: 10px;
+  font-size: 18px;
+}
+#formAsterisk{
+  font-size: 10px;
+  color: red;
+  vertical-align: center;
+  margin-top:-5px;
+}
+select option{
+  background: white;
+}
+.blankInput{
+  background: #FFA07A;
+}
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
@@ -437,6 +529,19 @@ margin-bottom: 30px;
   .marketTable td{
     font-size: 16px;
   }
+  .cartList{
+    width: 95%;
+  }
+  .cell{
+    font-size: 15px;
+  }
+  .quantity div{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0px 2px 0px 2px;
+    width: 20px;
+  }
   /* .scroll{
     text-align: center;
     background-color: black;
@@ -450,4 +555,15 @@ margin-bottom: 30px;
     width: auto;
     position: relative;
   } */
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
 }
