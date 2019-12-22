@@ -5,6 +5,7 @@ import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa'
 import { Button } from 'reactstrap';
 import { changeQuantity } from '../actions/index.js'
 import {StateSelector} from '../components/stateSelector.js'
+import convert from 'xml-js'
 
 const InputForm = ({type, label, title, value, onChange, placeHolder, special, blankArray})=>{
   let inputTag;
@@ -61,17 +62,44 @@ const ShoppingCart = (props) => {
   const [zip, changeZip] = useState('');
   const [emptyArray, changeEmptyArray] = useState([]);
   const cartArray = props.shoppingCart.filter((x=>x.quantity!==0));
+  const postKey = process.env.REACT_APP_USPS_API_KEY
   let totalCost = 0;
+  const shippingCost = 0;
   cartArray.forEach((x)=>{
     totalCost += x.price * x.quantity
   })
-  const shippingCost = 7;
-  const submit = (e) => {
+  const fetchShippingCost = async () => {
+    //fetch the data from the USPS
+    let res = await fetch(
+      `https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML=` +
+      `%3CRateV4Request%20USERID=%22${postKey}%22%3E%3CPackage%20ID=%220%22%3E`+
+      `%3CService%3EPRIORITY%3C/Service%3E%3CZipOrigination%3E27591%3C/ZipOrigination%3E`+
+      `%3CZipDestination%3E${zip}%3C/ZipDestination%3E` +
+      `%3CPounds%3E${1}%3C/Pounds%3E%3COunces%3E${0}%3C/Ounces%3E` +
+      `%3CContainer%3EVariable%3C/Container%3E%3C/Package%3E%3C/RateV4Request%3E`)
+    //convert the data to a js object
+    let text = await res.text()
+    let data = convert.xml2js(text, {compact:true,ignoreDeclaration:true})
+    return data.RateV4Response.Package
+
+  }
+  const matchZip = async () =>{
+    let res = await fetch(
+      `https://secure.shippingapis.com/shippingapi.dll?API=CityStateLookup`+
+      `&XML=%3CCityStateLookupRequest%20USERID=%22${postKey}%22%3E`+
+      `%3CZipCode%3E%3CZip5%3E${zip}%3C/Zip5%3E%3C/ZipCode%3E%3C/`+
+      `CityStateLookupRequest%3E`)
+    let text = await res.text()
+    let data = await convert.xml2js(text, {compact:true,ignoreDeclaration:true})
+    return data.CityStateLookupResponse.ZipCode
+  }
+  const submit = async (e) => {
     //stop the form from refreshing the page
     e.preventDefault();
     e.stopPropagation();
     //throw all inputs into an object with variable name as key
     const input = {name,email,phone,address1,city,state,zip}
+    const zipInfo = await matchZip();
     const blankInputs = Object.keys(input).filter(key=>input[key]==='');
     //make sure all inputs are filled
     if (blankInputs.length > 0) {
@@ -79,15 +107,19 @@ const ShoppingCart = (props) => {
       alert('Please enter your shipping information before continuing to checkout')
       changeEmptyArray([...blankInputs])
     }
-    //make sure zip code is 5 digit code only
-    else if(!zip.match(/\d{5}/)){
-      alert('Please enter your 5 digit zip code');
-      changeEmptyArray(['zip'])
+    //handle the error for the zip lookup
+    else if(zipInfo.hasOwnProperty('Error')){
+      alert(zipInfo.Error.Description._text)
+      changeEmptyArray([...emptyArray, 'zip'])
     }
+    //if state and zip don't match
+    else if(zipInfo.State._text !== state){
+      alert('Zip Code does not match the State')
+      changeEmptyArray([...emptyArray, 'zip', 'state'])
+    }
+    //if everything else checks out, then proceed to calculate shipping and continue
     else{
       changeEmptyArray([])
-      //continue validating information here
-      //fetch the zip code info from the usps api
     }
   }
   return(
