@@ -171,4 +171,43 @@ describe('shoppingCart reducer', ()=>{
       }
     ])
   })
+  it('adds the quantity to the shopping cart',()=>{
+    expect(shoppingCart(state,
+      {
+        type:'ADD_TO_CART',
+        index:1,
+        quantity: 5
+      }
+    )).toEqual(
+      [
+        {
+          type: 'Muth',
+          title: "Seasonal Wildflower Honey",
+          subtitle: "16 oz. glass Muth jar",
+          price: 15,
+          image: muthJarSpringHoney,
+          inStock: true,
+          quantity: 1
+        },
+        {
+          type: 'Hex',
+          title: "Seasonal Wildflower Honey + Comb",
+          subtitle: "12 oz. glass hex jar",
+          price: 10,
+          image: hexJar,
+          inStock: true,
+          quantity: 5
+        },
+        {
+          type: 'Squeeze',
+          title: "Seasonal Wildflower Honey",
+          subtitle: "8 oz. plastic bottle",
+          price: 5,
+          image: squeezeJarSpringHoney,
+          inStock: true,
+          quantity:0
+        }
+      ]
+    )
+  })
 })
