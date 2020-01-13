@@ -19,7 +19,7 @@ const AddToCart = (props) =>(
         <h5>Quantity:</h5>
         <div className = 'quantity'>
           <Button onClick = {()=>props.changeQuantity('sub')}><FaMinus /></Button>
-          <div>{props.amount}</div>
+          <div id='num'>{props.amount}</div>
           <Button onClick = {()=>props.changeQuantity('add')}><FaPlus /></Button>
         </div>
         <div className = 'addButtons'>
