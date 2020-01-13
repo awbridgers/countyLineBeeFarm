@@ -13,7 +13,8 @@ const props = {
     price: 15,
     image: 'image.jpg',
     inStock: true,
-    quantity: 0
+    quantity: 0,
+    amount: 1
   }
 }
 
@@ -29,5 +30,15 @@ describe('AddToCart component',()=>{
   it('exits when the exit button is clicked',()=>{
     wrapper.find('Button#addExitButton').dive().find('button').simulate('click');
     expect(props.exit).toHaveBeenCalled();
+  })
+  it('adds the item to cart when the button is pressed',()=>{
+    wrapper.find('Button').last().dive().find('button').simulate('click');
+    expect(props.accept).toHaveBeenCalled();
+  })
+  it('changes the quantity of the item when the button is pressed',()=>{
+    wrapper.find('div.quantity').find('Button').first().dive().find('button').simulate('click');
+    wrapper.find('div.quantity').find('Button').last().dive().find('button').simulate('click');
+    expect(props.changeQuantity).toHaveBeenNthCalledWith(1,'sub');
+    expect(props.changeQuantity).toHaveBeenNthCalledWith(2, 'add');
   })
 })
