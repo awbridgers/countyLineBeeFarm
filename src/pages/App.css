@@ -424,27 +424,15 @@ margin-bottom: 30px;
   letter-spacing: 0.5;
   text-transform: uppercase;
 }
-.sq-input {
-  box-sizing: border-box;
-  border: 1px solid #E0E2E3;
-  border-radius: 4px;
-  outline-offset: -2px;
-  display: inline-block;
-  -webkit-transition: border-color .2s ease-in-out, background .2s ease-in-out;
-  -moz-transition: border-color .2s ease-in-out, background .2s ease-in-out;
-  -ms-transition: border-color .2s ease-in-out, background .2s ease-in-out;
-  transition: border-color .2s ease-in-out, background .2s ease-in-out;
-}
+
+
 .shippingDetails{
   min-width:350px;
   width:40%;
   background: #cfb53b;
   margin: auto;
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  justify-content: space-around;
-  flex-grow: 2;
+  padding-bottom: 10px;
+
 }
 .label{
   color: black;
@@ -458,7 +446,7 @@ margin-bottom: 30px;
   width: 100%;
   padding: 0px 5px 0px 5px;
   text-align: left;
-
+  text-align: left;
 }
 #address1{
   margin-bottom: 3px;
@@ -468,7 +456,7 @@ label{
 }
 .cartCheckoutButton{
   color: black;
-  margin: 10px;
+  margin-top: 10px;
   font-size: 18px;
 }
 #formAsterisk{
@@ -483,6 +471,91 @@ select option{
 .blankInput{
   background: #FFA07A;
 }
+.loadingScreen{
+  position: fixed;
+  width: 100%;
+  height: 99%;
+  top:0px;
+  left:0px;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.checkoutPage{
+  color: #cfb53b;
+}
+.checkoutBody{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  margin: auto;
+  width: 90%;
+
+}
+.checkoutRight{
+  border: 2px solid grey;
+  flex-grow: 2;
+
+}
+.checkoutLeft{
+  border: 2px solid grey;
+  flex-grow: 3;
+  text-align: left;
+}
+.shippingInfo{
+  display: flex;
+  flex-flow: column;
+}
+
+.addressInfo{
+  display: inline-block;
+  margin: 10px auto 20px auto;
+  line-height: 18px;
+  font-size: 18px;
+}
+.personalInfo{
+  margin-top: 10px;
+}
+.paymentInfo{
+  width: 100%;
+  padding-bottom: 10px;
+}
+.ccInput{
+  width: 100%;
+  font-family: 'Arial';
+  padding: 16px;
+  font-size: 18px;
+}
+.squarePay .sq-payment-form{
+  color: #cfb53b;
+  margin: auto;
+}
+.sq-payment-form{
+  max-width: 380px;
+  width: auto !important;
+  min-width: 230px;
+}
+.sq-form-third{
+  margin-bottom: 0px !important;
+}
+.sq-creditcard{
+  background: #cfb53b !important;
+  color: black !important;
+}
+.sq-creditcard:hover{
+  background: #988425 !important;
+  color: white !important;
+}
+.checkBoxBilling{
+  font-size: 14px;
+  margin: 0px auto;
+}
+
+
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;

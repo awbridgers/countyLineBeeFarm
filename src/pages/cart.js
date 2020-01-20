@@ -1,74 +1,35 @@
 import React, {useState} from 'react';
 import './App.css';
-import {connect} from 'react-redux'
-import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa'
+import {connect} from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa';
 import { Button } from 'reactstrap';
-import { changeQuantity } from '../actions/index.js'
-import {StateSelector} from '../components/stateSelector.js'
-import convert from 'xml-js'
-
-const InputForm = ({type, label, title, value, onChange, placeHolder, special, blankArray})=>{
-  let inputTag;
-  //if its the state input, use the dropdown bar
-  if(type === 'state'){
-    inputTag = (
-      <StateSelector
-        value = {value}
-        onChange = {onChange}
-        id ={type}
-        autoComplete = {type}
-        name = {type}
-        style = {blankArray.includes(type) ? {background: '#FFA07A'}: {}}
-        />
-    )
-  }
-  //otherwise, use a text input form
-  else{
-    inputTag = (
-      <input
-        id = {type}
-        type = {special}
-        autoComplete = {type}
-        name = {type}
-        value = {value}
-        className = 'sq-input cartInput'
-        style = {blankArray.includes(type) ? {background: '#FFA07A'}: {}}
-        onChange = {onChange}
-        placeholder = {placeHolder}
-      >
-      </input>)
-  }
-  return (
-    <div id = {type}>
-      {label &&
-        <label className = 'label' htmlFor = {type}>
-          {title}<FaAsterisk id = 'formAsterisk'/>
-        </label>
-      }
-      {inputTag}
-    </div>
-  )
-}
-
+import { changeQuantity, changeShippingCost, changeShippingAddress } from '../actions/index.js';
+import {StateSelector} from '../components/stateSelector.js';
+import convert from 'xml-js';
+import Loader from 'react-spinners/RingLoader';
+import AddressForm from '../components/addressForm.js';
 
 const ShoppingCart = (props) => {
-  const [name, changeName] = useState('');
-  const [email, changeEmail] = useState('');
-  const [phone, changePhone] = useState('');
-  const [address1, changeAddress1] =  useState('');
-  const [address2, changeAddress2] =  useState('');
-  const [city, changeCity] =  useState('');
-  const [state, changeState] = useState('');
-  const [zip, changeZip] = useState('');
-  const [emptyArray, changeEmptyArray] = useState([]);
-  const cartArray = props.shoppingCart.filter((x=>x.quantity!==0));
-  const postKey = process.env.REACT_APP_USPS_API_KEY
+  const postKey = process.env.REACT_APP_USPS_API_KEY;
+  const shippingAddress = props.shippingAddress;
+  let history = useHistory();
+  //calculate total cost of order without shipping
   let totalCost = 0;
-  const shippingCost = 0;
+  const cartArray = props.shoppingCart.filter((x=>x.quantity!==0));
   cartArray.forEach((x)=>{
     totalCost += x.price * x.quantity
   })
+  const [loading, changeLoading] = useState(false);
+  const [errorArray, changeErrorArray] = useState([])
+  const changeInput = (e) =>{
+    const target = e.target.id;
+    const value = e.target.value;
+    //console.log(target, value)
+    props.changeShippingAddress(target, value);
+  }
   const fetchShippingCost = async () => {
+    const zip = shippingAddress['postal-code'];
     //fetch the data from the USPS
     let res = await fetch(
       `https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML=` +
@@ -84,6 +45,7 @@ const ShoppingCart = (props) => {
 
   }
   const matchZip = async () =>{
+    const zip = shippingAddress['postal-code'];
     let res = await fetch(
       `https://secure.shippingapis.com/shippingapi.dll?API=CityStateLookup`+
       `&XML=%3CCityStateLookupRequest%20USERID=%22${postKey}%22%3E`+
@@ -97,33 +59,69 @@ const ShoppingCart = (props) => {
     //stop the form from refreshing the page
     e.preventDefault();
     e.stopPropagation();
-    //throw all inputs into an object with variable name as key
-    const input = {name,email,phone,address1,city,state,zip}
+    //bring up the load screen
+    changeLoading(true);
+    //check all the inputs to see if any are blank
+    const blankInputs = Object.keys(shippingAddress).filter(key=>shippingAddress[key]==='');
+    let errorMessage = '';
+    let newErrorArray = [];
+    let proceedToCheckout = false;
     const zipInfo = await matchZip();
-    const blankInputs = Object.keys(input).filter(key=>input[key]==='');
     //make sure all inputs are filled
     if (blankInputs.length > 0) {
-      console.log(blankInputs)
-      alert('Please enter your shipping information before continuing to checkout')
-      changeEmptyArray([...blankInputs])
+      errorMessage = 'Please enter your shipping information before continuing to checkout'
+      newErrorArray = [...blankInputs];
     }
     //handle the error for the zip lookup
     else if(zipInfo.hasOwnProperty('Error')){
-      alert(zipInfo.Error.Description._text)
-      changeEmptyArray([...emptyArray, 'zip'])
+      errorMessage = zipInfo.Error.Description._text
+      newErrorArray = [...errorArray, 'postal-code']
     }
     //if state and zip don't match
-    else if(zipInfo.State._text !== state){
-      alert('Zip Code does not match the State')
-      changeEmptyArray([...emptyArray, 'zip', 'state'])
+    else if(zipInfo.State._text !== shippingAddress.region){
+      errorMessage = 'Zip Code does not match the State'
+      newErrorArray = [...errorArray, 'postal-code', 'region']
     }
     //if everything else checks out, then proceed to calculate shipping and continue
     else{
-      changeEmptyArray([])
+      newErrorArray = [];
+      const shippingInfo = await fetchShippingCost();
+      if(shippingInfo.hasOwnProperty('Error')){
+        errorMessage = shippingInfo.Error.Description._text
+      }
+      else{
+        const shippingCost = shippingInfo.Postage.Rate._text;
+        props.changeShippingCost(shippingCost);
+        proceedToCheckout = true;
+      }
+    }
+    //if all checks passed, proceed to checkout.
+    if(proceedToCheckout){
+      history.push('/checkout')
+    }
+    //if the checks did not pass, alert the user to why
+    else{
+      changeLoading(false)
+      changeErrorArray(newErrorArray);
+      alert(errorMessage)
     }
   }
   return(
     <div style = {{color: '#cfb53b', marginBottom: '50px'}}>
+      {loading &&
+        <div className = 'loadingScreen'>
+          <div>
+            <Loader
+              color = '#CFB53B'
+              height = {20}
+              width = {8}
+              margin = {10}
+            />
+          </div>
+          <div>
+            <h4>Preparing order</h4>
+          </div>
+        </div>}
       <div className = 'cartList'>
         <h2>Your Shopping Cart</h2>
         <div className = 'row'>
@@ -159,64 +157,35 @@ const ShoppingCart = (props) => {
       </div>
       <div>
         <h5>Enter your shipping information below to continue to checkout.</h5>
-        <form autoComplete = 'on' className = 'shippingDetails' onSubmit = {submit}>
-          <div className = 'form'>
-            <InputForm type = 'name' value = {name} label blankArray = {emptyArray}
-              title = "Name" onChange = {(e)=>changeName(e.target.value)}
-            />
-            <InputForm type = 'email' value = {email} label title = "Email"
-              special = 'email' onChange = {(e)=>changeEmail(e.target.value)}
-              blankArray = {emptyArray}
-            />
-          <InputForm type = 'phone' value = {phone} label special = 'tel'
-              title = "Phone" blankArray = {emptyArray} onChange = {(e)=>{
-                const number = e.target.value;
-                //console.log(e.target.value)
-                if(number.match(/^[\d-]*$/)){
-                  changePhone(e.target.value)}
-                }
-
-              }
-            />
-          <InputForm type = 'address1' value = {address1} label
-              title = "Street Address" onChange = {(e)=>changeAddress1(e.target.value)}
-              placeHolder = 'Street, PO Box, etc.' blankArray = {emptyArray}
-            />
-            <InputForm type = 'address2' value = {address2}
-              title = "Street Address" onChange = {(e)=>changeAddress2(e.target.value)}
-              placeHolder = 'Apartment, suite, etc. (Optional)' blankArray = {emptyArray}
-            />
-            <InputForm type = 'city' value = {city}
-              title = "City" onChange = {(e)=>changeCity(e.target.value)} label
-              blankArray = {emptyArray}
-            />
-          <InputForm type = 'state' value = {state}
-              title = "State" onChange = {(e)=>changeState(e.target.value)} label
-              blankArray = {emptyArray}
-            />
-          <InputForm type = 'zip' value = {zip} label
-              title = "Postal" blankArray = {emptyArray}
-              onChange = {(e)=>{
-                if(e.target.value.length < 6 && e.target.value.match(/^[\d]*$/)){
-                  changeZip(e.target.value)
-                }}
-              }
-
-            />
-          </div>
-          <Button className = 'cartCheckoutButton'>Continue to Checkout</Button>
-        </form>
+        <AddressForm
+          onSubmit = {submit}
+          name = {shippingAddress.name}
+          email = {shippingAddress.email}
+          phone = {shippingAddress.phone}
+          address1 = {shippingAddress['address-line1']}
+          address2 = {shippingAddress['address-line2']}
+          city = {shippingAddress.locality}
+          state = {shippingAddress.region}
+          zip = {shippingAddress['postal-code']}
+          errorCheck = {errorArray}
+          changeValue = {changeInput}
+          buttonText = 'Continue to Checkout'
+          button
+        />
       </div>
     </div>
   )
 }
 
 const mapStateToProps = state =>({
-  shoppingCart: state.shoppingCart
+  shoppingCart: state.shoppingCart,
+  shippingAddress: state.shippingAddress,
 })
 
 const mapDispatchToProps = dispatch =>({
-  changeQuantity: (index,mod)=>dispatch(changeQuantity(index,mod))
+  changeQuantity: (index,mod)=>dispatch(changeQuantity(index,mod)),
+  changeShippingCost: (amount)=>dispatch(changeShippingCost(amount)),
+  changeShippingAddress: (key,payload)=>dispatch(changeShippingAddress(key,payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

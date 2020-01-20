@@ -4,13 +4,41 @@ import {shippingAddress} from '../../reducers/shippingAddress';
 describe('shippingAddress reducer',()=>{
   it('returns the initial state',()=>{
     expect(shippingAddress(undefined,{})).toEqual({
-      name: 'Test Name',
-      email: 'testemail@test.com',
-      phone: '1234567890',
-      city: 'Test City',
-      state: 'Test State',
-      address: '123 Test St. Apt. 1',
-      zip: '12345'
+      name: '',
+      email: '',
+      phone: '',
+      city: '',
+      state: '',
+      address: '',
+      zip: ''
+    })
+  })
+  it('changes the properties',()=>{
+    expect(shippingAddress(undefined,{
+      type: 'CHANGE_SHIPPING_INFO',
+      key: 'name',
+      payload: 'Different Test'
+    })).toEqual({
+      name: 'Different Test',
+      email: '',
+      phone: '',
+      city: '',
+      state: '',
+      address: '',
+      zip: ''
+    })
+    expect(shippingAddress(undefined,{
+      type: 'CHANGE_SHIPPING_INFO',
+      key: 'address',
+      payload: '123 Test Street Apt B'
+    })).toEqual({
+      name: '',
+      email: '',
+      phone: '',
+      city: '',
+      state: '',
+      address: '123 Test Street Apt B',
+      zip: ''
     })
   })
 })

@@ -1,5 +1,5 @@
 
-export const shippingAddress = (state = {
+export const billingAddress = (state = {
   name: '',
   email: '',
   phone: '',
@@ -10,7 +10,7 @@ export const shippingAddress = (state = {
   "postal-code": ''
 },action)=>{
   switch(action.type){
-    case 'CHANGE_SHIPPING_INFO':
+    case 'CHANGE_BILLING_INFO':
       return {
         ...state,
         [action.key]: action.payload
