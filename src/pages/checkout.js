@@ -12,7 +12,7 @@ import SquarePaymentForm, {
 } from 'react-square-payment-form';
 import AddressForm from '../components/addressForm.js'
 import {changeBillingAddress} from '../actions/index.js'
-
+import CreditCardForm from '../components/creditCardForm.js';
 
 const inputStyles = [
   {
@@ -32,8 +32,24 @@ export class CheckoutPage extends Component{
     this.state = {
       errorMessages: [],
       billingSame: true,
-      errorArray: []
+      errorArray: [],
+      loaded: false
     }
+  }
+  componentDidMount(){
+    //load in the sq payment script API
+    const script ='https://js.squareupsandbox.com/v2/paymentform'
+    const onload = () => this.setState({loaded:true});
+    this.loadScript(script, onload,'text/javascript', false );
+  }
+  loadScript = (script, onload, type, sync) =>{
+    //a function to load a script into the document
+    let newScript = document.createElement('script');
+    newScript.src = script;
+    newScript.type = type;
+    newScript.async = sync;
+    newScript.onload = onload;
+    document.getElementsByTagName('head')[0].appendChild(newScript)
   }
   cardNonceResponseReceived = (errors, nonce, cardData, buyerVerificationToken) => {
     if (errors) {
@@ -42,6 +58,7 @@ export class CheckoutPage extends Component{
     }
 
     this.setState({ errorMessages: [] })
+
     alert("nonce created: " + nonce + ", buyerVerificationToken: " + buyerVerificationToken)
   }
   createVerificationDetails() {
@@ -75,6 +92,9 @@ export class CheckoutPage extends Component{
     const address = `${this.props.shippingAddress['address-line1']} ${this.props.shippingAddress['address-line2']}`
     const zip = this.props.shippingAddress['postal-code'];
     const bAddress = this.props.billingAddress
+    if(!this.state.loaded){
+      return <h1>Loading Screen</h1>
+    }
     return(
       <div className = 'checkoutPage'>
         <h1>Checkout</h1>
@@ -97,13 +117,20 @@ export class CheckoutPage extends Component{
             <div className = 'paymentInfo'>
               <span><h4>Payment Info</h4></span>
               <div className = 'squarePay'>
-                <SquarePaymentForm
+                <CreditCardForm
+                  paymentForm = {window.SqPaymentForm}
+                  billingAddress = {this.props.billingAddress}
+                  changeBillingAddress = {this.changeInput}
+                  cardNonceResponseReceived = {this.cardNonceResponseReceived}
+                />
+                {/*<SquarePaymentForm
                   sandbox={true}
                   applicationId={process.env.REACT_APP_SQUARE_ID}
                   locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
                   cardNonceResponseReceived={this.cardNonceResponseReceived}
                   createVerificationDetails={this.createVerificationDetails}
                   inputStyles = {inputStyles}
+                  ref = {el=>this.paymentForm = el}
                 >
                 <fieldset className="sq-fieldset">
                   <div>
@@ -149,7 +176,7 @@ export class CheckoutPage extends Component{
                 <div>
                   <CreditCardSubmitButton>Pay and Complete Order</CreditCardSubmitButton>
                 </div>
-              </SquarePaymentForm>
+              </SquarePaymentForm>*/}
               </div>
             </div>
           </div>

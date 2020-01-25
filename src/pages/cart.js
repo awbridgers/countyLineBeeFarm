@@ -62,7 +62,8 @@ const ShoppingCart = (props) => {
     //bring up the load screen
     changeLoading(true);
     //check all the inputs to see if any are blank
-    const blankInputs = Object.keys(shippingAddress).filter(key=>shippingAddress[key]==='');
+    const blankInputs = Object.keys(shippingAddress)
+    .filter(key=>key!== 'address-line2' && shippingAddress[key]==='');
     let errorMessage = '';
     let newErrorArray = [];
     let proceedToCheckout = false;
@@ -171,6 +172,7 @@ const ShoppingCart = (props) => {
           changeValue = {changeInput}
           buttonText = 'Continue to Checkout'
           button
+          formTitle = 'Shipping Address'
         />
       </div>
     </div>
