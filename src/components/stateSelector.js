@@ -4,7 +4,7 @@ import '../pages/App.css'
 
 export const StateSelector = (props) =>(
   <select name={props.name} value = {props.value} onChange = {props.onChange}
-  autoComplete = {props.autoComplete} id = {props.id} className = 'sq-input cartInput'
+  autoComplete = {props.autoComplete} id = {props.id} className = 'cartInput'
   style = {props.style}>
     <option hidden value="">Select a state</option>
     <option value="AL">Alabama</option>

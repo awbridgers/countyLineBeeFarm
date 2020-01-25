@@ -17,7 +17,7 @@ const InputForm =({id, label, value, title, onChange, placeHolder, type, error})
       name = {id}
       autoComplete = {id}
       type = {type}
-      className = 'sq-input cartInput'
+      className = 'cartInput'
       placeholder = {placeHolder}
       onChange = {onChange}
       value = {value}
@@ -46,6 +46,7 @@ const AddressForm = (props) =>{
         onSubmit = {props.onSubmit}
       >
         <div className = 'form'>
+          <h4 className = 'formTitle'>{props.formTitle}</h4>
           <InputForm
             id = 'name'
             value = {props.name}
