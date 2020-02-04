@@ -91,7 +91,7 @@ const ShoppingCart = (props) => {
         errorMessage = shippingInfo.Error.Description._text
       }
       else{
-        const shippingCost = shippingInfo.Postage.Rate._text;
+        const shippingCost = Number(shippingInfo.Postage.Rate._text);
         props.changeShippingCost(shippingCost);
         proceedToCheckout = true;
       }

@@ -55,6 +55,7 @@ const AddressForm = (props) =>{
             title = "Name"
             onChange = {(e)=>props.changeValue(e)}
           />
+        {!props.billing &&
           <InputForm
             id = 'email'
             value = {props.email}
@@ -63,7 +64,8 @@ const AddressForm = (props) =>{
             type = 'email'
             onChange = {(e)=>props.changeValue(e)}
             error = {props.errorCheck.includes('email')}
-          />
+          />}
+          {!props.billing &&
           <InputForm
             id = 'phone'
             value = {props.phone}
@@ -78,7 +80,7 @@ const AddressForm = (props) =>{
                 props.changeValue(e)}
               }
             }
-          />
+            />}
           <InputForm
             id = 'address-line1'
             value = {props.address1}

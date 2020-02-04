@@ -129,6 +129,7 @@ export default class CreditCardForm extends Component{
                 changeValue = {this.props.changeBillingAddress}
                 button = {false}
                 formTitle = 'Billing Address'
+                billing
               />
             </div>
             }

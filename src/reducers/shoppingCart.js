@@ -10,7 +10,7 @@ export const shoppingCart = (state = [
     price: 15,
     image: muthJarSpringHoney,
     inStock: true,
-    quantity: 0
+    quantity: 1
   },
 
   {
@@ -20,7 +20,7 @@ export const shoppingCart = (state = [
     price: 10,
     image: hexJar,
     inStock: true,
-    quantity: 0
+    quantity: 2
   },
   {
     type: 'Squeeze',

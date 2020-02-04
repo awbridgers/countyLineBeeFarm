@@ -13,6 +13,8 @@ import SquarePaymentForm, {
 import AddressForm from '../components/addressForm.js'
 import {changeBillingAddress} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
+import '../styles/checkout.css';
+import Order from '../components/order.js';
 
 const inputStyles = [
   {
@@ -35,12 +37,17 @@ export class CheckoutPage extends Component{
       errorArray: [],
       loaded: false
     }
+    this.subTotal = 0;
+    this.total = 0;
+
   }
   componentDidMount(){
     //load in the sq payment script API
     const script ='https://js.squareupsandbox.com/v2/paymentform'
     const onload = () => this.setState({loaded:true});
     this.loadScript(script, onload,'text/javascript', false );
+    this.subTotal = this.calcTotal()
+    this.total = this.subTotal + this.props.shippingCost
   }
   loadScript = (script, onload, type, sync) =>{
     //a function to load a script into the document
@@ -78,6 +85,13 @@ export class CheckoutPage extends Component{
       }
     }
   }
+  calcTotal = () =>{
+    let total = 0;
+    this.props.shoppingCart.forEach((x)=>{
+      total += (x.quantity * x.price)
+    })
+    return total
+  }
   changeBillingSame = (e)=>{
     this.setState({billingSame: e.target.checked})
   }
@@ -97,7 +111,7 @@ export class CheckoutPage extends Component{
     }
     return(
       <div className = 'checkoutPage'>
-        <h1>Checkout</h1>
+        <h1 id = 'checkoutTitle'>Checkout</h1>
         <div className = 'checkoutBody'>
           <div className = 'checkoutLeft'>
             <div className = 'shippingInfo'>
@@ -123,65 +137,16 @@ export class CheckoutPage extends Component{
                   changeBillingAddress = {this.changeInput}
                   cardNonceResponseReceived = {this.cardNonceResponseReceived}
                 />
-                {/*<SquarePaymentForm
-                  sandbox={true}
-                  applicationId={process.env.REACT_APP_SQUARE_ID}
-                  locationId={process.env.REACT_APP_SQUARE_LOCATION_ID}
-                  cardNonceResponseReceived={this.cardNonceResponseReceived}
-                  createVerificationDetails={this.createVerificationDetails}
-                  inputStyles = {inputStyles}
-                  ref = {el=>this.paymentForm = el}
-                >
-                <fieldset className="sq-fieldset">
-                  <div>
-                    <CreditCardNumberInput label = 'Card Number'/>
-                  </div>
-                  <div className="sq-form-third">
-                    <CreditCardExpirationDateInput/>
-                  </div>
-                  <div className="sq-form-third">
-                    <CreditCardPostalCodeInput />
-                  </div>
-                  <div className="sq-form-third">
-                    <CreditCardCVVInput />
-                  </div>
-                </fieldset>
-                <div className = 'checkBoxBilling'>
-                  <input
-                    id = 'billing'
-                    type='checkbox'
-                    checked = {this.state.billingSame}
-                    onChange = {this.changeBillingSame}
-                  />
-                <label htmlFor = 'billing'>Billing address is the same as shipping</label>
-                </div>
-                {!this.state.billingSame &&
-                <div>
-                  <AddressForm
-                    onSubmit = {(e)=>e.preventDefault()}
-                    name = {bAddress.name}
-                    email = {bAddress.email}
-                    phone = {bAddress.phone}
-                    address1 = {bAddress['address-line1']}
-                    address2 = {bAddress['address-line2']}
-                    city = {bAddress.locality}
-                    state = {bAddress.region}
-                    zip = {bAddress['postal-code']}
-                    errorCheck = {this.state.errorArray}
-                    changeValue = {this.changeInput}
-                    button = {false}
-                  />
-                </div>
-                }
-                <div>
-                  <CreditCardSubmitButton>Pay and Complete Order</CreditCardSubmitButton>
-                </div>
-              </SquarePaymentForm>*/}
               </div>
             </div>
           </div>
           <div className = 'checkoutRight'>
-            test
+            <Order
+              cart = {this.props.shoppingCart}
+              shippingCost = {this.props.shippingCost}
+              subTotal = {this.subTotal}
+              total = {this.total}
+            />
           </div>
         </div>
       </div>
@@ -195,6 +160,7 @@ const mapDispatchToProps = (dispatch) =>({
 
 const mapStateToProps = (state) =>({
   shippingCost: state.shippingCost,
+  shoppingCart: state.shoppingCart,
   shippingAddress: state.shippingAddress,
   billingAddress: state.billingAddress
 })

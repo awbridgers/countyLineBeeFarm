@@ -453,7 +453,6 @@ margin-bottom: 30px;
   width: 100%;
   padding: 0px 5px 0px 5px;
   text-align: left;
-  text-align: left;
 }
 #address1{
   margin-bottom: 3px;
@@ -491,46 +490,7 @@ select option{
   align-items: center;
   z-index: 1;
 }
-.checkoutPage{
-  color: #cfb53b;
-}
-.checkoutBody{
-  display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
-  justify-content: space-around;
-  margin: auto;
-  width: 90%;
 
-}
-.checkoutRight{
-  border: 2px solid grey;
-  flex-grow: 2;
-
-}
-.checkoutLeft{
-  border: 2px solid grey;
-  flex-grow: 3;
-  text-align: left;
-}
-.shippingInfo{
-  display: flex;
-  flex-flow: column;
-}
-
-.addressInfo{
-  display: inline-block;
-  margin: 10px auto 20px auto;
-  line-height: 18px;
-  font-size: 18px;
-}
-.personalInfo{
-  margin-top: 10px;
-}
-.paymentInfo{
-  width: 100%;
-  padding-bottom: 10px;
-}
 .ccInput{
   width: 100%;
   font-family: 'Arial';
@@ -565,6 +525,7 @@ select option{
   font-size: 14px;
   margin: 0px;
 }
+
 
 
 @media all and (max-width: 1024px){
