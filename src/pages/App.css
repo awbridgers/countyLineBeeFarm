@@ -604,10 +604,23 @@ select option{
     width: 20px;
   }
   @media all and (max-width:500px){
+    .addToCart{
+      width: 100%;
+      min-width: auto;
+      flex-flow: column;
+    }
+    .addBody{
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .addDetails{
+      align-self: auto;
+    }
     .addImage{
-      width:0px;
-      min-width: 0px;
-      display: none;
+      width:30px;
+
     }
   }
   /* .scroll{
