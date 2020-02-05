@@ -2,9 +2,9 @@ import React from 'react';
 import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
  CardSubtitle, CardBody } from 'reactstrap';
  import { LinkContainer } from 'react-router-bootstrap'
- import bee2 from "../images/bee2.jpg";
- import bee1 from "../images/bee1.jpg";
- import honey from '../images/honey.jpg'
+ import bee2 from "../images/bee2_short.jpg";
+ import bee1 from "../images/bee1_short.jpg";
+ import honey from '../images/honeyJars.jpg'
 
 const Group = (props) => {
   return (

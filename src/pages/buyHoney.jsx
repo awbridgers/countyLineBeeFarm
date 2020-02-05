@@ -11,7 +11,7 @@ import { LinkContainer } from 'react-router-dom'
 
 
 const BuyHoney = (props) => {
-  const [showCartScreen, setShowCartScreen] = useState(true);
+  const [showCartScreen, setShowCartScreen] = useState(false);
   const [honeyType, setHoneyType] = useState(0);
   const [amount, setAmount] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -48,6 +48,7 @@ const BuyHoney = (props) => {
             amount = {amount}
             exit = {()=>setShowCartScreen(false)}
             afterAdd = {addedToCart}
+            keepShopping = {()=>setShowCartScreen(false)}
             accept = {()=> {
               if(amount > 0){
                 props.addToCart(honeyType, amount);
