@@ -620,7 +620,12 @@ select option{
     }
     .addImage{
       width:30px;
-
+    }
+    .cartList{
+      width: 100%;
+    }
+    .cell{
+      border: 1px solid black;
     }
   }
   /* .scroll{
