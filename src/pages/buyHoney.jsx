@@ -48,6 +48,7 @@ const BuyHoney = (props) => {
             amount = {amount}
             exit = {()=>setShowCartScreen(false)}
             afterAdd = {addedToCart}
+            keepShopping = {()=>setShowCartScreen(false)}
             accept = {()=> {
               if(amount > 0){
                 props.addToCart(honeyType, amount);
