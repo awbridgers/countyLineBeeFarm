@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/countyLineBeeFarm/precache-manifest.d8e5e4cf4f2f69dbfb133bedbd2937f0.js"
+  "/countyLineBeeFarm/precache-manifest.f02743416465e69c2bd8333aa0f5703e.js"
 );
 
 self.addEventListener('message', (event) => {
