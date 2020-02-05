@@ -19,6 +19,8 @@ import Submitted from './pages/submitted.jsx';
 import BuyHoney from './pages/buyHoney.jsx';
 import NavBar from './components/navBar.jsx'
 import ShoppingCart from './pages/cart.js';
+import CheckoutPage from './pages/checkout.js';
+import AddressForm from './components/addressForm.js';
 
 
 const ScrollToTop = () => {
@@ -111,6 +113,9 @@ export default class Routing extends Component {
                 </Route>
                 <Route path = '/shopping-cart'>
                   <ShoppingCart />
+                </Route>
+                <Route path = '/checkout'>
+                  <CheckoutPage />
                 </Route>
                 <Route>
                   <NotFound />
