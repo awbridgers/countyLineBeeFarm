@@ -12,17 +12,19 @@ import { LinkContainer } from 'react-router-dom'
 
 const BuyHoney = (props) => {
   const [showCartScreen, setShowCartScreen] = useState(false);
-  const [honeyType, setHoneyType] = useState(0);
+  const [honeyType, setHoneyType] = useState(-1);
   const [amount, setAmount] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
   let history = useHistory();
+  const honeyItem = props.itemList[honeyType];
+  console.log(honeyItem);
   return (
       <div>
         <div className = 'marketDeck'>
           <MarketList marketList = {props.marketList} />
         </div>
         <div className = 'buyDeck'>
-          {props.shoppingCart.map((honeyType,i) =>{
+          {props.itemList.map((honeyType,i) =>{
             return(
               <Card className = 'honeyCard' key = {i}>
                 <CardImg className = 'honeyPicture' src= {honeyType.image} alt="Card image cap" />
@@ -35,7 +37,7 @@ const BuyHoney = (props) => {
                     <Button onClick = {()=>{
                         setShowCartScreen(true);
                         setHoneyType(i);
-                        setAmount(props.shoppingCart[i].quantity)}
+                        }
                       }>Add to Cart</Button>}
                 </CardBody>
               </Card>
@@ -44,16 +46,18 @@ const BuyHoney = (props) => {
         </div>
         {showCartScreen &&
           <AddToCart
-            honeyType = {props.shoppingCart[honeyType]}
+            honeyType = {props.itemList[honeyType]}
             amount = {amount}
-            exit = {()=>setShowCartScreen(false)}
-            afterAdd = {addedToCart}
-            keepShopping = {()=>setShowCartScreen(false)}
+            goToCart = {()=>history.push('/shopping-cart')}
+            exit = {()=>{
+              setShowCartScreen(false);
+              setAmount(0);
+              setHoneyType(-1);
+            }}
             accept = {()=> {
               if(amount > 0){
-                props.addToCart(honeyType, amount);
-                history.push('/shopping-cart')}
-              }
+                props.addToCart(honeyItem, amount);
+              }}
             }
             changeQuantity = {(type)=>{
               if(type === 'sub' && amount > 0){
@@ -70,7 +74,8 @@ const BuyHoney = (props) => {
 }
 
 const mapStateToProps = (state) =>({
-  shoppingCart: state.shoppingCart
+  shoppingCart: state.shoppingCart,
+  itemList: state.itemList,
 })
 const mapDispatchToProps = dispatch =>({
   addToCart: (index, quantity) => dispatch(addToCart(index, quantity))

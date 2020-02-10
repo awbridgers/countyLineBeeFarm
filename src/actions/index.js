@@ -1,12 +1,12 @@
-export const addToCart = (index, quantity) =>({
+export const addToCart = (item, quantity) =>({
   type: 'ADD_TO_CART',
-  index,
+  item,
   quantity
 })
 
-export const changeQuantity = (index, mod) =>({
+export const changeQuantity = (item, mod) =>({
   type: 'CHANGE_QUANTITY',
-  index,
+  item,
   mod
 })
 
