@@ -16,7 +16,7 @@ const ShoppingCart = (props) => {
   let history = useHistory();
   //calculate total cost of order without shipping
   let totalCost = 0;
-  const cartArray = props.shoppingCart.filter((x=>x.quantity!==0));
+  const cartArray = props.shoppingCart;
   cartArray.forEach((x)=>{
     totalCost += x.price * x.quantity
   })
@@ -141,9 +141,9 @@ const ShoppingCart = (props) => {
               <div className = 'cell halfCell'>{`$${item.price.toFixed(2)}`}</div>
               <div className = 'cell'>
                 <div className = 'quantity'>
-                  <Button onClick = {()=>props.changeQuantity(i,'sub')}><FaMinus /></Button>
+                  <Button onClick = {()=>props.changeQuantity(item,'sub')}><FaMinus /></Button>
                   <div>{item.quantity}</div>
-                  <Button onClick = {()=>props.changeQuantity(i,'add')}><FaPlus /></Button>
+                  <Button onClick = {()=>props.changeQuantity(item,'add')}><FaPlus /></Button>
                 </div>
               </div>
               <div className = 'cell halfCell'>{`$${item.price * item.quantity}.00`}</div>

@@ -6,6 +6,12 @@ import { FaPlus, FaMinus} from 'react-icons/fa'
 
 const AddToCart = (props) =>{
   const [goCart, changeGoCart] = useState(false);
+  const add = () =>{
+    if(props.amount > 0){
+      changeGoCart(true);
+      props.accept();
+    }
+  }
   return (
     <div className = 'addToCart'>
       <h1>Add to Cart</h1>
@@ -15,7 +21,7 @@ const AddToCart = (props) =>{
           <img src = {props.honeyType.image} alt = {props.honeyType.type} />
         </div>
         <div className = 'addDetails'>
-          <h4>Seasonal WildFlower Honey</h4>
+          <h4>{props.honeyType.title}</h4>
           <h5>{props.honeyType.subtitle}</h5>
           <CardText className = 'honeyPrice'>{`$${props.honeyType.price}`}</CardText>
           <h5>Quantity:</h5>
@@ -31,12 +37,14 @@ const AddToCart = (props) =>{
           }
           <div className = 'addButtons'>
             {!goCart &&
-              <Button onClick = {()=>changeGoCart(true)}>Add To Cart</Button>
+              <Button onClick = {()=>add()}>
+                Add To Cart
+              </Button>
             }
             {goCart &&
               <div>
-                <Button id = 'goToCart'onClick = {props.accept}>View Cart</Button>
-                <Button id = 'contShopping' onClick = {props.keepShopping}>Keep Shopping</Button>
+                <Button id = 'goToCart'onClick = {props.goToCart}>View Cart</Button>
+                <Button id = 'contShopping' onClick = {props.exit}>Keep Shopping</Button>
               </div>
             }
           </div>
