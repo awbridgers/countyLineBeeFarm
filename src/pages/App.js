@@ -5,6 +5,14 @@ import MediaQuery from 'react-responsive'
 import Group from '../components/group.jsx'
 
 class App extends Component {
+  componentDidMount(){
+    this.testServer();
+  }
+  testServer = async () =>{
+    let response = await fetch('api/test')
+    let test = await response.json();
+    console.log(test)
+  }
   render() {
     return (
       <div>

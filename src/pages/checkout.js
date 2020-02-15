@@ -3,13 +3,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import 'react-square-payment-form/lib/default.css'
 import { changeShippingAddress } from '../actions/index.js'
-import SquarePaymentForm, {
-  CreditCardNumberInput,
-  CreditCardExpirationDateInput,
-  CreditCardPostalCodeInput,
-  CreditCardCVVInput,
-  CreditCardSubmitButton
-} from 'react-square-payment-form';
+
 import AddressForm from '../components/addressForm.js'
 import {changeBillingAddress} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
@@ -48,6 +42,7 @@ export class CheckoutPage extends Component{
     this.loadScript(script, onload,'text/javascript', false );
     this.subTotal = this.calcTotal()
     this.total = this.subTotal + this.props.shippingCost
+    fetch('/api/test-catalog').then(x=>x.json()).then(data=>console.log(data))
   }
   loadScript = (script, onload, type, sync) =>{
     //a function to load a script into the document
@@ -58,33 +53,34 @@ export class CheckoutPage extends Component{
     newScript.onload = onload;
     document.getElementsByTagName('head')[0].appendChild(newScript)
   }
-  cardNonceResponseReceived = (errors, nonce, cardData, buyerVerificationToken) => {
-    if (errors) {
-      this.setState({ errorMessages: errors.map(error => error.message) })
-      return
+  cardNonceResponseReceived = async (errors, nonce, cardData, buyerVerificationToken) => {
+    //put all the necessary info into 1 object for the backend
+    const checkoutInfo = {
+      nonce: nonce,
+      shoppingCart: this.props.shoppingCart,
+      totalCost: this.total,
+      shippingAddress: this.props.shippingAddress,
+      billingAddress: this.state.billingSame ? this.props.shippingAddress : this.props.billingAddress,
+      shippingCost: this.props.shippingCost,
     }
-
-    this.setState({ errorMessages: [] })
-
-    alert("nonce created: " + nonce + ", buyerVerificationToken: " + buyerVerificationToken)
+    const rawResponse = await fetch('/api/process-payment', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(checkoutInfo)
+    })
+    const response = await rawResponse.json();
+    console.log(response);
+    // if (errors) {
+    //   this.setState({ errorMessages: errors.map(error => error.message) })
+    //   return
+    // }
+    //
+    // this.setState({ errorMessages: [] })
   }
-  createVerificationDetails() {
-    return {
-      amount: '100.00',
-      currencyCode: "USD",
-      intent: "CHARGE",
-      billingContact: {
-        familyName: "Smith",
-        givenName: "John",
-        email: "jsmith@example.com",
-        country: "GB",
-        city: "London",
-        addressLines: ["1235 Emperor's Gate"],
-        postalCode: "SW7 4JA",
-        phone: "020 7946 0532"
-      }
-    }
-  }
+
   calcTotal = () =>{
     let total = 0;
     this.props.shoppingCart.forEach((x)=>{

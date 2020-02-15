@@ -18,7 +18,7 @@ export default class CreditCardForm extends Component{
   componentDidMount(){
     const config = {
       applicationId: process.env.REACT_APP_SQUARE_ID,
-      locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
+      locationId: process.env.REACT_APP_SQUARE_LOCATION_ID_2,
       inputClass: "sq-input",
       autoBuild: false,
       inputStyles: [
@@ -57,6 +57,7 @@ export default class CreditCardForm extends Component{
      }
     this.paymentForm = new this.props.paymentForm(config);
     this.paymentForm.build();
+    console.log(this.paymentForm)
   }
   getNonce = e =>{
     //first, check if billing is same as shipping
