@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa';
 import { Button } from 'reactstrap';
-import { changeQuantity, changeShippingCost, changeShippingAddress } from '../actions/index.js';
+import { changeQuantity, changeShippingCost, changeShippingAddress,changeLoadScreen } from '../actions/index.js';
 import {StateSelector} from '../components/stateSelector.js';
 import convert from 'xml-js';
 import Loader from 'react-spinners/RingLoader';
@@ -20,7 +20,6 @@ const ShoppingCart = (props) => {
   cartArray.forEach((x)=>{
     totalCost += x.price * x.quantity
   })
-  const [loading, changeLoading] = useState(false);
   const [errorArray, changeErrorArray] = useState([])
   const changeInput = (e) =>{
     const target = e.target.id;
@@ -60,7 +59,7 @@ const ShoppingCart = (props) => {
     e.preventDefault();
     e.stopPropagation();
     //bring up the load screen
-    changeLoading(true);
+    props.changeLoadScreen(true,'Preparing your order.');
     //check all the inputs to see if any are blank
     const blankInputs = Object.keys(shippingAddress)
     .filter(key=>key!== 'address-line2' && shippingAddress[key]==='');
@@ -102,27 +101,13 @@ const ShoppingCart = (props) => {
     }
     //if the checks did not pass, alert the user to why
     else{
-      changeLoading(false)
+      props.changeLoadScreen(false, '')
       changeErrorArray(newErrorArray);
       alert(errorMessage)
     }
   }
   return(
     <div style = {{color: '#cfb53b', marginBottom: '50px'}}>
-      {loading &&
-        <div className = 'loadingScreen'>
-          <div>
-            <Loader
-              color = '#CFB53B'
-              height = {20}
-              width = {8}
-              margin = {10}
-            />
-          </div>
-          <div>
-            <h4>Preparing order</h4>
-          </div>
-        </div>}
       <div className = 'cartList'>
         <h2>Your Shopping Cart</h2>
         <div className = 'row'>
@@ -187,7 +172,8 @@ const mapStateToProps = state =>({
 const mapDispatchToProps = dispatch =>({
   changeQuantity: (index,mod)=>dispatch(changeQuantity(index,mod)),
   changeShippingCost: (amount)=>dispatch(changeShippingCost(amount)),
-  changeShippingAddress: (key,payload)=>dispatch(changeShippingAddress(key,payload))
+  changeShippingAddress: (key,payload)=>dispatch(changeShippingAddress(key,payload)),
+  changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

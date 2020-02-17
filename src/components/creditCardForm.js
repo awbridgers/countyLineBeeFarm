@@ -52,12 +52,14 @@ export default class CreditCardForm extends Component{
      },
      callbacks: {
        cardNonceResponseReceived: this.props.cardNonceResponseReceived,
-         paymentFormLoaded: ()=> this.setState({loaded: true})
+       paymentFormLoaded: ()=> {
+         this.setState({loaded: true})
+         this.props.changeLoad()
        }
      }
+   }
     this.paymentForm = new this.props.paymentForm(config);
     this.paymentForm.build();
-    console.log(this.paymentForm)
   }
   getNonce = e =>{
     //first, check if billing is same as shipping

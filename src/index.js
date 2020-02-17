@@ -21,6 +21,8 @@ import NavBar from './components/navBar.jsx'
 import ShoppingCart from './pages/cart.js';
 import CheckoutPage from './pages/checkout.js';
 import AddressForm from './components/addressForm.js';
+import LoadingScreen from './components/loadingScreen.js'
+import {connect} from 'react-redux';
 
 
 const ScrollToTop = () => {
@@ -81,10 +83,12 @@ export default class Routing extends Component {
   }
   render(){
     const {honeyStock, marketList} = this.state;
+    const {loadScreen} = this.props;
     return(
       <div className = 'App'>
         <Router>
           <ScrollToTop />
+          {loadScreen.show && <LoadingScreen message = {loadScreen.info}/>}
           <div>
             <Route path = '/'>
               <NavBar />
@@ -128,9 +132,15 @@ export default class Routing extends Component {
   }
 }
 
+const mapStateToProps = state =>({
+  loadScreen:state.loadScreen,
+})
+
+const ConnectedRouting = connect(mapStateToProps)(Routing)
+
 ReactDOM.render(
   <Provider store = {store}>
-    <Routing />
+    <ConnectedRouting />
   </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

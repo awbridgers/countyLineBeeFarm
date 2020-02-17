@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import 'react-square-payment-form/lib/default.css'
-import { changeShippingAddress } from '../actions/index.js'
-
+import { changeShippingAddress, changeLoadScreen } from '../actions/index.js'
 import AddressForm from '../components/addressForm.js'
 import {changeBillingAddress} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
@@ -36,6 +35,11 @@ export class CheckoutPage extends Component{
 
   }
   componentDidMount(){
+    //if the loadScreen is not active, activate it--> should only occur if
+    //loading this page directly TODO: Only allow access from shopping cart
+    if(!this.props.loadScreen.show){
+      this.props.changeLoadScreen(true, 'Preparing your order.')
+    }
     //load in the sq payment script API
     const script ='https://js.squareupsandbox.com/v2/paymentform'
     const onload = () => this.setState({loaded:true});
@@ -54,6 +58,8 @@ export class CheckoutPage extends Component{
     document.getElementsByTagName('head')[0].appendChild(newScript)
   }
   cardNonceResponseReceived = async (errors, nonce, cardData, buyerVerificationToken) => {
+    //put up the loadScreen
+    this.props.changeLoadScreen(true, 'Processing payment')
     //put all the necessary info into 1 object for the backend
     const checkoutInfo = {
       nonce: nonce,
@@ -73,12 +79,13 @@ export class CheckoutPage extends Component{
     })
     const response = await rawResponse.json();
     console.log(response);
-    // if (errors) {
-    //   this.setState({ errorMessages: errors.map(error => error.message) })
-    //   return
-    // }
-    //
-    // this.setState({ errorMessages: [] })
+    this.props.changeLoadScreen(false,'')
+    if (errors) {
+      this.setState({ errorMessages: errors.map(error => error.message) })
+      return
+    }
+
+    this.setState({ errorMessages: [] })
   }
 
   calcTotal = () =>{
@@ -103,7 +110,7 @@ export class CheckoutPage extends Component{
     const zip = this.props.shippingAddress['postal-code'];
     const bAddress = this.props.billingAddress
     if(!this.state.loaded){
-      return <h1>Loading Screen</h1>
+      return <h1 id = 'checkoutTitle'>Checkout</h1>
     }
     return(
       <div className = 'checkoutPage'>
@@ -132,6 +139,7 @@ export class CheckoutPage extends Component{
                   billingAddress = {this.props.billingAddress}
                   changeBillingAddress = {this.changeInput}
                   cardNonceResponseReceived = {this.cardNonceResponseReceived}
+                  changeLoad = {()=>this.props.changeLoadScreen(false, '')}
                 />
               </div>
             </div>
@@ -151,14 +159,16 @@ export class CheckoutPage extends Component{
 }
 const mapDispatchToProps = (dispatch) =>({
   changeShippingAddress:(key, payload)=>dispatch(changeShippingAddress(key,payload)),
-  changeBillingAddress:(key, payload)=>dispatch(changeBillingAddress(key,payload))
+  changeBillingAddress:(key, payload)=>dispatch(changeBillingAddress(key,payload)),
+  changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info)),
 })
 
 const mapStateToProps = (state) =>({
   shippingCost: state.shippingCost,
   shoppingCart: state.shoppingCart,
   shippingAddress: state.shippingAddress,
-  billingAddress: state.billingAddress
+  billingAddress: state.billingAddress,
+  loadScreen: state.loadScreen,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage)
