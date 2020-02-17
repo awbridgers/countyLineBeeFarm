@@ -26,3 +26,9 @@ export const changeBillingAddress = (key, payload)=>({
   key,
   payload
 })
+
+export const changeLoadScreen = (show, info)=>({
+  type: 'CHANGE_LOAD_SCREEN',
+  show,
+  info
+})

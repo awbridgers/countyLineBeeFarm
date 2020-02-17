@@ -494,6 +494,7 @@ select option{
   background: #FFA07A;
 }
 .loadingScreen{
+  color: #cfb53b;
   position: fixed;
   width: 100%;
   height: 99%;
