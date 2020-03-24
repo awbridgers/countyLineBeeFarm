@@ -17,7 +17,6 @@ const BuyHoney = (props) => {
   const [addedToCart, setAddedToCart] = useState(false);
   let history = useHistory();
   const honeyItem = props.itemList[honeyType];
-  console.log(honeyItem);
   return (
       <div>
         <div className = 'marketDeck'>

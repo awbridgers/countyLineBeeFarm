@@ -13,7 +13,7 @@ export const itemList = (state =
       image: muthJarSpringHoney,
       inStock: true,
       itemNumber: 1001,
-      id: "NRS2B6EJWQX4PEBDZZAAZIXG"
+      weight: 16
     },
 
     {
@@ -24,7 +24,7 @@ export const itemList = (state =
       image: hexJar,
       inStock: true,
       itemNumber: 1002,
-      id:"VMJIHQGXBJMYGMCDKUJKXCPZ"
+      weight: 12
     },
     {
       type: '$5 Bottle',
@@ -34,7 +34,7 @@ export const itemList = (state =
       image: squeezeJarSpringHoney,
       inStock: true,
       itemNumber: 1003,
-      id: "UAHHA7G4ZJVZDDRBAWCXR5FV"
+      weight: 8
     }
   ], action) => {
     switch(action.type){

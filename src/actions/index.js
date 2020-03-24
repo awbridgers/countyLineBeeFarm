@@ -9,6 +9,10 @@ export const changeQuantity = (item, mod) =>({
   item,
   mod
 })
+export const removeItem = (item) =>({
+  type: 'REMOVE_ITEM',
+  item
+})
 
 export const changeShippingAddress = (key, payload)=>({
   type: 'CHANGE_SHIPPING_INFO',

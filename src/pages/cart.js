@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa';
 import { Button } from 'reactstrap';
-import { changeQuantity, changeShippingCost, changeShippingAddress,changeLoadScreen } from '../actions/index.js';
+import {
+  changeQuantity,
+  changeShippingCost,
+  changeShippingAddress,
+  changeLoadScreen,
+  removeItem } from '../actions/index.js';
 import {StateSelector} from '../components/stateSelector.js';
 import convert from 'xml-js';
 import Loader from 'react-spinners/RingLoader';
@@ -29,13 +34,14 @@ const ShoppingCart = (props) => {
   }
   const fetchShippingCost = async () => {
     const zip = shippingAddress['postal-code'];
+    const weight = calcWeight();
     //fetch the data from the USPS
     let res = await fetch(
       `https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML=` +
       `%3CRateV4Request%20USERID=%22${postKey}%22%3E%3CPackage%20ID=%220%22%3E`+
       `%3CService%3EPRIORITY%3C/Service%3E%3CZipOrigination%3E27591%3C/ZipOrigination%3E`+
       `%3CZipDestination%3E${zip}%3C/ZipDestination%3E` +
-      `%3CPounds%3E${1}%3C/Pounds%3E%3COunces%3E${0}%3C/Ounces%3E` +
+      `%3CPounds%3E${0}%3C/Pounds%3E%3COunces%3E${weight}%3C/Ounces%3E` +
       `%3CContainer%3EVariable%3C/Container%3E%3C/Package%3E%3C/RateV4Request%3E`)
     //convert the data to a js object
     let text = await res.text()
@@ -106,6 +112,29 @@ const ShoppingCart = (props) => {
       alert(errorMessage)
     }
   }
+  const calcWeight = () =>{
+    let weight = 0;
+    props.shoppingCart.forEach(item=>weight+= (item.weight * item.quantity));
+    return weight;
+  }
+  if(props.shoppingCart.length === 0){
+    return(
+      <div style = {{color: '#cfb53b', marginTop: '20px'}}>
+        <h2> There are no items in your cart. </h2>
+      </div>
+    )
+  }
+  const changeQuantity = (item, type)=>{
+    //if we are subtracting all the quantity, remove the item
+    if(type === 'sub' && item.quantity === 1){
+      if(window.confirm('This will remove the item from your cart. Continue?')){
+        props.removeItem(item)
+      }
+    }
+    else{
+      props.changeQuantity(item, type)
+    }
+  }
   return(
     <div style = {{color: '#cfb53b', marginBottom: '50px'}}>
       <div className = 'cartList'>
@@ -126,9 +155,9 @@ const ShoppingCart = (props) => {
               <div className = 'cell halfCell'>{`$${item.price.toFixed(2)}`}</div>
               <div className = 'cell'>
                 <div className = 'quantity'>
-                  <Button onClick = {()=>props.changeQuantity(item,'sub')}><FaMinus /></Button>
+                  <Button onClick = {()=>changeQuantity(item,'sub')}><FaMinus /></Button>
                   <div>{item.quantity}</div>
-                  <Button onClick = {()=>props.changeQuantity(item,'add')}><FaPlus /></Button>
+                  <Button onClick = {()=>changeQuantity(item,'add')}><FaPlus /></Button>
                 </div>
               </div>
               <div className = 'cell halfCell'>{`$${item.price * item.quantity}.00`}</div>
@@ -173,7 +202,8 @@ const mapDispatchToProps = dispatch =>({
   changeQuantity: (index,mod)=>dispatch(changeQuantity(index,mod)),
   changeShippingCost: (amount)=>dispatch(changeShippingCost(amount)),
   changeShippingAddress: (key,payload)=>dispatch(changeShippingAddress(key,payload)),
-  changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info))
+  changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info)),
+  removeItem: (item)=>dispatch(removeItem(item)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

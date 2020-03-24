@@ -12,6 +12,10 @@ class App extends Component {
     let response = await fetch('api/test')
     let test = await response.json();
     console.log(test)
+    // let testEmail = await fetch('api/test-email');
+    // let res = await testEmail.json();
+    // console.log(res)
+
   }
   render() {
     return (

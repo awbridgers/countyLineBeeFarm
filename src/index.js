@@ -7,7 +7,12 @@ import './pages/App.css'
 import 'firebase/database';
 import moment from 'moment-timezone';
 import firebase from 'firebase/app';
-import {HashRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+  Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store.js';
 import App from './pages/App.js';
@@ -22,7 +27,8 @@ import ShoppingCart from './pages/cart.js';
 import CheckoutPage from './pages/checkout.js';
 import AddressForm from './components/addressForm.js';
 import LoadingScreen from './components/loadingScreen.js'
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
+
 
 
 const ScrollToTop = () => {
@@ -46,6 +52,17 @@ firebase.initializeApp({
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 })
 
+ const CheckoutRoute = ({children, ...rest}) =>{
+   const cart = useSelector(state=>state.shoppingCart);
+   return(
+     <Route {...rest}
+       render = {()=>cart.length > 0 ? (children) : (
+         <Redirect to = '/shopping-cart' />
+        )
+       }
+     />
+   )
+ }
 
 export default class Routing extends Component {
   constructor(){
@@ -118,9 +135,9 @@ export default class Routing extends Component {
                 <Route path = '/shopping-cart'>
                   <ShoppingCart />
                 </Route>
-                <Route path = '/checkout'>
+                <CheckoutRoute path = '/checkout'>
                   <CheckoutPage />
-                </Route>
+                </CheckoutRoute>
                 <Route>
                   <NotFound />
                 </Route>

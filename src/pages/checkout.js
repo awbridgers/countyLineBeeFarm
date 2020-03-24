@@ -8,6 +8,7 @@ import {changeBillingAddress} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
 import '../styles/checkout.css';
 import Order from '../components/order.js';
+import OrderConfirmation from '../components/orderConfirm.js';
 
 const inputStyles = [
   {
@@ -25,10 +26,11 @@ export class CheckoutPage extends Component{
   constructor(){
     super()
     this.state = {
-      errorMessages: [],
+      errorMessages: '',
       billingSame: true,
       errorArray: [],
-      loaded: false
+      loaded: false,
+      orderPlaced: false
     }
     this.subTotal = 0;
     this.total = 0;
@@ -37,7 +39,7 @@ export class CheckoutPage extends Component{
   componentDidMount(){
     //if the loadScreen is not active, activate it--> should only occur if
     //loading this page directly TODO: Only allow access from shopping cart
-    if(!this.props.loadScreen.show){
+    if(!this.props.loadScreen.show && !this.state.orderPlaced){
       this.props.changeLoadScreen(true, 'Preparing your order.')
     }
     //load in the sq payment script API
@@ -46,7 +48,6 @@ export class CheckoutPage extends Component{
     this.loadScript(script, onload,'text/javascript', false );
     this.subTotal = this.calcTotal()
     this.total = this.subTotal + this.props.shippingCost
-    fetch('/api/test-catalog').then(x=>x.json()).then(data=>console.log(data))
   }
   loadScript = (script, onload, type, sync) =>{
     //a function to load a script into the document
@@ -58,8 +59,12 @@ export class CheckoutPage extends Component{
     document.getElementsByTagName('head')[0].appendChild(newScript)
   }
   cardNonceResponseReceived = async (errors, nonce, cardData, buyerVerificationToken) => {
-    //put up the loadScreen
-    this.props.changeLoadScreen(true, 'Processing payment')
+    //handle errors first
+    if (errors) {
+      this.setState({ errorMessages: errors[0].message});
+      this.props.changeLoadScreen(false, '')
+      return
+    }
     //put all the necessary info into 1 object for the backend
     const checkoutInfo = {
       nonce: nonce,
@@ -78,14 +83,15 @@ export class CheckoutPage extends Component{
       body: JSON.stringify(checkoutInfo)
     })
     const response = await rawResponse.json();
-    console.log(response);
-    this.props.changeLoadScreen(false,'')
-    if (errors) {
-      this.setState({ errorMessages: errors.map(error => error.message) })
-      return
+    //if the order was placed
+    if(response.success){
+      this.setState({orderPlaced:true})
     }
-
-    this.setState({ errorMessages: [] })
+    else{
+      alert('There was an error placing your order. Please try again.')
+    }
+    this.props.changeLoadScreen(false,'')
+    this.setState({ errorMessages: ''})
   }
 
   calcTotal = () =>{
@@ -109,8 +115,29 @@ export class CheckoutPage extends Component{
     const address = `${this.props.shippingAddress['address-line1']} ${this.props.shippingAddress['address-line2']}`
     const zip = this.props.shippingAddress['postal-code'];
     const bAddress = this.props.billingAddress
+
     if(!this.state.loaded){
-      return <h1 id = 'checkoutTitle'>Checkout</h1>
+      return (
+        <div className = 'checkoutPage'>
+          <h1 id = 'checkoutTitle'>Checkout</h1>
+        </div>
+      )
+    }
+
+    if(this.state.orderPlaced){
+      return(
+        <div className = 'checkoutPage'>
+          <h1 id = 'checkoutTitle'>Checkout</h1>
+          <OrderConfirmation />
+          <Order
+            cart = {this.props.shoppingCart}
+            shippingCost = {this.props.shippingCost}
+            subTotal = {this.subTotal}
+            total = {this.total}
+            changeLoadScreen = {this.props.changeLoadScreen}
+          />
+        </div>
+      )
     }
     return(
       <div className = 'checkoutPage'>
@@ -132,14 +159,15 @@ export class CheckoutPage extends Component{
               </div>
             </div>
             <div className = 'paymentInfo'>
-              <span><h4>Payment Info</h4></span>
+              <span><h4 style = {{marginBottom: '0px'}}>Payment Info</h4></span>
               <div className = 'squarePay'>
                 <CreditCardForm
                   paymentForm = {window.SqPaymentForm}
                   billingAddress = {this.props.billingAddress}
                   changeBillingAddress = {this.changeInput}
                   cardNonceResponseReceived = {this.cardNonceResponseReceived}
-                  changeLoad = {()=>this.props.changeLoadScreen(false, '')}
+                  changeLoad = {this.props.changeLoadScreen}
+                  error = {this.state.errorMessages}
                 />
               </div>
             </div>
