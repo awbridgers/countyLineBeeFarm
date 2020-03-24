@@ -10,6 +10,7 @@ const testCart = [{
   image: muthJarSpringHoney,
   inStock: true,
   itemNumber: 1001,
+  weight: 16,
   quantity: 1,
 },
 
@@ -21,6 +22,7 @@ const testCart = [{
   image: hexJar,
   inStock: true,
   itemNumber: 1002,
+  weight: 12,
   quantity: 2
 },
 {
@@ -31,10 +33,11 @@ const testCart = [{
   image: squeezeJarSpringHoney,
   inStock: true,
   itemNumber: 1003,
+  weight: 8,
   quantity: 3
 }]
 
-export const shoppingCart = (state = [...testCart], action) => {
+export const shoppingCart = (state = [], action) => {
   switch(action.type){
     case 'ADD_TO_CART':
       const index = state.findIndex(x=>x.itemNumber === action.item.itemNumber);
@@ -65,10 +68,7 @@ export const shoppingCart = (state = [...testCart], action) => {
         }
         const current = honey.quantity;
         const update = action.mod === 'sub' ? current - 1 : current + 1;
-        const confirmString = 'This will remove the item for you cart. Continue?'
-        if(update === 0 && !window.confirm(confirmString)){
-          return honey
-        }
+
 
 
         return {
@@ -76,6 +76,9 @@ export const shoppingCart = (state = [...testCart], action) => {
           quantity: update < 0 ? 0 : update
         }
       })
+    case 'REMOVE_ITEM':
+      return state.slice().filter(x=>x.itemNumber!==action.item.itemNumber);
+
     default:
       return state;
   }

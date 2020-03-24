@@ -54,7 +54,7 @@ export default class CreditCardForm extends Component{
        cardNonceResponseReceived: this.props.cardNonceResponseReceived,
        paymentFormLoaded: ()=> {
          this.setState({loaded: true})
-         this.props.changeLoad()
+         this.props.changeLoad(false,'')
        }
      }
    }
@@ -75,11 +75,13 @@ export default class CreditCardForm extends Component{
       }
       else{
         //if all the forms are filled in properly, then just request nonce
+        this.props.changeLoad(true, 'Processing payment')
         this.paymentForm.requestCardNonce();
       }
     }
     else{
       //if they are the same, just request nonce.
+      this.props.changeLoad(true, 'Processing payment')
       this.paymentForm.requestCardNonce();
     }
   }
@@ -91,6 +93,7 @@ export default class CreditCardForm extends Component{
     return(
       <div>
         <div id="form-container" style = {loaded ? {display:'block'} : {display:'none'}}>
+          <div id = 'error'>{this.props.error}</div>
           <div>
             <label htmlFor = 'sq-card-number' className = 'sq-label'>Card Number</label>
             <div id="sq-card-number"></div>

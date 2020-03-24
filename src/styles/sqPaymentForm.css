@@ -79,3 +79,15 @@ fieldset {
 .button-credit-card:hover {
   color: white;
 }
+#error{
+  font-size: 14px;
+  height: 17px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  color: red;
+}
+.squarePay{
+  margin-top:0px;
+  padding-top: 0px;
+}
