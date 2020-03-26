@@ -14,7 +14,7 @@ const Order = props => (
         return (
           <div key = {i} className = 'order'>
             <div className = 'orderCellImage'>
-              <img src = {item.image}/>
+              <img src = {item.image} alt = {item.subtitle}/>
             </div>
             <div className = 'orderCell'>
               <div>{item.title.replace('Wildflower','')}</div>

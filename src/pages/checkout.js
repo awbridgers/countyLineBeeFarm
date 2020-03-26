@@ -3,24 +3,11 @@ import './App.css';
 import {connect} from 'react-redux';
 import 'react-square-payment-form/lib/default.css'
 import { changeShippingAddress, changeLoadScreen } from '../actions/index.js'
-import AddressForm from '../components/addressForm.js'
 import {changeBillingAddress} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
 import '../styles/checkout.css';
 import Order from '../components/order.js';
 import OrderConfirmation from '../components/orderConfirm.js';
-
-const inputStyles = [
-  {
-    fontSize: '18px',
-    backgroundColor: 'white',
-    placeholderColor: 'black',
-    fontFamily: "Arial",
-    padding: '16px 0px',
-    color: 'black',
-
-  }
-]
 
 export class CheckoutPage extends Component{
   constructor(){
@@ -114,8 +101,6 @@ export class CheckoutPage extends Component{
     const {name, email, phone, locality, region} = this.props.shippingAddress;
     const address = `${this.props.shippingAddress['address-line1']} ${this.props.shippingAddress['address-line2']}`
     const zip = this.props.shippingAddress['postal-code'];
-    const bAddress = this.props.billingAddress
-
     if(!this.state.loaded){
       return (
         <div className = 'checkoutPage'>

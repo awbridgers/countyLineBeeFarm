@@ -1,41 +1,6 @@
-import squeezeJarSpringHoney from '../images/squeezeJarSpringHoney.jpg';
-import muthJarSpringHoney from '../images/muthJarSpringHoney.jpg';
-import hexJar from '../images/hexWithComb.jpg';
-
-const testCart = [{
-  type: 'Muth Jar',
-  title: "Seasonal Wildflower Honey",
-  subtitle: "16 oz. glass Muth jar",
-  price: 15,
-  image: muthJarSpringHoney,
-  inStock: true,
-  itemNumber: 1001,
-  weight: 16,
-  quantity: 1,
-},
-
-{
-  type: 'Hex Jar + Comb',
-  title: "Seasonal Wildflower Honey + Comb",
-  subtitle: "12 oz. glass hex jar",
-  price: 10,
-  image: hexJar,
-  inStock: true,
-  itemNumber: 1002,
-  weight: 12,
-  quantity: 2
-},
-{
-  type: '$5 Bottle',
-  title: "Seasonal Wildflower Honey",
-  subtitle: "8 oz. plastic bottle",
-  price: 5,
-  image: squeezeJarSpringHoney,
-  inStock: true,
-  itemNumber: 1003,
-  weight: 8,
-  quantity: 3
-}]
+// import squeezeJarSpringHoney from '../images/squeezeJarSpringHoney.jpg';
+// import muthJarSpringHoney from '../images/muthJarSpringHoney.jpg';
+// import hexJar from '../images/hexWithComb.jpg';
 
 export const shoppingCart = (state = [], action) => {
   switch(action.type){
@@ -83,3 +48,38 @@ export const shoppingCart = (state = [], action) => {
       return state;
   }
 }
+
+// const testCart = [{
+//   type: 'Muth Jar',
+//   title: "Seasonal Wildflower Honey",
+//   subtitle: "16 oz. glass Muth jar",
+//   price: 15,
+//   image: muthJarSpringHoney,
+//   inStock: true,
+//   itemNumber: 1001,
+//   weight: 16,
+//   quantity: 1,
+// },
+//
+// {
+//   type: 'Hex Jar + Comb',
+//   title: "Seasonal Wildflower Honey + Comb",
+//   subtitle: "12 oz. glass hex jar",
+//   price: 10,
+//   image: hexJar,
+//   inStock: true,
+//   itemNumber: 1002,
+//   weight: 12,
+//   quantity: 2
+// },
+// {
+//   type: '$5 Bottle',
+//   title: "Seasonal Wildflower Honey",
+//   subtitle: "8 oz. plastic bottle",
+//   price: 5,
+//   image: squeezeJarSpringHoney,
+//   inStock: true,
+//   itemNumber: 1003,
+//   weight: 8,
+//   quantity: 3
+// }]

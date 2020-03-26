@@ -25,7 +25,6 @@ import BuyHoney from './pages/buyHoney.jsx';
 import NavBar from './components/navBar.jsx'
 import ShoppingCart from './pages/cart.js';
 import CheckoutPage from './pages/checkout.js';
-import AddressForm from './components/addressForm.js';
 import LoadingScreen from './components/loadingScreen.js'
 import {connect, useSelector} from 'react-redux';
 

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom'
-import { FaMinus, FaPlus,FaAsterisk} from 'react-icons/fa';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import { Button } from 'reactstrap';
 import {
   changeQuantity,
@@ -11,9 +11,7 @@ import {
   changeLoadScreen,
   removeItem,
   changeAllowCheckout } from '../actions/index.js';
-import {StateSelector} from '../components/stateSelector.js';
 import convert from 'xml-js';
-import Loader from 'react-spinners/RingLoader';
 import AddressForm from '../components/addressForm.js';
 
 const ShoppingCart = (props) => {
@@ -46,7 +44,9 @@ const ShoppingCart = (props) => {
       `%3CService%3EPRIORITY%3C/Service%3E%3CZipOrigination%3E27591%3C/ZipOrigination%3E`+
       `%3CZipDestination%3E${zip}%3C/ZipDestination%3E` +
       `%3CPounds%3E${0}%3C/Pounds%3E%3COunces%3E${weight}%3C/Ounces%3E` +
-      `%3CContainer%3EVariable%3C/Container%3E%3C/Package%3E%3C/RateV4Request%3E`)
+      `%3CContainer%3EVariable%3C/Container%3E%3C/Package%3E%3C/RateV4Request%3E`).catch((e)=>{
+        console.log(e);
+      })
     //convert the data to a js object
     let text = await res.text()
     let data = convert.xml2js(text, {compact:true,ignoreDeclaration:true})
@@ -154,7 +154,7 @@ const ShoppingCart = (props) => {
           return(
             <div key = {`item${i+1}`}className = 'row'>
               <div className = 'cell'>
-                <div id= 'itemImage'><img src = {item.image} /></div>
+                <div id= 'itemImage'><img src = {item.image} alt={item.subtitle} /></div>
                 <div id = 'itemTitle'>{item.subtitle}</div>
               </div>
               <div className = 'cell halfCell'>{`$${item.price.toFixed(2)}`}</div>
