@@ -36,3 +36,8 @@ export const changeLoadScreen = (show, info)=>({
   show,
   info
 })
+
+export const changeAllowCheckout = (bool)=>({
+  type: 'CHANGE_ALLOW_CHECKOUT',
+  bool
+})

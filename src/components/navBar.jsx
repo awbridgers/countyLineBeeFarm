@@ -15,6 +15,7 @@ import {
       const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
       return(
         <LinkContainer
+          className = {!isTabletOrMobile && props.cart ? 'cartNav' : ''}
           to = {props.linkLocation}
           onClick = {isTabletOrMobile ? props.onClick : null}>
           <NavItem className = "navItem">
@@ -39,6 +40,7 @@ export default class Example extends React.Component {
     });
   }
   render() {
+    const {cart} = this.props
     return (
         <Navbar light expand="md">
           <MediaQuery minDeviceWidth = {1224}>
@@ -73,6 +75,14 @@ export default class Example extends React.Component {
                   linkTitle = 'Contact'
                   onClick = {this.toggle}
                   />
+                  <CustomNavItem
+                    cart
+                    linkLocation = 'shopping-cart'
+                    linkTitle = {cart > 0 ?
+                      `Cart (${cart} item${cart === 1 ? `` : `s`})`: 'Cart'}
+                    onClick = {this.toggle}
+                  />
+
             </Nav>
           </Collapse>
         </Navbar>

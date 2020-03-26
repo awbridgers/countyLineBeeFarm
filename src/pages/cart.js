@@ -9,7 +9,8 @@ import {
   changeShippingCost,
   changeShippingAddress,
   changeLoadScreen,
-  removeItem } from '../actions/index.js';
+  removeItem,
+  changeAllowCheckout } from '../actions/index.js';
 import {StateSelector} from '../components/stateSelector.js';
 import convert from 'xml-js';
 import Loader from 'react-spinners/RingLoader';
@@ -29,7 +30,10 @@ const ShoppingCart = (props) => {
   const changeInput = (e) =>{
     const target = e.target.id;
     const value = e.target.value;
-    //console.log(target, value)
+    //if the user changes the address info, make them calculate shipping again
+    if(props.changeAllowCheckout){
+      props.changeAllowCheckout(false);
+    }
     props.changeShippingAddress(target, value);
   }
   const fetchShippingCost = async () => {
@@ -103,6 +107,7 @@ const ShoppingCart = (props) => {
     }
     //if all checks passed, proceed to checkout.
     if(proceedToCheckout){
+      props.changeAllowCheckout(true);
       history.push('/checkout')
     }
     //if the checks did not pass, alert the user to why
@@ -204,6 +209,7 @@ const mapDispatchToProps = dispatch =>({
   changeShippingAddress: (key,payload)=>dispatch(changeShippingAddress(key,payload)),
   changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info)),
   removeItem: (item)=>dispatch(removeItem(item)),
+  changeAllowCheckout: (bool)=>dispatch(changeAllowCheckout(bool)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

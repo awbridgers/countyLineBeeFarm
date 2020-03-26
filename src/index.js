@@ -53,10 +53,10 @@ firebase.initializeApp({
 })
 
  const CheckoutRoute = ({children, ...rest}) =>{
-   const cart = useSelector(state=>state.shoppingCart);
+   const allowCheckout = useSelector(state=>state.allowCheckout);
    return(
      <Route {...rest}
-       render = {()=>cart.length > 0 ? (children) : (
+       render = {()=>allowCheckout ? (children) : (
          <Redirect to = '/shopping-cart' />
         )
        }
@@ -108,7 +108,7 @@ export default class Routing extends Component {
           {loadScreen.show && <LoadingScreen message = {loadScreen.info}/>}
           <div>
             <Route path = '/'>
-              <NavBar />
+              <NavBar cart = {this.props.cart.length}/>
             </Route>
               <Switch>
                 <Route exact path = "/">
@@ -151,6 +151,7 @@ export default class Routing extends Component {
 
 const mapStateToProps = state =>({
   loadScreen:state.loadScreen,
+  cart: state.shoppingCart
 })
 
 const ConnectedRouting = connect(mapStateToProps)(Routing)
