@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import { useHistory } from 'react-router-dom'
@@ -17,14 +17,25 @@ import AddressForm from '../components/addressForm.js';
 const ShoppingCart = (props) => {
   const postKey = process.env.REACT_APP_USPS_API_KEY;
   const shippingAddress = props.shippingAddress;
+  const [errorArray, changeErrorArray] = useState([]);
   let history = useHistory();
+  //useEffect for turning off the load screen if the back button was pushed
+  useEffect(()=>{
+    if(props.loadScreen.show){
+      props.changeLoadScreen(false, '');
+      props.changeAllowCheckout(false);
+    }
+  }, [])
+
   //calculate total cost of order without shipping
-  let totalCost = 0;
-  const cartArray = props.shoppingCart;
-  cartArray.forEach((x)=>{
-    totalCost += x.price * x.quantity
-  })
-  const [errorArray, changeErrorArray] = useState([])
+  const totalCost = () =>{
+    const {shoppingCart} = props;
+    let total = 0;
+    shoppingCart.forEach((x)=>{
+      total += (x.price * x.quantity);
+    })
+    return total;
+  }
   const changeInput = (e) =>{
     const target = e.target.id;
     const value = e.target.value;
@@ -45,7 +56,7 @@ const ShoppingCart = (props) => {
       `%3CZipDestination%3E${zip}%3C/ZipDestination%3E` +
       `%3CPounds%3E${0}%3C/Pounds%3E%3COunces%3E${weight}%3C/Ounces%3E` +
       `%3CContainer%3EVariable%3C/Container%3E%3C/Package%3E%3C/RateV4Request%3E`).catch((e)=>{
-        console.log(e);
+        throw new Error(e);
       })
     //convert the data to a js object
     let text = await res.text()
@@ -59,7 +70,9 @@ const ShoppingCart = (props) => {
       `https://secure.shippingapis.com/shippingapi.dll?API=CityStateLookup`+
       `&XML=%3CCityStateLookupRequest%20USERID=%22${postKey}%22%3E`+
       `%3CZipCode%3E%3CZip5%3E${zip}%3C/Zip5%3E%3C/ZipCode%3E%3C/`+
-      `CityStateLookupRequest%3E`)
+      `CityStateLookupRequest%3E`).catch((e)=>{
+        throw new Error(e);
+      })
     let text = await res.text()
     let data = await convert.xml2js(text, {compact:true,ignoreDeclaration:true})
     return data.CityStateLookupResponse.ZipCode
@@ -70,51 +83,63 @@ const ShoppingCart = (props) => {
     e.stopPropagation();
     //bring up the load screen
     props.changeLoadScreen(true,'Preparing your order.');
-    //check all the inputs to see if any are blank
-    const blankInputs = Object.keys(shippingAddress)
-    .filter(key=>key!== 'address-line2' && shippingAddress[key]==='');
-    let errorMessage = '';
-    let newErrorArray = [];
-    let proceedToCheckout = false;
-    const zipInfo = await matchZip();
-    //make sure all inputs are filled
-    if (blankInputs.length > 0) {
-      errorMessage = 'Please enter your shipping information before continuing to checkout'
-      newErrorArray = [...blankInputs];
-    }
-    //handle the error for the zip lookup
-    else if(zipInfo.hasOwnProperty('Error')){
-      errorMessage = zipInfo.Error.Description._text
-      newErrorArray = [...errorArray, 'postal-code']
-    }
-    //if state and zip don't match
-    else if(zipInfo.State._text !== shippingAddress.region){
-      errorMessage = 'Zip Code does not match the State'
-      newErrorArray = [...errorArray, 'postal-code', 'region']
-    }
-    //if everything else checks out, then proceed to calculate shipping and continue
-    else{
-      newErrorArray = [];
-      const shippingInfo = await fetchShippingCost();
-      if(shippingInfo.hasOwnProperty('Error')){
-        errorMessage = shippingInfo.Error.Description._text
+    try{
+      //prepare all the checker variables
+      const blankInputs = Object.keys(shippingAddress)
+      .filter(key=>key!== 'address-line2' && shippingAddress[key]==='');
+      let errorMessage = '';
+      let newErrorArray = [];
+      let proceedToCheckout = false;
+      const zipInfo = await matchZip().catch((e)=>{
+        throw new Error(e);
+      })
+      //make sure all inputs are filled
+      if (blankInputs.length > 0) {
+        errorMessage = 'Please enter your shipping information before continuing to checkout'
+        newErrorArray = [...blankInputs];
       }
+      //handle the error for the zip lookup
+      else if(zipInfo.hasOwnProperty('Error')){
+        errorMessage = zipInfo.Error.Description._text
+        newErrorArray = [...errorArray, 'postal-code']
+      }
+      //if state and zip don't match
+      else if(zipInfo.State._text !== shippingAddress.region){
+        errorMessage = 'Zip Code does not match the State'
+        newErrorArray = [...errorArray, 'postal-code', 'region']
+      }
+      //if everything else checks out, then proceed to calculate shipping and continue
       else{
-        const shippingCost = Number(shippingInfo.Postage.Rate._text);
-        props.changeShippingCost(shippingCost);
-        proceedToCheckout = true;
+        newErrorArray = [];
+        const shippingInfo = await fetchShippingCost().catch((e)=>{
+          throw new Error(e)
+        });
+        //if the returned shipping Info is an error
+        if(shippingInfo.hasOwnProperty('Error')){
+          errorMessage = shippingInfo.Error.Description._text
+        }
+        //if the shipping cost was returned properly
+        else{
+          const shippingCost = Number(shippingInfo.Postage.Rate._text);
+          props.changeShippingCost(shippingCost);
+          proceedToCheckout = true;
+        }
+      }
+      //if all checks passed, proceed to checkout.
+      if(proceedToCheckout){
+        props.changeAllowCheckout(true);
+        history.push('/checkout')
+      }
+      //if the checks did not pass, alert the user to why
+      else{
+        props.changeLoadScreen(false, '')
+        changeErrorArray(newErrorArray);
+        alert(errorMessage)
       }
     }
-    //if all checks passed, proceed to checkout.
-    if(proceedToCheckout){
-      props.changeAllowCheckout(true);
-      history.push('/checkout')
-    }
-    //if the checks did not pass, alert the user to why
-    else{
-      props.changeLoadScreen(false, '')
-      changeErrorArray(newErrorArray);
-      alert(errorMessage)
+    catch(error){
+        props.changeLoadScreen(false, '')
+        window.alert(error.message);
     }
   }
   const calcWeight = () =>{
@@ -172,7 +197,7 @@ const ShoppingCart = (props) => {
       }
         <div className = 'row totalRow'>
           <div className = 'cell'>Subtotal</div>
-          <div className = 'cell halfCell'>{`$${totalCost.toFixed(2)}`}</div>
+          <div className = 'cell halfCell'>{`$${totalCost().toFixed(2)}`}</div>
         </div>
       </div>
       <div>
@@ -201,6 +226,7 @@ const ShoppingCart = (props) => {
 const mapStateToProps = state =>({
   shoppingCart: state.shoppingCart,
   shippingAddress: state.shippingAddress,
+  loadScreen: state.loadScreen,
 })
 
 const mapDispatchToProps = dispatch =>({
