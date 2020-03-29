@@ -92,7 +92,7 @@ export default class CreditCardForm extends Component{
     const {loaded} = this.state;
     return(
       <div>
-        <div id="form-container" style = {loaded ? {display:'block'} : {display:'none'}}>
+        <div id="form-container" style = {loaded ? {visibility: 'visible'} : {visibility:'hidden'}}>
           <div id = 'error'>{this.props.error}</div>
           <div>
             <label htmlFor = 'sq-card-number' className = 'sq-label'>Card Number</label>
