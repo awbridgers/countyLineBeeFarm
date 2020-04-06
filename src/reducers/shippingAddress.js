@@ -15,6 +15,17 @@ export const shippingAddress = (state = {
         ...state,
         [action.key]: action.payload
       }
+      case 'RESET_SHIPPING_INFO':
+        return {
+          name: '',
+          email: '',
+          phone: '',
+          locality: '',
+          region: '',
+          "address-line1": '',
+          "address-line2": '',
+          "postal-code": ''
+      }
     default:
       return state
   }

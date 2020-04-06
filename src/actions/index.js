@@ -13,6 +13,9 @@ export const removeItem = (item) =>({
   type: 'REMOVE_ITEM',
   item
 })
+export const resetCart = ()=>({
+  type: 'RESET_CART'
+})
 
 export const changeShippingAddress = (key, payload)=>({
   type: 'CHANGE_SHIPPING_INFO',
@@ -29,6 +32,13 @@ export const changeBillingAddress = (key, payload)=>({
   type: 'CHANGE_BILLING_INFO',
   key,
   payload
+})
+export const resetBillingAddress = () =>({
+  type: 'RESET_BILLING_INFO'
+})
+
+export const resetShippingAddress = () =>({
+  type: 'RESET_SHIPPING_INFO'
 })
 
 export const changeLoadScreen = (show, info)=>({

@@ -2,12 +2,21 @@ import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import 'react-square-payment-form/lib/default.css'
-import { changeShippingAddress, changeLoadScreen } from '../actions/index.js'
-import {changeBillingAddress} from '../actions/index.js'
+import {
+  changeBillingAddress,
+  changeShippingCost,
+  changeShippingAddress,
+  changeLoadScreen,
+  resetCart,
+  resetShippingAddress,
+  resetBillingAddress,
+  changeAllowCheckout
+} from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
 import '../styles/checkout.css';
 import Order from '../components/order.js';
 import OrderConfirmation from '../components/orderConfirm.js';
+
 
 export class CheckoutPage extends Component{
   constructor(){
@@ -33,6 +42,7 @@ export class CheckoutPage extends Component{
     const script ='https://js.squareupsandbox.com/v2/paymentform'
     const onload = () => this.setState({loaded:true});
     this.loadScript(script, onload,'text/javascript', false );
+    this.saveShoppingCart = [...this.props.shoppingCart];
     this.subTotal = this.calcTotal()
     this.total = this.subTotal + this.props.shippingCost
   }
@@ -73,6 +83,9 @@ export class CheckoutPage extends Component{
     //if the order was placed
     if(response.success){
       this.setState({orderPlaced:true})
+      this.props.resetCart();
+      this.props.resetBillingAddress();
+      this.props.resetShippingAddress();
     }
     else{
       alert('There was an error placing your order. Please try again.')
@@ -115,7 +128,7 @@ export class CheckoutPage extends Component{
           <h1 id = 'checkoutTitle'>Checkout</h1>
           <OrderConfirmation />
           <Order
-            cart = {this.props.shoppingCart}
+            cart = {this.saveShoppingCart}
             shippingCost = {this.props.shippingCost}
             subTotal = {this.subTotal}
             total = {this.total}
@@ -169,11 +182,22 @@ export class CheckoutPage extends Component{
       </div>
     )
   }
+  componentWillUnmount(){
+    if(this.state.orderPlaced){
+      this.props.changeAllowCheckout(false);
+    }
+  }
 }
 const mapDispatchToProps = (dispatch) =>({
-  changeShippingAddress:(key, payload)=>dispatch(changeShippingAddress(key,payload)),
-  changeBillingAddress:(key, payload)=>dispatch(changeBillingAddress(key,payload)),
-  changeLoadScreen: (show, info)=>dispatch(changeLoadScreen(show,info)),
+  changeShippingAddress:(key, payload)=> dispatch(changeShippingAddress(key,payload)),
+  changeBillingAddress:(key, payload)=> dispatch(changeBillingAddress(key,payload)),
+  changeShippingCost: (cost)=> dispatch(changeShippingCost(cost)),
+  resetCart:()=> dispatch(resetCart()),
+  resetBillingAddress: ()=> dispatch(resetBillingAddress()),
+  resetShippingAddress: ()=> dispatch(resetShippingAddress()),
+  changeLoadScreen: (show, info)=> dispatch(changeLoadScreen(show,info)),
+  changeAllowCheckout: (bool)=> dispatch(changeAllowCheckout(bool)),
+
 })
 
 const mapStateToProps = (state) =>({

@@ -15,6 +15,17 @@ export const billingAddress = (state = {
         ...state,
         [action.key]: action.payload
       }
+    case 'RESET_BILLING_INFO':
+      return {
+        name: '',
+        email: '',
+        phone: '',
+        locality: '',
+        region: '',
+        "address-line1": '',
+        "address-line2": '',
+        "postal-code": ''
+    }
     default:
       return state
   }

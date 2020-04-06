@@ -43,7 +43,8 @@ export const shoppingCart = (state = [], action) => {
       })
     case 'REMOVE_ITEM':
       return state.slice().filter(x=>x.itemNumber!==action.item.itemNumber);
-
+      case 'RESET_CART':
+        return [];
     default:
       return state;
   }
