@@ -144,7 +144,7 @@ describe('shippingAddress reducer',()=>{
   })
   it('resets the shipping info',()=>{
     expect(shippingAddress(undefined,{
-      type: 'RESET_shipping_INFO',
+      type: 'RESET_SHIPPING_INFO',
     })).toEqual({
       name: '',
       email:'',
