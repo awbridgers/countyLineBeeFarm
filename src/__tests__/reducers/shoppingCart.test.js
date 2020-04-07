@@ -54,6 +54,13 @@ describe('shoppingCart reducer', ()=>{
       mod: 'sub'
     })).toEqual([{...muthJar, quantity: 69},{...hexJar, quantity:1}])
   })
+  it('doesnt sub the item if that would result in a negative quantity',()=>{
+    expect(shoppingCart([{...muthJar, quantity:0},{...hexJar, quantity:1}],{
+      type: 'CHANGE_QUANTITY',
+      item: muthJar,
+      mod: 'sub'
+    })).toEqual([{...muthJar, quantity: 0},{...hexJar, quantity:1}])
+  })
   it('add the quantity of an item',()=>{
     expect(shoppingCart([{...muthJar, quantity:70},{...hexJar, quantity:1}],{
       type: 'CHANGE_QUANTITY',
