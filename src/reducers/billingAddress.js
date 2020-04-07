@@ -1,8 +1,6 @@
 
 export const billingAddress = (state = {
   name: '',
-  email: '',
-  phone: '',
   locality: '',
   region: '',
   "address-line1": '',
@@ -18,8 +16,6 @@ export const billingAddress = (state = {
     case 'RESET_BILLING_INFO':
       return {
         name: '',
-        email: '',
-        phone: '',
         locality: '',
         region: '',
         "address-line1": '',
