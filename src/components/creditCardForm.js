@@ -124,8 +124,6 @@ export default class CreditCardForm extends Component{
               <AddressForm
                 onSubmit = {(e)=>e.preventDefault()}
                 name = {this.props.billingAddress.name}
-                email = {this.props.billingAddress.email}
-                phone = {this.props.billingAddress.phone}
                 address1 = {this.props.billingAddress['address-line1']}
                 address2 = {this.props.billingAddress['address-line2']}
                 city = {this.props.billingAddress.locality}
