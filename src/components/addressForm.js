@@ -5,7 +5,7 @@ import {StateSelector} from './stateSelector.js';
 import { Button } from 'reactstrap';
 
 
-const InputForm =({id, label, value, title, onChange, placeHolder, type, error}) =>(
+export const InputForm =({id, label, value, title, onChange, placeHolder, type, error}) =>(
   <div id = {id}>
     {label &&
       <label className = 'label' htmlFor = {id}>

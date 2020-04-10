@@ -27,10 +27,10 @@ describe('AddToCart component',()=>{
   it('renders without crashing',()=>{
     expect(wrapper.find('div.addToCart')).toHaveLength(1);
   })
-  // it('exits when the exit button is clicked',()=>{
-  //   wrapper.find('Button#addExitButton').dive().find('button').simulate('click');
-  //   expect(props.exit).toHaveBeenCalled();
-  // })
+  it('exits when the exit button is clicked',()=>{
+    wrapper.find('Button#addExitButton').dive().find('button').simulate('click');
+    expect(props.exit).toHaveBeenCalled();
+  })
   // it('adds the item to cart when the button is pressed',()=>{
   //   wrapper.find('Button').last().dive().find('button').simulate('click');
   //   expect(props.accept).toHaveBeenCalled();
