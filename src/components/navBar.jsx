@@ -11,11 +11,11 @@ import {
   import MediaQuery, {useMediaQuery} from 'react-responsive';
   import { LinkContainer } from 'react-router-bootstrap'
 
-  const CustomNavItem = (props) =>{
+  export const CustomNavItem = (props) =>{
       const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
       return(
         <LinkContainer
-          className = {!isTabletOrMobile && props.cart ? 'cartNav' : ''}
+          className = {!isTabletOrMobile && props.cart ? 'cartNav' : 'normalNav'}
           to = {props.linkLocation}
           onClick = {isTabletOrMobile ? props.onClick : null}>
           <NavItem className = "navItem">
