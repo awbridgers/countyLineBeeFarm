@@ -43,7 +43,7 @@ export default class Example extends React.Component {
     const {cart} = this.props
     return (
         <Navbar light expand="md">
-          <MediaQuery minDeviceWidth = {1224}>
+          <MediaQuery minDeviceWidth = {769}>
             <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
                 <img className = "beeLogo" src = {beeLogo} alt= 'Bee Logo'/>
