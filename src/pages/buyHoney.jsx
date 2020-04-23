@@ -9,7 +9,7 @@ import AddToCart from '../components/addToCart.js'
 import { addToCart } from '../actions/index.js';
 
 
-const BuyHoney = (props) => {
+export const BuyHoney = (props) => {
   const [showCartScreen, setShowCartScreen] = useState(false);
   const [honeyType, setHoneyType] = useState(-1);
   const [amount, setAmount] = useState(0);
