@@ -71,7 +71,6 @@ export const BuyHoney = (props) => {
 }
 
 const mapStateToProps = (state) =>({
-  shoppingCart: state.shoppingCart,
   itemList: state.itemList,
 })
 const mapDispatchToProps = dispatch =>({

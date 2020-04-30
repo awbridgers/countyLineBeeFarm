@@ -3,6 +3,8 @@ import { shallow } from 'enzyme';
 import App from '../../pages/App.js';
 import { useMediaQuery } from 'react-responsive';
 
+global.fetch = jest.fn().mockReturnValue(Promise.resolve({test:'test'}))
+
 jest.mock('react-responsive');
 useMediaQuery.mockReturnValueOnce(true).mockReturnValue(false)
 describe('App page',()=>{
