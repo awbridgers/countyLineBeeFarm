@@ -134,7 +134,7 @@ export class ShoppingCart extends Component{
       else{
         this.props.changeLoadScreen(false, '')
         this.setState({errorArray: newErrorArray});
-        alert(errorMessage)
+        window.alert(errorMessage)
       }
     }
     catch(error){
@@ -164,7 +164,7 @@ export class ShoppingCart extends Component{
     if(this.props.shoppingCart.length === 0){
       return(
         <div style = {{color: '#cfb53b', marginTop: '20px'}}>
-          <h2> There are no items in your cart. </h2>
+          <h2>There are no items in your cart.</h2>
         </div>
       )
     }
@@ -231,6 +231,7 @@ const mapStateToProps = state =>({
   shoppingCart: state.shoppingCart,
   shippingAddress: state.shippingAddress,
   loadScreen: state.loadScreen,
+  allowCheckout: state.allowCheckout
 })
 
 const mapDispatchToProps = dispatch =>({
