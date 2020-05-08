@@ -3,6 +3,14 @@ import { shallow } from 'enzyme';
 import ConnectedCart, {ShoppingCart} from '../../pages/cart.js';
 import convert from 'xml-js';
 import configureStore from 'redux-mock-store'
+import {withRouter} from 'react-router-dom'
+
+jest.mock('react-router-dom',()=>{
+  return {
+    withRouter: (child)=>child
+  }
+});
+
 
 //mock fetch calls
 
@@ -281,6 +289,32 @@ describe('Cart Page Unconnected',()=>{
       expect(e.message).toEqual('Error: total fail mace')
     })
   })
+  it('runs the matchzip function', async()=>{
+    const mockFetch = jest.spyOn(global, 'fetch').mockImplementation(()=>{
+      return Promise.resolve({
+        text: jest.fn(()=>({
+          CityStateLookupResponse: {
+            ZipCode: 12345
+          }
+        }))
+      })
+    })
+    const mockConvert = jest.spyOn(convert, 'xml2js').mockImplementation((text,a)=>{
+      return text;
+    })
+    expect(await wrapper.instance().matchZip()).toEqual(12345)
+  })
+  it('should throw error if error in matchzip', async()=>{
+    const mockFetch = jest.spyOn(global, 'fetch').mockImplementation(()=>{
+      return Promise.reject(new Error('Error fetching zip'))
+      })
+    const mockConvert = jest.spyOn(convert, 'xml2js').mockImplementation((text,a)=>{
+      return text;
+    })
+    await wrapper.instance().matchZip().catch((e)=>{
+      expect(e.message).toEqual('Error: Error fetching zip')
+    })
+  })
 })
 
 describe('Connected Cart Component',()=>{
@@ -291,5 +325,45 @@ describe('Connected Cart Component',()=>{
   })
   beforeEach(()=>{
     wrapper = shallow(<ConnectedCart store = {store} />).dive();
+  })
+  it('should return allowCheckout',()=>{
+    expect(wrapper.prop('allowCheckout')).toEqual(false)
+  })
+  it('should dispatch the actions',()=>{
+    wrapper.invoke('changeAllowCheckout')(true);
+    wrapper.invoke('changeQuantity')(0,'sub')
+    wrapper.invoke('changeShippingCost')(50)
+    wrapper.invoke('changeShippingAddress')(1, 'test')
+    wrapper.invoke('changeLoadScreen')(true, 'test')
+    wrapper.invoke('removeItem')('item')
+    expect(store.getActions()).toEqual([
+      {
+      type: 'CHANGE_ALLOW_CHECKOUT',
+      bool: true
+      },
+      {
+        type: 'CHANGE_QUANTITY',
+        item: 0,
+        mod: 'sub'
+      },
+      {
+        type: 'CHANGE_SHIPPING_COST',
+        cost: 50
+      },
+      {
+        type: 'CHANGE_SHIPPING_INFO',
+        key: 1,
+        payload: 'test'
+      },
+      {
+        type: 'CHANGE_LOAD_SCREEN',
+        show: true,
+        info: 'test'
+      },
+      {
+        type: 'REMOVE_ITEM',
+        item: 'item'
+      },
+    ])
   })
 })
