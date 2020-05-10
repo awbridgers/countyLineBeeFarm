@@ -107,7 +107,7 @@ export class CheckoutPage extends Component{
     return total
   }
   changeBillingSame = (e)=>{
-    this.setState({billingSame: e.target.checked})
+    this.setState({billingSame: !this.state.billingSame})
   }
   changeInput = (e) =>{
     const target = e.target.id;

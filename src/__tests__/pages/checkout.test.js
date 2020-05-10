@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ConnectedCheckout, {CheckoutPage} from '../../pages/checkout.js';
+import configureStore from 'redux-mock-store';
+
+
 
 const props = {
   changeShippingAddress: jest.fn(),
@@ -36,14 +39,14 @@ const props = {
     'postal-code': 'postal'
   },
   billingAddress: {
-    name: 'name',
-    email:'email',
-    phone:'phone',
-    locality: 'locality',
-    region: 'region',
-    'address-line1': 'address1',
-    'address-line2': 'address2',
-    'postal-code': 'postal'
+    name: 'billing name',
+    email:'billing email',
+    phone:'billing phone',
+    locality: 'billing locality',
+    region: 'billing region',
+    'address-line1': 'billing address1',
+    'address-line2': 'billing address2',
+    'postal-code': 'billing postal'
   },
   loadScreen: {
     show: false,
@@ -143,5 +146,111 @@ describe('checkout page unconnected',()=>{
   it('calculates the total price of the cart',()=>{
     const cost = wrapper.instance().calcTotal();
     expect(cost).toEqual(30)
+  })
+  it('should change the billingSame when the checkbox is clicked',()=>{
+    wrapper.setState({loaded:true})
+    expect(wrapper.state().billingSame).toEqual(true);
+    wrapper.instance().changeBillingSame();
+    expect(wrapper.state().billingSame).toEqual(false);
+  })
+  it('should change the input',()=>{
+    const event = {
+      target:{
+        id: 'test',
+        value: 'value'
+      }
+    }
+    wrapper.instance().changeInput(event);
+    expect(props.changeBillingAddress).toHaveBeenCalledWith('test', 'value')
+  })
+  it('uses the shipping address if billingSame, elsewise uses biling',async ()=>{
+    jest.spyOn(global, 'fetch').mockImplementation((x,y)=>{
+      return Promise.resolve({
+        json: ()=>({
+          success: true,
+        })
+      })
+    })
+    const tester = jest.spyOn(JSON, 'stringify').mockImplementation((x)=>x)
+    wrapper.instance().cardNonceResponseReceived(null,1,2,3);
+    wrapper.setState({billingSame: false});
+    wrapper.instance().cardNonceResponseReceived(null,1,2,3);
+    expect(tester.mock.calls[0][0].billingAddress).toEqual(props.shippingAddress)
+    expect(tester.mock.calls[1][0].billingAddress).toEqual(props.billingAddress)
+  })
+  it('disallow checkout on unmount again',()=>{
+    wrapper.instance().componentWillUnmount()
+    expect(props.changeAllowCheckout).not.toHaveBeenCalled();
+    wrapper.setState({orderPlaced: true})
+    wrapper.instance().componentWillUnmount()
+    expect(props.changeAllowCheckout).toHaveBeenCalled()
+  })
+  it('changes the loaded state when the script loads',()=>{
+    const load = jest.spyOn(document, 'getElementsByTagName').mockImplementation(()=>{
+      return [
+        {
+          appendChild: (x)=>{x.onload();}
+        }
+      ]
+    })
+    expect(wrapper.state().loaded).toEqual(false);
+    wrapper.instance().componentDidMount();
+    expect(wrapper.state().loaded).toEqual(true);
+  })
+})
+
+describe('Connected Checkout page',()=>{
+  let wrapper;
+  const mockStore = configureStore();
+  const store = mockStore({...props})
+  beforeEach(()=>{
+    wrapper = shallow(<ConnectedCheckout store = {store} />).dive()
+  })
+  it('attatches the state to the page',()=>{
+    expect(wrapper.prop('shippingCost')).toEqual(props.shippingCost);
+  })
+  it('attatches the dispatch to the page', ()=>{
+    wrapper.invoke('changeShippingAddress')(1, 'test')
+    wrapper.invoke('changeBillingAddress')(1, 'test')
+    wrapper.invoke('changeShippingCost')(15)
+    wrapper.invoke('resetCart')()
+    wrapper.invoke('resetBillingAddress')()
+    wrapper.invoke('resetShippingAddress')()
+    wrapper.invoke('changeLoadScreen')(true, 'test')
+    wrapper.invoke('changeAllowCheckout')(true)
+    expect(store.getActions()).toEqual([
+      {
+        type: 'CHANGE_SHIPPING_INFO',
+        key: 1,
+        payload: 'test'
+      },
+      {
+        type: 'CHANGE_BILLING_INFO',
+        key: 1,
+        payload: 'test'
+      },
+      {
+        type: 'CHANGE_SHIPPING_COST',
+        cost: 15
+      },
+      {
+        type: 'RESET_CART'
+      },
+      {
+        type: 'RESET_BILLING_INFO'
+      },
+      {
+        type: 'RESET_SHIPPING_INFO'
+      },
+      {
+        type: 'CHANGE_LOAD_SCREEN',
+        show: true,
+        info: 'test'
+      },
+      {
+        type: 'CHANGE_ALLOW_CHECKOUT',
+        bool: true
+      }
+    ])
   })
 })
