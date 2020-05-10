@@ -28,7 +28,9 @@ const props = {
   error: '',
   cardNonceResponseReceived: jest.fn(),
   changeLoad: jest.fn(),
-  paymentForm: jest.fn((config)=>mockPaymentForm(config))
+  paymentForm: jest.fn((config)=>mockPaymentForm(config)),
+  billingSame: true,
+  changeBillingSame: jest.fn()
 }
 
 
@@ -47,13 +49,12 @@ describe('Credit Card Form',()=>{
     expect(wrapper.find('div#form-container').props().style).toEqual({visibility: 'visible'});
   })
   it('changes the checkbox',()=>{
-    expect(wrapper.state().billingSame).toBe(true)
     wrapper.find('input#billing').simulate('change');
-    expect(wrapper.state().billingSame).toBe(false)
+    expect(props.changeBillingSame).toHaveBeenCalled()
   })
   it('displays the address form when billingSame is false',()=>{
-expect(wrapper.find('AddressForm')).toHaveLength(0)
-    wrapper.setState({billingSame: false});
+    expect(wrapper.find('AddressForm')).toHaveLength(0)
+    wrapper.setProps({billingSame: false});
     expect(wrapper.find('AddressForm')).toHaveLength(1)
   })
   it('runs the getNonce function with the button is pressed',()=>{
@@ -62,7 +63,7 @@ expect(wrapper.find('AddressForm')).toHaveLength(0)
   })
   it('alerts the user if the billingAdress is not complete',()=>{
     wrapper.setProps({billingAddress: {name: ''}})
-    wrapper.setState({billingSame: false})
+    wrapper.setProps({billingSame: false})
     window.alert=jest.fn();
     wrapper.instance().getNonce();
     expect(window.alert).toHaveBeenCalled();
@@ -79,7 +80,7 @@ expect(wrapper.find('AddressForm')).toHaveLength(0)
     expect(mockRequest).toHaveBeenCalled();
   })
   it('runs preventDefault on AddressForm Submit',()=>{
-    wrapper.setState({billingSame: false})
+    wrapper.setProps({billingSame: false})
     const mock = jest.fn();
     wrapper.find('AddressForm').simulate('submit', {preventDefault: mock});
     expect(mock).toHaveBeenCalled();

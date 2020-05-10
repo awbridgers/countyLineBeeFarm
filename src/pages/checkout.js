@@ -71,24 +71,29 @@ export class CheckoutPage extends Component{
       billingAddress: this.state.billingSame ? this.props.shippingAddress : this.props.billingAddress,
       shippingCost: this.props.shippingCost,
     }
-    const rawResponse = await fetch('/api/process-payment', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(checkoutInfo)
-    })
-    const response = await rawResponse.json();
-    //if the order was placed
-    if(response.success){
-      this.setState({orderPlaced:true})
-      this.props.resetCart();
-      this.props.resetBillingAddress();
-      this.props.resetShippingAddress();
+    try{
+      const rawResponse = await fetch('/api/process-payment', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(checkoutInfo)
+      })
+      const response = await rawResponse.json();
+      //if the order was placed
+      if(response.success){
+        this.setState({orderPlaced:true})
+        this.props.resetCart();
+        this.props.resetBillingAddress();
+        this.props.resetShippingAddress();
+      }
+      else{
+        alert('There was an error placing your order. Please try again.')
+      }
     }
-    else{
-      alert('There was an error placing your order. Please try again.')
+    catch(e){
+      alert(e.message)
     }
     this.props.changeLoadScreen(false,'')
     this.setState({ errorMessages: ''})
@@ -166,6 +171,8 @@ export class CheckoutPage extends Component{
                   cardNonceResponseReceived = {this.cardNonceResponseReceived}
                   changeLoad = {this.props.changeLoadScreen}
                   error = {this.state.errorMessages}
+                  billingSame = {this.state.billingSame}
+                  changeBillingSame = {this.changeBillingSame}
                 />
               </div>
             </div>

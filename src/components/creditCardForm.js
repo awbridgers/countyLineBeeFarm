@@ -11,7 +11,6 @@ export default class CreditCardForm extends Component{
       nonce: undefined,
       loaded: false,
       errorMessages: [],
-      billingSame: true,
       billingError: [],
     }
   }
@@ -63,7 +62,7 @@ export default class CreditCardForm extends Component{
   }
   getNonce = e =>{
     //first, check if billing is same as shipping
-    if(!this.state.billingSame){
+    if(!this.props.billingSame){
       const billingAddress = this.props.billingAddress;
       //if they are not the same, make sure all the inputs are filled in
       const blankInputs = Object.keys(billingAddress)
@@ -85,9 +84,7 @@ export default class CreditCardForm extends Component{
       this.paymentForm.requestCardNonce();
     }
   }
-  changeBillingSame = () =>{
-    this.setState({billingSame: !this.state.billingSame})
-  }
+
   render(){
     const {loaded} = this.state;
     return(
@@ -114,12 +111,12 @@ export default class CreditCardForm extends Component{
             <input
               id = 'billing'
               type='checkbox'
-              checked = {this.state.billingSame}
-              onChange = {this.changeBillingSame}
+              checked = {this.props.billingSame}
+              onChange = {this.props.changeBillingSame}
             />
           <label htmlFor = 'billing'>Billing address is the same as shipping</label>
           </div>
-            {!this.state.billingSame &&
+            {!this.props.billingSame &&
             <div>
               <AddressForm
                 onSubmit = {(e)=>e.preventDefault()}
