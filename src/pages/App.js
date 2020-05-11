@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import beeLogo from '../images/beeLogo.png'
 import {useMediaQuery} from 'react-responsive'

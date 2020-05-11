@@ -146,46 +146,6 @@ margin-bottom: 30px;
   max-width: 50%;
 }
 
-.emailForm{
-  font-size: 20px;
-  text-align: center;
-  margin-top: 25px;
-  float: left;
-  width:35%;
-  position: relative;
-  left: 50px;
-  min-width: 258px;
-
-
-}
-.email{
-  width:400px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  margin-top: 20px;
-
-}
-.message{
-  width: 400px;
-  font-weight: 600;
-}
-.contactInfo{
-  color: white;
-  margin-top: 25px;
-  float: right;
-  width: 50%;
-  min-width: 200px;
-  text-align: center;
-  position: relative;
-  right: 100px;
-
-
-}
-
-.emailP{
-  margin-top: 20px;
-  text-align: center
-}
 .graph{
   width:80%;
 }
