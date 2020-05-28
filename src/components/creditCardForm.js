@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import 'react-square-payment-form/lib/default.css'
 import '../styles/sqPaymentForm.css';
-import '../pages/App.css'
 import AddressForm from './addressForm.js'
 
 export default class CreditCardForm extends Component{

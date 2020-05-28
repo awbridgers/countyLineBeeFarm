@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Button, CardImg, CardTitle, CardText,
  CardSubtitle, CardBody } from 'reactstrap';
-import './App.css';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import MarketList from '../components/marketList.js'

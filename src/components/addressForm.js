@@ -1,5 +1,4 @@
 import React from 'react';
-import '../pages/App.css';
 import { FaAsterisk } from 'react-icons/fa'
 import {StateSelector} from './stateSelector.js';
 import { Button } from 'reactstrap';

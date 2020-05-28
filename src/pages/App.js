@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import beeLogo from '../images/beeLogo.png'
 import {useMediaQuery} from 'react-responsive'
 import Group from '../components/group.jsx'

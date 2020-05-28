@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa';

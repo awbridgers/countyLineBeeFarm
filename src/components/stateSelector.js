@@ -1,5 +1,4 @@
 import React from 'react';
-import '../pages/App.css'
 
 
 export const StateSelector = (props) =>(

@@ -1,6 +1,5 @@
 import React from 'react';
 import Loader from 'react-spinners/RingLoader';
-import '../pages/App.css';
 
 
 const LoadingScreen = props =>(

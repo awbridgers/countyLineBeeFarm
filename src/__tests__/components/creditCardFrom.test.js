@@ -69,7 +69,7 @@ describe('Credit Card Form',()=>{
     expect(window.alert).toHaveBeenCalled();
   })
   it('runs the nonce function if billing is not same and inputs are filled',()=>{
-    wrapper.setState({billingSame:false});
+    wrapper.setProps({billingSame:false});
     wrapper.instance().getNonce();
     expect(props.changeLoad).toHaveBeenCalledWith(true, 'Processing payment');
     expect(mockRequest).toHaveBeenCalled();

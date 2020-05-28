@@ -1,4 +1,4 @@
-#email{
+#emailPage{
   display: flex;
 
   justify-content: space-around;
@@ -56,7 +56,7 @@
 .mobileMessage{
   width: 85%;
 }
-#email .btn, .mobileEmailForm .btn{
+#emailPage .btn, .mobileEmailForm .btn{
   margin-top: auto;
   color: black;
   font-size: 18px;
