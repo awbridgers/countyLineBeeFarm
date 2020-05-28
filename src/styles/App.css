@@ -26,10 +26,6 @@
   padding-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
 
 .beeLogo {
   width: 100px;
@@ -49,6 +45,10 @@
 }
 .navItem{
   margin: 0px 20px 0px 20px;
+}
+.cartNav{
+  position: absolute;
+  right: 0px;
 }
 
 .header{
@@ -139,50 +139,13 @@ margin-bottom: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.card-title{
+  font-size: 1.25rem;
+}
 .mobileImage{
   max-width: 50%;
 }
 
-.emailForm{
-  font-size: 20px;
-  text-align: center;
-  margin-top: 25px;
-  float: left;
-  width:35%;
-  position: relative;
-  left: 50px;
-  min-width: 258px;
-
-
-}
-.email{
-  width:400px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  margin-top: 20px;
-
-}
-.message{
-  width: 400px;
-  font-weight: 600;
-}
-.contactInfo{
-  color: white;
-  margin-top: 25px;
-  float: right;
-  width: 50%;
-  min-width: 200px;
-  text-align: center;
-  position: relative;
-  right: 100px;
-
-
-}
-
-.emailP{
-  margin-top: 20px;
-  text-align: center
-}
 .graph{
   width:80%;
 }
@@ -494,6 +457,7 @@ select option{
   background: #FFA07A;
 }
 .loadingScreen{
+  color: #cfb53b;
   position: fixed;
   width: 100%;
   height: 99%;

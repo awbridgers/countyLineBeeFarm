@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 import { Card, Button, CardImg, CardTitle, CardText,
  CardSubtitle, CardBody } from 'reactstrap';
-import './App.css';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import MarketList from '../components/marketList.js'
 import AddToCart from '../components/addToCart.js'
 import { addToCart } from '../actions/index.js';
-import { LinkContainer } from 'react-router-dom'
 
 
-const BuyHoney = (props) => {
+export const BuyHoney = (props) => {
   const [showCartScreen, setShowCartScreen] = useState(false);
   const [honeyType, setHoneyType] = useState(-1);
   const [amount, setAmount] = useState(0);
-  const [addedToCart, setAddedToCart] = useState(false);
   let history = useHistory();
   const honeyItem = props.itemList[honeyType];
-  console.log(honeyItem);
   return (
       <div>
         <div className = 'marketDeck'>
@@ -74,7 +70,6 @@ const BuyHoney = (props) => {
 }
 
 const mapStateToProps = (state) =>({
-  shoppingCart: state.shoppingCart,
   itemList: state.itemList,
 })
 const mapDispatchToProps = dispatch =>({

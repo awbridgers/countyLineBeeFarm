@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
-import '../pages/App.css';
+import React from 'react';
 import { FaAsterisk } from 'react-icons/fa'
 import {StateSelector} from './stateSelector.js';
 import { Button } from 'reactstrap';
 
 
-const InputForm =({id, label, value, title, onChange, placeHolder, type, error}) =>(
+export const InputForm =({id, label, value, title, onChange, placeHolder, type, error}) =>(
   <div id = {id}>
     {label &&
       <label className = 'label' htmlFor = {id}>
@@ -28,16 +27,6 @@ const InputForm =({id, label, value, title, onChange, placeHolder, type, error})
 )
 
 const AddressForm = (props) =>{
-  const [blankArray, changeBlankArray] = useState([]);
-  const keyObjects = {
-    name: props.name,
-    email: props.email,
-    phone: props.phone,
-    locality: props.city,
-    region: props.state,
-    "address-line1" : props.address1,
-    "postal-code": props.zip
-  }
   return(
     <div>
       <form

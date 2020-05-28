@@ -45,6 +45,8 @@
 }
 .orderLayout{
   min-width: 340px;
+  max-width: 615px;
+  margin: auto;
   margin-bottom: 20px;
   border:2px solid gray;
 }
@@ -102,4 +104,11 @@
 .total{
   font-size: 18px;
   font-weight: bold;
+}
+.orderConfirm{
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+  background: #cfb53b;
+  color: black;
+
 }

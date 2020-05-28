@@ -5,6 +5,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardDeck,
  import bee2 from "../images/bee2_short.jpg";
  import bee1 from "../images/bee1_short.jpg";
  import honey from '../images/honeyJars.jpg'
+ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Group = (props) => {
   return (

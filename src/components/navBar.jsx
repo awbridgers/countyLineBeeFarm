@@ -11,10 +11,11 @@ import {
   import MediaQuery, {useMediaQuery} from 'react-responsive';
   import { LinkContainer } from 'react-router-bootstrap'
 
-  const CustomNavItem = (props) =>{
+  export const CustomNavItem = (props) =>{
       const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
       return(
         <LinkContainer
+          className = {!isTabletOrMobile && props.cart ? 'cartNav' : 'normalNav'}
           to = {props.linkLocation}
           onClick = {isTabletOrMobile ? props.onClick : null}>
           <NavItem className = "navItem">
@@ -39,9 +40,10 @@ export default class Example extends React.Component {
     });
   }
   render() {
+    const {cart} = this.props
     return (
         <Navbar light expand="md">
-          <MediaQuery minDeviceWidth = {1224}>
+          <MediaQuery minDeviceWidth = {769}>
             <LinkContainer to ="/">
               <NavbarBrand className = '' href="/">
                 <img className = "beeLogo" src = {beeLogo} alt= 'Bee Logo'/>
@@ -73,6 +75,14 @@ export default class Example extends React.Component {
                   linkTitle = 'Contact'
                   onClick = {this.toggle}
                   />
+                  <CustomNavItem
+                    cart
+                    linkLocation = 'shopping-cart'
+                    linkTitle = {cart > 0 ?
+                      `Cart (${cart} item${cart === 1 ? `` : `s`})`: 'Cart'}
+                    onClick = {this.toggle}
+                  />
+
             </Nav>
           </Collapse>
         </Navbar>

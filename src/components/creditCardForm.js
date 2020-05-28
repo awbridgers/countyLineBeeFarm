@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import 'react-square-payment-form/lib/default.css'
 import '../styles/sqPaymentForm.css';
-import '../pages/App.css'
 import AddressForm from './addressForm.js'
 
 export default class CreditCardForm extends Component{
@@ -11,14 +10,13 @@ export default class CreditCardForm extends Component{
       nonce: undefined,
       loaded: false,
       errorMessages: [],
-      billingSame: true,
       billingError: [],
     }
   }
   componentDidMount(){
     const config = {
       applicationId: process.env.REACT_APP_SQUARE_ID,
-      locationId: process.env.REACT_APP_SQUARE_LOCATION_ID,
+      locationId: process.env.REACT_APP_SQUARE_LOCATION_ID_2,
       inputClass: "sq-input",
       autoBuild: false,
       inputStyles: [
@@ -52,15 +50,18 @@ export default class CreditCardForm extends Component{
      },
      callbacks: {
        cardNonceResponseReceived: this.props.cardNonceResponseReceived,
-         paymentFormLoaded: ()=> this.setState({loaded: true})
+       paymentFormLoaded: ()=> {
+         this.setState({loaded: true})
+         this.props.changeLoad(false,'')
        }
      }
+   }
     this.paymentForm = new this.props.paymentForm(config);
     this.paymentForm.build();
   }
   getNonce = e =>{
     //first, check if billing is same as shipping
-    if(!this.state.billingSame){
+    if(!this.props.billingSame){
       const billingAddress = this.props.billingAddress;
       //if they are not the same, make sure all the inputs are filled in
       const blankInputs = Object.keys(billingAddress)
@@ -72,22 +73,23 @@ export default class CreditCardForm extends Component{
       }
       else{
         //if all the forms are filled in properly, then just request nonce
+        this.props.changeLoad(true, 'Processing payment')
         this.paymentForm.requestCardNonce();
       }
     }
     else{
       //if they are the same, just request nonce.
+      this.props.changeLoad(true, 'Processing payment')
       this.paymentForm.requestCardNonce();
     }
   }
-  changeBillingSame = () =>{
-    this.setState({billingSame: !this.state.billingSame})
-  }
+
   render(){
     const {loaded} = this.state;
     return(
       <div>
-        <div id="form-container" style = {loaded ? {display:'block'} : {display:'none'}}>
+        <div id="form-container" style = {loaded ? {visibility: 'visible'} : {visibility:'hidden'}}>
+          <div id = 'error'>{this.props.error}</div>
           <div>
             <label htmlFor = 'sq-card-number' className = 'sq-label'>Card Number</label>
             <div id="sq-card-number"></div>
@@ -108,18 +110,16 @@ export default class CreditCardForm extends Component{
             <input
               id = 'billing'
               type='checkbox'
-              checked = {this.state.billingSame}
-              onChange = {this.changeBillingSame}
+              checked = {this.props.billingSame}
+              onChange = {this.props.changeBillingSame}
             />
           <label htmlFor = 'billing'>Billing address is the same as shipping</label>
           </div>
-            {!this.state.billingSame &&
+            {!this.props.billingSame &&
             <div>
               <AddressForm
                 onSubmit = {(e)=>e.preventDefault()}
                 name = {this.props.billingAddress.name}
-                email = {this.props.billingAddress.email}
-                phone = {this.props.billingAddress.phone}
                 address1 = {this.props.billingAddress['address-line1']}
                 address2 = {this.props.billingAddress['address-line2']}
                 city = {this.props.billingAddress.locality}

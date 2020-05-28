@@ -37,7 +37,7 @@ const AddToCart = (props) =>{
           }
           <div className = 'addButtons'>
             {!goCart &&
-              <Button onClick = {()=>add()}>
+              <Button id = 'addButton' onClick = {()=>add()}>
                 Add To Cart
               </Button>
             }
