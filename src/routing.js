@@ -89,7 +89,7 @@ export class Routing extends Component {
         })
       }
     })
-    this.setState({marketList: eventArray})
+    this.setState({marketList: eventArray.splice(0,4)})
     //load in all the honey in stock values
     const snapshot =  await this.ref.once('value');
     const newStock = snapshot.child('honeyStock').val()
