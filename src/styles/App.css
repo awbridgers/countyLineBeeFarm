@@ -7,7 +7,23 @@
   height: 100%;
 }
 
-
+.gallery{
+  width: 80%;
+  margin: auto;
+}
+.image-gallery-description{
+  left:0px;
+  right: 0px;
+  bottom: 10px !important;
+  background: rgba(0,0,0,0.7) !important;
+}
+.image-gallery-thumbnail{
+  width: auto;
+}
+.image-gallery-thumbnail-image{
+  height: 100px;
+  width: auto;
+}
 .navbar {
   background: #cfb53b;
 }
@@ -239,6 +255,15 @@ margin-bottom: 30px;
 }
 .homepageCard .btn:hover, .honeyCard .btn:hover, .shippingDetails .btn:hover{
   color: white;
+}
+.btn.disabled{
+  opacity: 1;
+}
+.soldOut{
+}
+.btn.disabled:hover{
+  color: black;
+  cursor: default;
 }
 
 .card-body{

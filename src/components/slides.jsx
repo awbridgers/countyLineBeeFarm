@@ -6,6 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import ImageGallery from 'react-image-gallery';
 import MediaQuery from 'react-responsive';
 import bee from '../images/beeBack.jpg';
 import bee1 from '../images/bee1.jpg';
@@ -17,66 +18,96 @@ import honeyHarvest from '../images/honeyHarvest.jpg';
 import machine from '../images/machine.jpg';
 import supers from '../images/honeySupers.jpg';
 import gettingSwarm from '../images/gettingSwarm.JPG';
+import closeUp from '../images/closeUpBee.jpg';
+import 'react-image-gallery/styles/css/image-gallery.css'
 
 
 
 const items = [
   {
-    src: originalHives,
+    original: originalHives,
     altText: 'Slide 1',
     header: '',
-    caption: 'Setting up our first hives in the spring of 2017'
+    description: 'Setting up our first hives in the spring of 2017',
+    thumbnail: originalHives,
+    thumbnailClass: 'thumbnail'
   },
   {
-    src: bee1,
+    original: bee1,
+    thumbnail: bee1,
     altText: 'Slide 2',
-    caption: 'Some of our original hardworking bees!'
+    description: 'Some of our original hardworking bees!'
   },
   {
-    src: swarm,
+    original: swarm,
+    thumbnail: swarm,
     altText: 'Slide 3',
-    caption: 'Our bees tried to swarm a few times while we were still figuring out what we were doing. Oops!'
+    description: 'Our bees tried to swarm a few times while we were still figuring out what we were doing. Oops!'
   },
   {
-    src: gettingSwarm,
+    original: gettingSwarm,
+    thumbnail: gettingSwarm,
     altText: 'Slide 2',
-    caption: 'Thankfully, we were able to retrieve the swarm and get our bees back!'
+    description: 'Thankfully, we were able to retrieve the swarm and get our bees back!'
   },
   {
-    src: bee2,
+    original: bee2,
+    thumbnail: bee2,
     altText: 'Slide 2',
-    caption: 'Our hives continue to grow and multiply.'
+    description: 'Our hives continue to grow and multiply.',
+    thumbnailClass: 'thumbnail'
   },
   {
-    src: bee,
+    original: bee,
+    thumbnail: bee,
     altText: 'Slide 2',
-    caption: 'Searching for the queen!'
+    description: 'Searching for the queen!'
   },
   {
-    src: supers,
+    original: supers,
+    thumbnail: supers,
     altText: 'Slide 2',
-    caption: 'Frames full of honey from our honey supers'
+    description: 'Frames full of honey from our honey supers'
   },
   {
-    src: cuttingComb,
+    original: cuttingComb,
+    thumbnail: cuttingComb,
     altText: 'Slide 2',
-    caption: 'Cutting the honeycomb to free that delicious, all natural honey. Yum!'
+    description: 'Cutting the honeycomb to free that delicious, all natural honey. Yum!',
+    thumbnailClass: 'thumbnail'
   },
   {
-    src: machine,
+    original: machine,
+    thumbnail: machine,
     altText: 'Slide 2',
-    caption: 'Frames in the honey extractor ready to be spun'
+    description: 'Frames in the honey extractor ready to be spun'
   },
   {
-    src: honeyHarvest,
+    original: honeyHarvest,
+    thumbnail: honeyHarvest,
     altText: 'Slide 2',
-    caption: 'Here comes the honey!'
+    description: 'Here comes the honey!'
+  },
+  {
+    original: closeUp,
+    thumbnail: closeUp,
+    altText: 'Slide 2',
+    description: 'A friendly bee!'
   },
 
 
 ];
+const Slides = props =>(
+  <div className = 'gallery'>
+    <ImageGallery
+      items = {items}
+      showFullScreenButton = {false}
+      showPlayButton = {false}
+    />
+  </div>
+)
 
-class Slides extends Component {
+class OldSlides extends Component {
   constructor(props) {
     super(props);
     this.state = { activeIndex: 0 };
@@ -125,12 +156,12 @@ class Slides extends Component {
         >
           <MediaQuery maxDeviceWidth = {1224}>
             <img src={item.src} className = "carouselImageSmall"  alt={item.altText} />
-            <div  className = "test">{item.caption} </div>
+            <div  className = "test">{item.description} </div>
             </MediaQuery>
             <MediaQuery minDeviceWidth = {1224}>
               <img className = "carouselImage" src={item.src}  alt={item.altText} />
-              <div className = "carouselCaption"></div>
-              <CarouselCaption className = "carouselFont" captionHeader={item.header} captionText = {item.caption} />
+              <div className = "carouseldescription"></div>
+              <CarouselCaption className = "carouselFont" descriptionHeader={item.header} descriptionText = {item.description} />
               </MediaQuery>
         </CarouselItem>
       );
