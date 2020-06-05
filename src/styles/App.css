@@ -11,6 +11,9 @@
   width: 80%;
   margin: auto;
 }
+.image-gallery-swipe{
+  background: #0a0a0a
+}
 .image-gallery-description{
   left:0px;
   right: 0px;
@@ -18,11 +21,19 @@
   background: rgba(0,0,0,0.7) !important;
 }
 .image-gallery-thumbnail{
-  width: auto;
+  width: auto !important;
 }
+
 .image-gallery-thumbnail-image{
   height: 100px;
-  width: auto;
+  width: auto !important;
+}
+.image-gallery-image{
+height: 500px;
+
+}
+.image-gallery-slide-wrapper{
+  height: 500px;
 }
 .navbar {
   background: #cfb53b;
@@ -615,6 +626,18 @@ select option{
     }
     .cell{
       border: 1px solid black;
+    }
+    .image-gallery-thumbnail-image{
+      height: 35px;
+    }
+    .image-gallery-image{
+      height: 300px;
+    }
+    .image-gallery-slide-wrapper{
+      height: 315px;
+    }
+    .gallery{
+      width:95%;
     }
   }
   /* .scroll{

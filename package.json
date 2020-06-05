@@ -1,7 +1,6 @@
 {
   "name": "bee_website",
   "version": "2.1.0",
-  "homepage": "https://awbridgers.github.io.countyLineBeeFarm",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.4.1",

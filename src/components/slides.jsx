@@ -101,7 +101,7 @@ const Slides = props =>(
   <div className = 'gallery'>
     <ImageGallery
       items = {items}
-      showFullScreenButton = {false}
+      showFullscreenButton = {false}
       showPlayButton = {false}
     />
   </div>

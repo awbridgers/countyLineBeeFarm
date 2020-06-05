@@ -3,7 +3,7 @@ import 'firebase/database';
 import moment from 'moment-timezone';
 import firebase from 'firebase/app';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   useLocation,
@@ -95,6 +95,13 @@ export class Routing extends Component {
     const newStock = snapshot.child('honeyStock').val()
     this.setState({honeyStock: newStock})
   }
+  totalItems = (array) =>{
+    let itemCount = 0;
+    array.forEach((x,i)=>{
+      itemCount += x.quantity
+    })
+    return itemCount
+  }
   render(){
     const {honeyStock, marketList} = this.state;
     const {loadScreen} = this.props;
@@ -105,7 +112,7 @@ export class Routing extends Component {
           {loadScreen.show && <LoadingScreen message = {loadScreen.info}/>}
           <div>
             <Route path = '/'>
-              <NavBar cart = {this.props.cart.length}/>
+              <NavBar cart = {this.totalItems(this.props.cart)}/>
             </Route>
               <Switch>
                 <Route exact path = "/">
