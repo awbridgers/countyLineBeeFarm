@@ -6,6 +6,7 @@ import Group from '../components/group.jsx'
 
   const testServer = async () =>{
     const target = process.env.NODE_ENV === 'development' ? 'api/test' : 'https://clbf-api.herokuapps.com/test';
+    console.log(target)
     let response = await fetch(target)
     let test = await response.json();
     console.log(test)
