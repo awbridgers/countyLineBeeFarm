@@ -4,18 +4,20 @@ import {useMediaQuery} from 'react-responsive'
 import Group from '../components/group.jsx'
 
 
-  // const testServer = async () =>{
-  //   let response = await fetch('api/test')
-  //   let test = await response.json();
-  //   console.log(test)
-  //   // let testEmail = await fetch('api/test-email');
-  //   // let res = await testEmail.json();
-  //   // console.log(res)
-  // }
+  const testServer = async () =>{
+    const target = process.env.NODE_ENV === 'development' ? 'api/test' : 'https://clbf-api.herokuapps.com/test';
+    let response = await fetch(target)
+    let test = await response.json();
+    console.log(test)
+    // let testEmail = await fetch('api/test-email');
+    // let res = await testEmail.json();
+    // console.log(res)
+  }
 
 
 
   const App = props => {
+    testServer();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     return (
       <div>

@@ -1,13 +1,5 @@
-import React, { Component } from 'react';
-import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption
-} from 'reactstrap';
+import React from 'react';
 import ImageGallery from 'react-image-gallery';
-import MediaQuery from 'react-responsive';
 import bee from '../images/beeBack.jpg';
 import bee1 from '../images/bee1.jpg';
 import bee2 from '../images/bee2.jpg';
@@ -107,83 +99,7 @@ const Slides = props =>(
   </div>
 )
 
-class OldSlides extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { activeIndex: 0 };
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-    this.goToIndex = this.goToIndex.bind(this);
-    this.onExiting = this.onExiting.bind(this);
-    this.onExited = this.onExited.bind(this);
-  }
 
-  onExiting() {
-    this.animating = true;
-  }
-
-  onExited() {
-    this.animating = false;
-  }
-
-  next() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  previous() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
-    this.setState({ activeIndex: nextIndex });
-  }
-
-  goToIndex(newIndex) {
-    if (this.animating) return;
-    this.setState({ activeIndex: newIndex });
-  }
-
-  render() {
-    const { activeIndex } = this.state;
-
-    const slides = items.map((item) => {
-      return (
-        <CarouselItem
-          className = "carouselItem"
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={item.src}
-        >
-          <MediaQuery maxDeviceWidth = {1224}>
-            <img src={item.src} className = "carouselImageSmall"  alt={item.altText} />
-            <div  className = "test">{item.description} </div>
-            </MediaQuery>
-            <MediaQuery minDeviceWidth = {1224}>
-              <img className = "carouselImage" src={item.src}  alt={item.altText} />
-              <div className = "carouseldescription"></div>
-              <CarouselCaption className = "carouselFont" descriptionHeader={item.header} descriptionText = {item.description} />
-              </MediaQuery>
-        </CarouselItem>
-      );
-    });
-
-    return (
-      <Carousel
-        pause = 'hover'
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-        interval = {false}
-        className = "carousel"
-      >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-        {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-      </Carousel>
-    );
-  }
-}
 
 
 export default Slides;

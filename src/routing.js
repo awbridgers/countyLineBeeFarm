@@ -37,19 +37,18 @@ export const ScrollToTop = () => {
 }
 
 
-//setup the firebase database
-firebase.initializeApp({
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_DATABASE_URL,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
-})
+// //setup the firebase database
+// firebase.initializeApp({
+//     apiKey: process.env.REACT_APP_API_KEY,
+//     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+//     databaseURL: process.env.REACT_APP_DATABASE_URL,
+//     projectId: process.env.REACT_APP_PROJECT_ID,
+//     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+//     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
+// })
 
  export const CheckoutRoute = ({children, ...rest}) =>{
    const allowCheckout = useSelector(state=>state.allowCheckout);
-   console.log(allowCheckout)
    return(
      <Route {...rest}
        render = {()=>allowCheckout ? (children) : (
@@ -63,8 +62,8 @@ firebase.initializeApp({
 export class Routing extends Component {
   constructor(){
     super();
-    this.state = {honeyStock:{muth: false, hex: false, squeeze: false}, marketList:[]}
-    this.ref = firebase.database().ref();
+    this.state = {honeyStock:{muth: true, hex: true, squeeze: true}, marketList:[]}
+    //this.ref = firebase.database().ref();
     moment.tz.setDefault('America/New_York');
   }
   async componentDidMount(){
@@ -90,10 +89,6 @@ export class Routing extends Component {
       }
     })
     this.setState({marketList: eventArray.splice(0,4)})
-    //load in all the honey in stock values
-    const snapshot =  await this.ref.once('value');
-    const newStock = snapshot.child('honeyStock').val()
-    this.setState({honeyStock: newStock})
   }
   totalItems = (array) =>{
     let itemCount = 0;

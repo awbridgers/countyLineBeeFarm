@@ -86,6 +86,7 @@ export class CheckoutPage extends Component{
         this.props.resetCart();
         this.props.resetBillingAddress();
         this.props.resetShippingAddress();
+        sessionStorage.clear();
       }
       else{
         alert('There was an error placing your order. Please try again.')
@@ -96,6 +97,7 @@ export class CheckoutPage extends Component{
     }
     this.props.changeLoadScreen(false,'')
     this.setState({ errorMessages: ''})
+ 
   }
 
   calcTotal = () =>{
