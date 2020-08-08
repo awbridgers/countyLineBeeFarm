@@ -2,6 +2,7 @@
   "name": "bee_website",
   "version": "2.1.0",
   "private": true,
+  "homepage": "https://awbridgers.github.io/countyLineBeeFarm",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "firebase": "^7.14.5",
