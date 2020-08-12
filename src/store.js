@@ -31,8 +31,9 @@ const store = createStore(
 
 store.subscribe(()=>{
   const currentState = store.getState();
+  const {itemList, loadScreen, ...rest} = currentState;
   saveState({
-    ...currentState, loadScreen:{show: false, info: ''}
+    ...rest
   })
 })
 

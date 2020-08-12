@@ -51,3 +51,8 @@ export const changeAllowCheckout = (bool)=>({
   type: 'CHANGE_ALLOW_CHECKOUT',
   bool
 })
+
+export const changeOrderPlaced = (info)=>({
+  type: 'CHANGE_ORDER_PLACED',
+  info
+})

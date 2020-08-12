@@ -6,6 +6,7 @@ import { billingAddress } from './billingAddress.js'
 import { itemList } from './itemList.js'
 import { loadScreen } from './loadScreenReducer.js'
 import { allowCheckout } from './allowCheckout.js';
+import { orderPlaced } from './orderPlaced.js';
 
 const rootReducer = combineReducers({
   shoppingCart,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   billingAddress,
   itemList,
   loadScreen,
-  allowCheckout
+  allowCheckout,
+  orderPlaced
 })
 
 

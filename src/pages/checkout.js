@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Receipt from '../components/receipt.js'
 import 'react-square-payment-form/lib/default.css'
 import {
   changeBillingAddress,
@@ -9,7 +10,8 @@ import {
   resetCart,
   resetShippingAddress,
   resetBillingAddress,
-  changeAllowCheckout
+  changeAllowCheckout,
+  changeOrderPlaced
 } from '../actions/index.js'
 import CreditCardForm from '../components/creditCardForm.js';
 import '../styles/checkout.css';
@@ -25,7 +27,8 @@ export class CheckoutPage extends Component{
       billingSame: true,
       errorArray: [],
       loaded: false,
-      orderPlaced: false
+      orderPlaced: false,
+      orderInfo: {}
     }
     this.subTotal = 0;
     this.total = 0;
@@ -34,7 +37,7 @@ export class CheckoutPage extends Component{
   componentDidMount(){
     //if the loadScreen is not active, activate it--> should only occur if
     //loading this page directly TODO: Only allow access from shopping cart
-    if(!this.props.loadScreen.show && !this.state.orderPlaced){
+    if(!this.props.loadScreen.show && !this.props.orderPlaced){
       this.props.changeLoadScreen(true, 'Preparing your order.')
     }
     //load in the sq payment script API
@@ -82,11 +85,13 @@ export class CheckoutPage extends Component{
       const response = await rawResponse.json();
       //if the order was placed
       if(response.success){
-        this.setState({orderPlaced:true})
+        this.props.changeOrderPlaced(response.orderInfo)
         this.props.resetCart();
         this.props.resetBillingAddress();
         this.props.resetShippingAddress();
+        this.props.changeShippingCost(0)
         sessionStorage.clear();
+        
       }
       else{
         alert('There was an error placing your order. Please try again.')
@@ -128,18 +133,12 @@ export class CheckoutPage extends Component{
       )
     }
 
-    if(this.state.orderPlaced){
+    if(this.props.orderPlaced){
       return(
         <div className = 'checkoutPage'>
           <h1 id = 'checkoutTitle'>Checkout</h1>
           <OrderConfirmation />
-          <Order
-            cart = {this.saveShoppingCart}
-            shippingCost = {this.props.shippingCost}
-            subTotal = {this.subTotal}
-            total = {this.total}
-            changeLoadScreen = {this.props.changeLoadScreen}
-          />
+          <Receipt order = {this.props.orderPlaced} />
         </div>
       )
     }
@@ -192,7 +191,8 @@ export class CheckoutPage extends Component{
   }
   componentWillUnmount(){
     if(this.state.orderPlaced){
-      this.props.changeAllowCheckout(false);
+      
+      
     }
   }
 }
@@ -205,6 +205,8 @@ const mapDispatchToProps = (dispatch) =>({
   resetShippingAddress: ()=> dispatch(resetShippingAddress()),
   changeLoadScreen: (show, info)=> dispatch(changeLoadScreen(show,info)),
   changeAllowCheckout: (bool)=> dispatch(changeAllowCheckout(bool)),
+  changeOrderPlaced: (info) => dispatch(changeOrderPlaced(info)),
+
 
 })
 
@@ -214,6 +216,7 @@ const mapStateToProps = (state) =>({
   shippingAddress: state.shippingAddress,
   billingAddress: state.billingAddress,
   loadScreen: state.loadScreen,
+  orderPlaced: state.orderPlaced
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage)

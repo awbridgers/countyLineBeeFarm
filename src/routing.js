@@ -1,7 +1,7 @@
 import React, {Component, useEffect} from 'react';
 import 'firebase/database';
 import moment from 'moment-timezone';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 import {
   HashRouter as Router,
   Route,
@@ -19,7 +19,8 @@ import NavBar from './components/navBar.jsx'
 import ShoppingCart from './pages/cart.js';
 import CheckoutPage from './pages/checkout.js';
 import LoadingScreen from './components/loadingScreen.js'
-import {connect, useSelector} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import { changeAllowCheckout,changeOrderPlaced } from './actions/index.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './styles/App.css'
@@ -33,6 +34,21 @@ export const ScrollToTop = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  return null;
+}
+//stay on checkout page to show receipt until route is changed
+export const AccessCheckout = () =>{
+  const { pathname } = useLocation();
+  const allowCheckout = useSelector(state=>state.allowCheckout);
+  const orderPlaced = useSelector(state=>state.orderPlaced) ? true : false;
+  console.log(allowCheckout, orderPlaced)
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    if(allowCheckout && orderPlaced && pathname !== '/checkout'){
+      dispatch(changeOrderPlaced(null));
+      dispatch(changeAllowCheckout(false));
+    }
+  },[pathname,allowCheckout, orderPlaced, dispatch])
   return null;
 }
 
@@ -104,6 +120,7 @@ export class Routing extends Component {
       <div className = 'App'>
         <Router>
           <ScrollToTop />
+          <AccessCheckout />
           {loadScreen.show && <LoadingScreen message = {loadScreen.info}/>}
           <div>
             <Route path = '/'>
