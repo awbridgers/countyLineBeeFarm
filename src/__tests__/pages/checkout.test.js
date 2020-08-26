@@ -15,7 +15,10 @@ const props = {
   changeLoadScreen: jest.fn(),
   changeAllowCheckout: jest.fn(),
   shippingCost: 15,
+<<<<<<< HEAD
   orderPlaced: false,
+=======
+>>>>>>> master
   shoppingCart: [
     {
       type: 'Muth Jar',
@@ -71,9 +74,14 @@ describe('checkout page unconnected',()=>{
     wrapper.setState({loaded: true});
     expect(wrapper.find('.checkoutBody')).toHaveLength(1);
   })
+<<<<<<< HEAD
   it('should return the order confirm screen when order is placed',()=>{
     wrapper.setState({loaded: true});
     wrapper.setProps({orderPlaced: true})
+=======
+  it('should return the order confrim screen when order is placed',()=>{
+    wrapper.setState({orderPlaced: true, loaded: true});
+>>>>>>> master
     expect(wrapper.find('OrderConfirmation')).toHaveLength(1)
   })
   it('should turn on the load screen if it is not on',()=>{

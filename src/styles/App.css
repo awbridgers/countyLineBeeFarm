@@ -3,11 +3,18 @@
 }
 .App {
   text-align: center;
+<<<<<<< HEAD
   height: 100%;
 }
 button{
   touch-action: manipulation;
 }
+=======
+  max-width: 1440px;
+  height: 100%;
+}
+
+>>>>>>> master
 .gallery{
   width: 80%;
   margin: auto;
@@ -101,8 +108,12 @@ height: 500px;
 }
 
 .banner{
+<<<<<<< HEAD
   min-height: 100px;
   height: 5vw;
+=======
+  height: 100px;
+>>>>>>> master
   width: 80%;
   margin: auto;
   background-color: #141414;
@@ -272,9 +283,14 @@ margin-bottom: 30px;
 .btn.disabled{
   opacity: 1;
 }
+<<<<<<< HEAD
 /* .soldOut{
   
 } */
+=======
+.soldOut{
+}
+>>>>>>> master
 .btn.disabled:hover{
   color: black;
   cursor: default;
@@ -546,11 +562,15 @@ select option{
 }
 
 
+<<<<<<< HEAD
 @media all and (min-width: 2000px){
   .bannerText h3{
     font-size: 2em;
   }
 }
+=======
+
+>>>>>>> master
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
