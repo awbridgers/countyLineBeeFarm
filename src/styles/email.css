@@ -9,24 +9,12 @@
 .emailForm{
   font-size: 20px;
   text-align: center;
-<<<<<<< HEAD
-  margin-left: 20px;
-}
-.email{
-  width: 80%;
-  min-width:400px;
-  margin-bottom: 20px;
-  font-weight: 600;
-  margin-top: 20px;
-  display:block;
-=======
 }
 .email{
   width:400px;
   margin-bottom: 20px;
   font-weight: 600;
   margin-top: 20px;
->>>>>>> master
 
 }
 .message{
