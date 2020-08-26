@@ -1,22 +1,12 @@
-<<<<<<< HEAD
 import React, { useEffect } from 'react';
-=======
-import React from 'react';
->>>>>>> master
 import beeLogo from '../images/beeLogo.png'
 import {useMediaQuery} from 'react-responsive'
 import Group from '../components/group.jsx'
 
 
   // const testServer = async () =>{
-<<<<<<< HEAD
     
   //   let response = await fetch('api/test')
-=======
-  //   const target = process.env.NODE_ENV === 'development' ? 'api/test' : 'https://clbf-api.herokuapp.com/api/test';
-  //   console.log(target)
-  //   let response = await fetch(target)
->>>>>>> master
   //   let test = await response.json();
   //   console.log(test)
   //   // let testEmail = await fetch('api/test-email');
@@ -27,13 +17,9 @@ import Group from '../components/group.jsx'
 
 
   const App = props => {
-<<<<<<< HEAD
     useEffect(()=>{
       //testServer();
     },[])
-=======
-    //testServer();
->>>>>>> master
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     return (
       <div>
