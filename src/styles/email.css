@@ -1,0 +1,71 @@
+#emailPage{
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+
+.emailForm{
+  font-size: 20px;
+  text-align: center;
+  margin-left: 20px;
+}
+.email{
+  width: 80%;
+  min-width:400px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  display:block;
+
+}
+.message{
+  width: 400px;
+  font-weight: 600;
+}
+.contactInfo{
+  color: white;
+  margin-top: 25px;
+  text-align: center;
+  align-self: flex-start;
+}
+
+.emailP{
+  margin-top: 20px;
+  text-align: center
+}
+.emailAddress{
+  color: #cfb53b;
+}
+.emailAddress h5{
+  font-weight: bold;
+}
+.mobileContactInfo{
+  width: 85%;
+  color: white;
+  margin: auto;
+  padding-top: 20px;
+}
+.mobileEmailForm{
+  width: 95%;
+  padding-bottom: 50px;
+  margin: auto;
+}
+.mobileEmailAddress{
+  width: 85%;
+  margin-bottom: 10px;
+}
+.mobileMessage{
+  width: 85%;
+}
+#emailPage .btn, .mobileEmailForm .btn{
+  margin-top: auto;
+  color: black;
+  font-size: 18px;
+  margin: 10px auto;
+  display: block;
+}
+#email .btn:hover, .mobileEmailForm .btn:hover{
+  color: white;
+}

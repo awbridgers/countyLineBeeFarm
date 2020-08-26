@@ -1,0 +1,61 @@
+.receipt{
+}
+.document{
+ 
+}
+.pdf{
+  text-align: center;
+}
+.react-pdf__Page__canvas{
+  margin: auto;
+}
+
+.receiptSection {
+  border-top: 2px solid black; 
+  border-bottom: 2px solid black; 
+  font-size:16px;
+}
+
+.table {
+  margin: 2px 0px;
+  text-align: left;
+}
+
+.recieptHeader{
+  width: 140px; 
+  min-width:120px
+}
+
+.shippingAddress{
+  padding-left:2px
+}
+
+.items {
+  min-width: 265px;
+  border-collapse:collapse; 
+  margin-top:2px; 
+  table-layout:fixed;
+}
+
+.itemHeader{
+  font-weight:bold;
+  text-align: right;
+}
+.itemNameHeader{
+  width:200px;
+  font-weight:bold; 
+  padding-bottom: 2px;
+  width:200px;
+  font-weight:bold; 
+  padding-bottom: 2px;
+}
+
+.totals{
+  text-align: right; 
+  padding:5px 0px;
+}
+@media only screen and (max-width: 439px) {
+  table[class=body] .itemCell{
+    width:30% !important;
+  }
+}

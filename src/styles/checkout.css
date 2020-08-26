@@ -1,0 +1,114 @@
+.checkoutPage{
+  color: #cfb53b;
+}
+#checkoutTitle{
+  margin-bottom: 20px;
+}
+.checkoutBody{
+  display: flex;
+  flex-flow: row wrap-reverse;
+  align-items: flex-end;
+  justify-content: space-around;
+  margin: auto;
+  width: 90%;
+  padding-bottom: 50px;
+}
+.checkoutRight{
+  flex-grow: 1;
+
+
+}
+.checkoutLeft{
+  text-align: left;
+  min-width: 50%;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.shippingInfo{
+  display: flex;
+  flex-flow: column;
+}
+
+.addressInfo{
+  display: inline-block;
+  margin: 10px auto 20px auto;
+  line-height: 18px;
+  font-size: 18px;
+}
+.personalInfo{
+  margin-top: 10px;
+}
+.paymentInfo{
+  width: 100%;
+  padding-bottom: 10px;
+}
+.orderLayout{
+  min-width: 340px;
+  max-width: 615px;
+  margin: auto;
+  margin-bottom: 20px;
+  border:2px solid gray;
+}
+.checkoutItemList{
+
+
+}
+.order{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin: 5px;
+  align-items: center;
+
+}
+.itemCost{
+  flex-grow: 1;
+}
+.bold{
+  font-weight: bold;
+}
+.orderCell{
+  width: 45%;
+}
+.orderCellImage{
+
+}
+.orderCellImage img{
+  width: 75px;
+}
+.orderPrice{
+  margin-top: 20px;
+  width:55%;
+
+}
+.subtotal{
+  width: 50%;
+  text-align: left;
+}
+
+.cost{
+  flex-grow: 1;
+  text-align: right;
+
+}
+.costRow{
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 5px;
+
+
+
+}
+.total{
+  font-size: 18px;
+  font-weight: bold;
+}
+.orderConfirm{
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+  background: #cfb53b;
+  color: black;
+
+}
