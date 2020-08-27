@@ -3,7 +3,7 @@ import 'firebase/database';
 import moment from 'moment-timezone';
 // import firebase from 'firebase/app';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   useLocation,
@@ -41,7 +41,7 @@ export const AccessCheckout = () =>{
   const { pathname } = useLocation();
   const allowCheckout = useSelector(state=>state.allowCheckout);
   const orderPlaced = useSelector(state=>state.orderPlaced) ? true : false;
-  console.log(allowCheckout, orderPlaced)
+  //console.log(allowCheckout, orderPlaced)
   const dispatch = useDispatch();
   useEffect(()=>{
     if(allowCheckout && orderPlaced && pathname !== '/checkout'){
