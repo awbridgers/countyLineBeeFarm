@@ -272,9 +272,11 @@ margin-bottom: 30px;
 .btn.disabled{
   opacity: 1;
 }
+
 /* .soldOut{
   
 } */
+
 .btn.disabled:hover{
   color: black;
   cursor: default;
@@ -545,12 +547,12 @@ select option{
   margin: 0px;
 }
 
-
 @media all and (min-width: 2000px){
   .bannerText h3{
     font-size: 2em;
   }
 }
+
 @media all and (max-width: 1024px){
   .carousel{
     height: 350px;
