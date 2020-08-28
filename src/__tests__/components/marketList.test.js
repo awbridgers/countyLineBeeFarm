@@ -29,6 +29,7 @@ describe('MarketList component',()=>{
     expect(wrapper.find('Card')).toHaveLength(1);
   })
   it('sorts the markets by date',()=>{
-    expect(wrapper.find('td').at(1).text()).toEqual('Wednesday, Jan. 1st')
+    expect(wrapper.find('tr#scheduledMarkets')
+      .find('td').at(1).text()).toEqual('Wednesday, Jan. 1st')
   })
 })

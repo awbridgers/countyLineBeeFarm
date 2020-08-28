@@ -139,7 +139,7 @@ describe('Routing Functions',()=>{
       jest.clearAllMocks();
     })
     it('renders without crashing',()=>{
-      expect(wrapper.find('HashRouter')).toHaveLength(1);
+      expect(wrapper.find('div.App')).toHaveLength(1);
     })
     it('displays the load screen if it is active',()=>{
       expect(wrapper.find('LoadingScreen')).toHaveLength(0)
@@ -166,16 +166,6 @@ describe('Routing Functions',()=>{
             name: 'test event 2'
           }
         ])
-      })
-      it('gets the honey stock information', async()=>{
-        wrapper = shallow(<Routing {...props} />);
-        await flushPromises();
-        wrapper.update();
-        expect(wrapper.state().honeyStock).toEqual({
-          test1: true,
-          test2: false,
-          test3: true
-        })
       })
     })
   })

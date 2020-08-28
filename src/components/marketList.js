@@ -18,7 +18,7 @@ const MarketList = (props) =>(
     {props.marketList.sort((a,b)=>a.date - b.date).map((market,i)=>{
       // console.log(market.date)
       return(
-      <tr key = {i}>
+      <tr id = 'scheduledMarkets' key = {i}>
         <td>{market.name}</td>
         <td>{market.date.format('dddd, MMM. Do')}</td>
       </tr>
