@@ -85,12 +85,13 @@ export class CheckoutPage extends Component{
       const response = await rawResponse.json();
       //if the order was placed
       if(response.success){
-        this.props.changeOrderPlaced(response.orderInfo)
+        this.props.changeOrderPlaced(response.pdf)
         this.props.resetCart();
         this.props.resetBillingAddress();
         this.props.resetShippingAddress();
         this.props.changeShippingCost(0)
         sessionStorage.clear();
+        
         
       }
       else{
@@ -138,7 +139,7 @@ export class CheckoutPage extends Component{
         <div className = 'checkoutPage'>
           <h1 id = 'checkoutTitle'>Checkout</h1>
           <OrderConfirmation />
-          <Receipt order = {this.props.orderPlaced} />
+          <Receipt pdf = {this.props.orderPlaced} />
         </div>
       )
     }

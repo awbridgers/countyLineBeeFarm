@@ -14,6 +14,7 @@ const props = {
   resetShippingAddress: jest.fn(),
   changeLoadScreen: jest.fn(),
   changeAllowCheckout: jest.fn(),
+  changeOrderPlaced: jest.fn(),
   shippingCost: 15,
   shoppingCart: [
     {
@@ -51,7 +52,8 @@ const props = {
   loadScreen: {
     show: false,
     message: 'test'
-  }
+  },
+  orderPlaced:false
 }
 
 
@@ -59,6 +61,7 @@ describe('checkout page unconnected',()=>{
   let wrapper;
   beforeEach(()=>{
     wrapper = shallow(<CheckoutPage {...props} />)
+    window.alert=jest.fn();
     jest.restoreAllMocks();
     jest.clearAllMocks();
   })
@@ -70,8 +73,9 @@ describe('checkout page unconnected',()=>{
     wrapper.setState({loaded: true});
     expect(wrapper.find('.checkoutBody')).toHaveLength(1);
   })
-  it('should return the order confrim screen when order is placed',()=>{
-    wrapper.setState({orderPlaced: true, loaded: true});
+  it('should return the order confirm screen when order is placed',()=>{
+    wrapper.setState({loaded: true});
+    wrapper.setProps({orderPlaced: true})
     expect(wrapper.find('OrderConfirmation')).toHaveLength(1)
   })
   it('should turn on the load screen if it is not on',()=>{
@@ -132,16 +136,18 @@ describe('checkout page unconnected',()=>{
   it('resets info and changes orderPlaced if placing is successful', async ()=>{
     jest.spyOn(global, 'fetch').mockImplementation((x,y)=>{
       return Promise.resolve({
-        json: ()=>({
-          success: true
-        })
+        json: ()=>{
+          return Promise.resolve({
+            success: true,
+            pdf: 'pdf'
+          })
+        }
       })
     })
     await wrapper.instance().cardNonceResponseReceived(null, 1,2,3);
     expect(props.resetCart).toHaveBeenCalled();
     expect(props.resetBillingAddress).toHaveBeenCalled();
     expect(props.resetShippingAddress).toHaveBeenCalled();
-    expect(wrapper.state().orderPlaced).toEqual(true);
   })
   it('calculates the total price of the cart',()=>{
     const cost = wrapper.instance().calcTotal();
@@ -177,13 +183,6 @@ describe('checkout page unconnected',()=>{
     wrapper.instance().cardNonceResponseReceived(null,1,2,3);
     expect(tester.mock.calls[0][0].billingAddress).toEqual(props.shippingAddress)
     expect(tester.mock.calls[1][0].billingAddress).toEqual(props.billingAddress)
-  })
-  it('disallow checkout on unmount again',()=>{
-    wrapper.instance().componentWillUnmount()
-    expect(props.changeAllowCheckout).not.toHaveBeenCalled();
-    wrapper.setState({orderPlaced: true})
-    wrapper.instance().componentWillUnmount()
-    expect(props.changeAllowCheckout).toHaveBeenCalled()
   })
   it('changes the loaded state when the script loads',()=>{
     const load = jest.spyOn(document, 'getElementsByTagName').mockImplementation(()=>{
