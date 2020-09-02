@@ -217,6 +217,7 @@ describe('Connected Checkout page',()=>{
     wrapper.invoke('resetShippingAddress')()
     wrapper.invoke('changeLoadScreen')(true, 'test')
     wrapper.invoke('changeAllowCheckout')(true)
+    wrapper.invoke('changeOrderPlaced')('test')
     expect(store.getActions()).toEqual([
       {
         type: 'CHANGE_SHIPPING_INFO',
@@ -249,6 +250,10 @@ describe('Connected Checkout page',()=>{
       {
         type: 'CHANGE_ALLOW_CHECKOUT',
         bool: true
+      },
+      {
+        type: 'CHANGE_ORDER_PLACED',
+        info: 'test'
       }
     ])
   })

@@ -49,5 +49,9 @@ describe('actions',()=>{
       type: 'CHANGE_ALLOW_CHECKOUT',
       bool: true,
     })
+    expect(actions.changeOrderPlaced('test')).toEqual({
+      type: 'CHANGE_ORDER_PLACED',
+      info: 'test'
+    })
   })
 })

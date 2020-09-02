@@ -17,9 +17,9 @@ import Group from '../components/group.jsx'
 
 
   const App = props => {
-    useEffect(()=>{
-      //testServer();
-    },[])
+    // useEffect(()=>{
+    //   //testServer();
+    // },[])
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     return (
       <div>

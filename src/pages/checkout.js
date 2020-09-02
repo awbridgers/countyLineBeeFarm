@@ -190,12 +190,6 @@ export class CheckoutPage extends Component{
       </div>
     )
   }
-  componentWillUnmount(){
-    if(this.state.orderPlaced){
-      
-      
-    }
-  }
 }
 const mapDispatchToProps = (dispatch) =>({
   changeShippingAddress:(key, payload)=> dispatch(changeShippingAddress(key,payload)),
@@ -207,8 +201,6 @@ const mapDispatchToProps = (dispatch) =>({
   changeLoadScreen: (show, info)=> dispatch(changeLoadScreen(show,info)),
   changeAllowCheckout: (bool)=> dispatch(changeAllowCheckout(bool)),
   changeOrderPlaced: (info) => dispatch(changeOrderPlaced(info)),
-
-
 })
 
 const mapStateToProps = (state) =>({
