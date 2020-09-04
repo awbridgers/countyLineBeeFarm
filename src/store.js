@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers/rootReducer.js';
 
-const loadState = () => {
+export const loadState = () => {
   try{
     const serializedState = sessionStorage.getItem('state');
     if(!serializedState){
@@ -14,13 +14,13 @@ const loadState = () => {
   }
 }
 
-const saveState = state => {
+export const saveState = state => {
   try{
     const serializedState = JSON.stringify(state);
     sessionStorage.setItem('state', serializedState);
   }
   catch(e){
-    //ignore
+    console.log('save error')
   }
 }
 
