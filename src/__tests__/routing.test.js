@@ -3,14 +3,15 @@ import {shallow, mount} from 'enzyme';
 import ConnectedRouting, {
   ScrollToTop,
   CheckoutRoute,
-  Routing
+  Routing,
+  AccessCheckout
 } from '../routing.js';
-import {connect, Provider} from 'react-redux'
-import {HashRouter as Router} from 'react-router-dom'
+import {connect, Provider, useSelector} from 'react-redux'
+import * as ReactRouter from 'react-router-dom'
 import * as ReactRedux from 'react-redux';
 import * as firebase from 'firebase/app'
 import moment from 'moment-timezone'
-import configureStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store';
 jest.mock('react-router-dom',()=>({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(()=>({pathname: 'test'}))
@@ -75,7 +76,6 @@ global.scrollTo = jest.fn();
 describe('Routing Functions',()=>{
   describe('protected route for checkout',()=>{
     let wrapper;
-    let store;
     const mockStore = configureStore();
     const props = {
       children: <h1>Test</h1>
@@ -90,9 +90,9 @@ describe('Routing Functions',()=>{
       const store = mockStore({allowCheckout: true})
       const wrapper =  mount(
         <Provider store = {store}>
-          <Router>
+          <ReactRouter.HashRouter>
             <CheckoutRoute {...props} />
-          </Router>
+          </ReactRouter.HashRouter>
         </Provider>
       )
       expect(wrapper.find('Route')).toHaveLength(1);
@@ -102,9 +102,9 @@ describe('Routing Functions',()=>{
       const store = mockStore({allowCheckout: false})
       const wrapper = mount(
         <Provider store = {store}>
-          <Router>
+          <ReactRouter.HashRouter>
             <CheckoutRoute {...props} />
-          </Router>
+          </ReactRouter.HashRouter>
         </Provider>
       )
       expect(wrapper.find('Redirect')).toHaveLength(1);
@@ -180,5 +180,81 @@ describe('Routing Functions',()=>{
       expect(wrapper.prop('loadScreen')).toEqual('test');
       expect(wrapper.prop('cart')).toEqual('cart')
     })
+  })
+  describe('accessCheckout',()=>{
+    let wrapper;
+    let store;
+    let dp;
+    let select;
+    const mockStore = configureStore();
+    const mockDispatch = jest.fn();
+    beforeEach(()=>{
+      jest.clearAllMocks();
+    })
+    afterEach(()=>{
+      select.mockRestore();
+    })
+    it('changes allowcheckout to false if the user leaves after placing order',()=>{
+      select = jest.spyOn(ReactRedux, 'useSelector').mockReturnValue(true);
+      jest.spyOn(ReactRouter, 'useLocation').mockImplementation(()=>({
+        pathname: 'newTest'
+      }))
+      dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch)
+      wrapper = shallow(<AccessCheckout />)
+      expect(mockDispatch).toHaveBeenLastCalledWith({
+        type: 'CHANGE_ALLOW_CHECKOUT',
+        bool: false
+      })
+      expect(wrapper).toEqual({});
+    })
+    it('does not change if the path is /checkout',()=>{
+      select = jest.spyOn(ReactRedux, 'useSelector').mockReturnValue(true);
+      jest.spyOn(ReactRouter, 'useLocation').mockImplementation(()=>({
+        pathname: '/checkout'
+      }))
+      dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch)
+      wrapper = shallow(<AccessCheckout />)
+      expect(mockDispatch.mock.calls.length).toEqual(0)
+    })
+    it('does not change if orderPlaced is false',()=>{
+      select =  jest.spyOn(ReactRedux, 'useSelector').mockReturnValueOnce(true).mockReturnValue(false);
+      jest.spyOn(ReactRouter, 'useLocation').mockImplementation(()=>({
+        pathname: '/checkout'
+      }))
+      dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch)
+      wrapper = shallow(<AccessCheckout />)
+      expect(mockDispatch.mock.calls.length).toEqual(0)
+    })
+    it('does not change if allowCheckout is false',()=>{
+      select = jest.spyOn(ReactRedux, 'useSelector').mockReturnValueOnce(false).mockReturnValue(true);
+      jest.spyOn(ReactRouter, 'useLocation').mockImplementation(()=>({
+        pathname: '/checkout'
+      }))
+      dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch)
+      wrapper = shallow(<AccessCheckout />)
+      expect(mockDispatch.mock.calls.length).toEqual(0)
+    })
+    it('returns the correct value from the store',()=>{
+      store = mockStore({allowCheckout: true, orderPlaced: true})
+      jest.spyOn(ReactRouter, 'useLocation').mockReturnValue('/location');
+      dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch)
+      wrapper = mount(
+        <Provider store = {store}>
+          <AccessCheckout />
+        </Provider>
+      )
+      expect(mockDispatch).toHaveBeenCalledTimes(2);
+    })
+    // it('test ',()=>{
+    //   store = mockStore({allowCheckout: false, orderPlaced: true})
+    //   jest.spyOn(ReactRouter, 'useLocation').mockReturnValue('/location');
+    //   dp = jest.spyOn(ReactRedux, 'useDispatch').mockReturnValue(mockDispatch);
+    //   wrapper = mount(
+    //     <Provider store = {store}>
+    //       <AccessCheckout />
+    //     </Provider>
+    //   )
+    //   expect(mockDispatch).toHaveBeenCalledTimes(0);
+    // })
   })
 })
