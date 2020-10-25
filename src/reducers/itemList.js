@@ -2,6 +2,8 @@
 import squeezeJarSpringHoney from '../images/squeezeJarSpringHoney.jpg';
 import muthJarSpringHoney from '../images/muthJarSpringHoney.jpg';
 import hexJar from '../images/hexWithComb.jpg';
+import bigPlasticJar from '../images/bigPlasticJar.png'
+import halfGallonJar from '../images/halfGallonJar2.png'
 
 export const itemList = (state =
   [
@@ -35,6 +37,26 @@ export const itemList = (state =
       inStock: true,
       itemNumber: 1003,
       weight: 8
+    },
+    {
+      type: '3 lbs Bottle',
+      title: "Seasonal Wildflower Honey",
+      subtitle: "3 lb plastic bottle",
+      price: 30,
+      image: bigPlasticJar,
+      inStock: false,
+      itemNumber: 1004,
+      weight: 48
+    },
+    {
+      type: 'Half Gallon Jar',
+      title: "Seasonal Wildflower Honey",
+      subtitle: "6 lb glass jar",
+      price: 50,
+      image: halfGallonJar,
+      inStock: false,
+      itemNumber: 1005,
+      weight: 96
     }
   ], action) => {
     switch(action.type){

@@ -6,7 +6,7 @@ import Slides from '../components/slides.jsx'
 export default class About extends Component {
   render(){
     return(
-      <div>
+      <div className = 'page'>
         <div className = 'wordContainer'>
           <h1>About Us</h1>
           <p>We started beekeeping in the spring of 2017 in an effort to help save the honeybee population from

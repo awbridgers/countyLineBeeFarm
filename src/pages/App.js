@@ -22,7 +22,7 @@ import Group from '../components/group.jsx'
     // },[])
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
     return (
-      <div>
+      <div className = 'page'>
         <div>
           {!isTabletOrMobile ? (
             <div className = "banner">

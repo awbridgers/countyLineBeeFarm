@@ -128,7 +128,7 @@ export class CheckoutPage extends Component{
     const zip = this.props.shippingAddress['postal-code'];
     if(!this.state.loaded){
       return (
-        <div className = 'checkoutPage'>
+        <div className = 'checkoutPage page'>
           <h1 id = 'checkoutTitle'>Checkout</h1>
         </div>
       )
@@ -136,7 +136,7 @@ export class CheckoutPage extends Component{
 
     if(this.props.orderPlaced){
       return(
-        <div className = 'checkoutPage'>
+        <div className = 'checkoutPage page'>
           <h1 id = 'checkoutTitle'>Checkout</h1>
           <OrderConfirmation />
           <Receipt pdf = {this.props.orderPlaced} />

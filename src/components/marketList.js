@@ -11,10 +11,10 @@ const MarketList = (props) =>(
           <th>Market</th>
           <th>Date</th>
         </tr>
-        <tr>
+        {/* <tr>
           <td>Wendell Farmers' Market</td>
           <td>Saturdays, May 16th-Oct. 3rd</td>
-        </tr>
+        </tr> */}
     {props.marketList.sort((a,b)=>a.date - b.date).map((market,i)=>{
       // console.log(market.date)
       return(

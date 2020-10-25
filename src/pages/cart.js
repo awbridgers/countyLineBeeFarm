@@ -162,13 +162,13 @@ export class ShoppingCart extends Component{
     const {shippingAddress} = this.props;
     if(this.props.shoppingCart.length === 0){
       return(
-        <div style = {{color: '#cfb53b', marginTop: '20px'}}>
+        <div className = 'page' style = {{color: '#cfb53b', marginTop: '20px'}}>
           <h2>There are no items in your cart.</h2>
         </div>
       )
     }
     return(
-      <div style = {{color: '#cfb53b', marginBottom: '50px'}}>
+      <div className = 'page' style = {{color: '#cfb53b', marginBottom: '50px'}}>
         <div className = 'cartList'>
           <h2>Your Shopping Cart</h2>
           <div className = 'row'>

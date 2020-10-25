@@ -9,7 +9,7 @@ const Email = () =>{
   const [email, changeEmail] =  useState('');
   const [message, changeMessage] = useState('');
   return !isTabletOrMobile ? (
-    <div id = 'emailPage'>
+    <div id = 'emailPage' className = 'page'>
       <div className = "emailForm">
         <form method="POST" action="https://formspree.io/info@countylinebeefarm.com">
           <input className = "email" name = "email" type = "email" placeholder = "Email Address" value = {email} onChange = {(e)=>changeEmail(e.target.value)}></input>
