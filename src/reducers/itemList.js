@@ -13,7 +13,7 @@ export const itemList = (state =
       subtitle: "16 oz. glass Muth jar",
       price: 15,
       image: muthJarSpringHoney,
-      inStock: true,
+      inStock: false,
       itemNumber: 1001,
       weight: 16
     },
@@ -24,7 +24,7 @@ export const itemList = (state =
       subtitle: "12 oz. glass hex jar",
       price: 10,
       image: hexJar,
-      inStock: true,
+      inStock: false,
       itemNumber: 1002,
       weight: 12
     },
@@ -34,7 +34,7 @@ export const itemList = (state =
       subtitle: "8 oz. plastic bottle",
       price: 5,
       image: squeezeJarSpringHoney,
-      inStock: true,
+      inStock: false,
       itemNumber: 1003,
       weight: 8
     },
@@ -44,7 +44,7 @@ export const itemList = (state =
       subtitle: "3 lb plastic bottle",
       price: 30,
       image: bigPlasticJar,
-      inStock: true,
+      inStock: false,
       itemNumber: 1004,
       weight: 48
     },
@@ -54,7 +54,7 @@ export const itemList = (state =
       subtitle: "6 lb glass jar",
       price: 50,
       image: halfGallonJar,
-      inStock: true,
+      inStock: false,
       itemNumber: 1005,
       weight: 96
     }

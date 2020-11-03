@@ -23,6 +23,10 @@ export const BuyHoney = (props) => {
   const honeyItem = props.itemList[honeyType];
   return (
     <div className="page">
+    <div className = 'buyNote'>
+       We are currently reserving our supply for the local markets.
+       If you are unavailable to attend a market, contact us about local pickup. 
+      </div>
       <div className="marketDeck">
         <MarketList marketList={props.marketList} />
       </div>
@@ -41,7 +45,7 @@ export const BuyHoney = (props) => {
                 <CardText className="honeyPrice">{`$${honeyType.price}`}</CardText>
                 {!honeyType.inStock && (
                   <Button className="soldOut" color="danger" disabled>
-                    Sold Out
+                    Market Only
                   </Button>
                 )}
                 {honeyType.inStock && (
@@ -68,6 +72,7 @@ export const BuyHoney = (props) => {
           </CardBody>
         </Card>
       </div>
+      
       {showCartScreen && (
         <AddToCart
           honeyType={props.itemList[honeyType]}
