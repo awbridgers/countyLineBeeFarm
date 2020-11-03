@@ -43,12 +43,12 @@ export const BuyHoney = (props) => {
                 <CardTitle>{honeyType.title}</CardTitle>
                 <CardSubtitle>{honeyType.subtitle}</CardSubtitle>
                 <CardText className="honeyPrice">{`$${honeyType.price}`}</CardText>
-                {!honeyType.inStock && (
+                {!honeyType.availableOnline && (
                   <Button className="soldOut" color="danger" disabled>
-                    Market Only
+                    {honeyType.inStock ? 'Market Only' : 'Sold Out'}
                   </Button>
                 )}
-                {honeyType.inStock && (
+                {honeyType.availableOnline && (
                   <Button
                     onClick={() => {
                       setShowCartScreen(true);
