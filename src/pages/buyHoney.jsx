@@ -45,7 +45,7 @@ export const BuyHoney = (props) => {
                 <CardText className="honeyPrice">{`$${honeyType.price}`}</CardText>
                 {!honeyType.availableOnline && (
                   <Button className="soldOut" color="danger" disabled>
-                    {honeyType.inStock ? 'Market Only' : 'Sold Out'}
+                    {honeyType.inStock ? 'Local Pickup Only' : 'Sold Out'}
                   </Button>
                 )}
                 {honeyType.availableOnline && (

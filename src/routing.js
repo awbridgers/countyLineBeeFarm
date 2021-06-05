@@ -3,7 +3,7 @@ import 'firebase/database';
 import moment from 'moment-timezone';
 // import firebase from 'firebase/app';
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   useLocation,
