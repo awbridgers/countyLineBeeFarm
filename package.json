@@ -6,7 +6,7 @@
     "bootstrap": "^4.4.1",
     "firebase": "^8.2.3",
     "http-proxy-middleware": "^0.20.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "moment-timezone": "^0.5.28",
     "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
